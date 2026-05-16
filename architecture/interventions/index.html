@@ -1,0 +1,2688 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+      
+      
+      
+      
+        <link rel="prev" href="../mars/">
+      
+      
+        <link rel="next" href="../../api/framework/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Interventions - Terraforming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#super-greenhouse-gas-ghg-intervention-layer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Interventions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/framework/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Terraforming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planet Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-unified-state-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Unified State Space
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Unified State Space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-injection-and-decay-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How injection and decay work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-lives-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What lives where
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-of-interventioncontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role of InterventionController
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-compounds-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Compounds Registry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-atmospheric-concentration-ppb-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Atmospheric Concentration — ppb Formula
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-radiative-forcing-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Radiative Forcing — ΔF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-greenhouse-factor-update-ghf-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Greenhouse Factor Update — GHF Formula
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Greenhouse Factor Update — GHF Formula">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-what-is-ghf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background — what is GHF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivation-of-ghf_new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Derivation of GHF_new
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-this-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties of this formula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numerical-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Numerical values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-exponential-decay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Exponential Decay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-annual-simulation-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Annual Simulation Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-baseline-olr-why-it-must-be-cached" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Baseline OLR — Why It Must Be Cached
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Baseline OLR — Why It Must Be Cached">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-bug-now-fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The bug (now fixed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The fix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Architecture Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-module-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Module Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-cli-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. CLI Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. CLI Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-model-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config model additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-columns-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output columns (CSV)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-bugs-found-and-fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Bugs Found and Fixed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Bugs Found and Fixed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bug-1-compound-interest-ghf-growth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 1 — Compound-interest GHF growth
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-2-ghf-decrease-despite-increasing-f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 2 — GHF decrease despite increasing ΔF
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-worked-numerical-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Worked Numerical Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-stability-limits-and-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Stability Limits and Constraints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Stability Limits and Constraints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-timestep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration timestep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forcing-regime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forcing regime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ghf-physical-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GHF physical range
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-citations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Citations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="super-greenhouse-gas-ghg-intervention-layer">Super-Greenhouse Gas (GHG) Intervention Layer<a class="headerlink" href="#super-greenhouse-gas-ghg-intervention-layer" title="Permanent link">&para;</a></h1>
+<p>Complete derivation, architecture, equations, and worked examples for the
+terraforming intervention system in <a href="../../api/interventions/"><code>src.interventions</code></a>
+and its CLI integration in <a href="../../cli/commands/"><code>cli</code></a>.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-unified-state-space">Unified State Space</a></li>
+<li><a href="#2-compounds-registry">Compounds Registry</a></li>
+<li><a href="#3-atmospheric-concentration--ppb-formula">Atmospheric Concentration — ppb Formula</a></li>
+<li><a href="#4-radiative-forcing--f">Radiative Forcing — ΔF</a></li>
+<li><a href="#5-greenhouse-factor-update--ghf-formula">Greenhouse Factor Update — GHF Formula</a></li>
+<li><a href="#6-exponential-decay">Exponential Decay</a></li>
+<li><a href="#7-annual-simulation-loop">Annual Simulation Loop</a></li>
+<li><a href="#8-baseline-olr--why-it-must-be-cached">Baseline OLR — Why It Must Be Cached</a></li>
+<li><a href="#9-architecture-diagram">Architecture Diagram</a></li>
+<li><a href="#10-module-map">Module Map</a></li>
+<li><a href="#11-cli-integration">CLI Integration</a></li>
+<li><a href="#12-bugs-found-and-fixed">Bugs Found and Fixed</a></li>
+<li><a href="#13-worked-numerical-example">Worked Numerical Example</a></li>
+<li><a href="#14-stability-limits-and-constraints">Stability Limits and Constraints</a></li>
+<li><a href="#15-citations">Citations</a></li>
+</ol>
+<hr />
+<h2 id="1-unified-state-space">1. Unified State Space<a class="headerlink" href="#1-unified-state-space" title="Permanent link">&para;</a></h2>
+<p>Injected greenhouse gases are atmospheric constituents like any other. They live
+in <code>mars.atmosphere.composition</code> — the same dict that holds CO₂, N₂, and Ar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Before any injection:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">mars</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">composition</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;CO2&quot;</span><span class="p">:</span> <span class="mi">580</span><span class="p">,</span> <span class="s2">&quot;N2&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>  <span class="c1"># Pa</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># After mars.inject({&quot;CF4&quot;: 1e9, &quot;SF6&quot;: 5e8}):</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">mars</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">composition</span> <span class="o">==</span> <span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">&quot;CO2&quot;</span><span class="p">:</span> <span class="mi">580</span><span class="p">,</span>   <span class="c1"># Pa — unchanged</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="s2">&quot;N2&quot;</span><span class="p">:</span>   <span class="mi">15</span><span class="p">,</span>   <span class="c1"># Pa — unchanged</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="s2">&quot;CF4&quot;</span><span class="p">:</span>   <span class="n">X</span><span class="p">,</span>   <span class="c1"># Pa — ΔP = M·g / A_surface, accumulated each year</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="s2">&quot;SF6&quot;</span><span class="p">:</span>   <span class="n">Y</span><span class="p">,</span>   <span class="c1"># Pa</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>At any point in a simulation, <code>mars</code> holds the complete and accurate picture of
+planetary state — no separate GHG tracker, no lookup through the controller:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">mars</span> <span class="o">=</span> <span class="n">Mars</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ic</span>   <span class="o">=</span> <span class="n">InterventionController</span><span class="p">(</span><span class="n">mars</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;CF4&quot;</span><span class="p">:</span> <span class="mf">1e9</span><span class="p">,</span> <span class="s2">&quot;SF6&quot;</span><span class="p">:</span> <span class="mf">5e8</span><span class="p">},</span> <span class="n">dt</span><span class="o">=</span><span class="mi">21600</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">ic</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_years</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">mars</span><span class="o">.</span><span class="n">thermal</span><span class="o">.</span><span class="n">surface_temperature</span>         <span class="c1"># K  — current surface temperature</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">mars</span><span class="o">.</span><span class="n">thermal</span><span class="o">.</span><span class="n">greenhouse_factor</span>           <span class="c1"># —  — GHF incorporating all GHG forcing</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">mars</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">surface_pressure</span>         <span class="c1"># Pa — current total pressure</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">mars</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">composition</span><span class="p">[</span><span class="s2">&quot;CF4&quot;</span><span class="p">]</span>       <span class="c1"># Pa — CF4 partial pressure</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">mars</span><span class="o">.</span><span class="n">water</span><span class="o">.</span><span class="n">ice_mass</span>                      <span class="c1"># kg — current ice mass</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">mars</span><span class="o">.</span><span class="n">delta_F</span>                             <span class="c1"># W/m² — current total GHG forcing</span>
+</code></pre></div>
+<h3 id="how-injection-and-decay-work">How injection and decay work<a class="headerlink" href="#how-injection-and-decay-work" title="Permanent link">&para;</a></h3>
+<p>Two methods on <code>Mars</code> mutate <code>atmosphere.composition</code> and immediately resync GHF:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">mars</span><span class="o">.</span><span class="n">inject</span><span class="p">({</span><span class="s2">&quot;CF4&quot;</span><span class="p">:</span> <span class="n">kg</span><span class="p">})</span>     <span class="c1"># kg → Pa via M·g/A_surface; appended to composition</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">mars</span><span class="o">.</span><span class="n">decay_ghg</span><span class="p">(</span><span class="n">dt_years</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1"># P_i ← P_i × exp(-dt/τ) for all COMPOUNDS species</span>
+</code></pre></div>
+<p>Both methods call <code>_recompute_greenhouse_factor()</code> afterwards, so
+<code>mars.thermal.greenhouse_factor</code> is always consistent with the composition.</p>
+<h3 id="what-lives-where">What lives where<a class="headerlink" href="#what-lives-where" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mars.atmosphere.composition</code></td>
+<td>Partial pressures (Pa) of <strong>all</strong> gases including injected GHGs</td>
+</tr>
+<tr>
+<td><code>mars.thermal.greenhouse_factor</code></td>
+<td>Current GHF — always recomputed after inject/decay</td>
+</tr>
+<tr>
+<td><code>mars.delta_F</code></td>
+<td>Property: <span class="arithmatex">\(\Delta F\)</span> derived on-the-fly from composition</td>
+</tr>
+<tr>
+<td><code>mars._baseline_ghf</code> / <code>mars._baseline_olr</code></td>
+<td>Cached at first injection (see <a href="#8-baseline-olr--why-it-must-be-cached">Section 8</a>)</td>
+</tr>
+<tr>
+<td><code>controller._cumulative_injected_kg</code></td>
+<td>Reporting-only: total kg ever injected per compound</td>
+</tr>
+</tbody>
+</table>
+<h3 id="role-of-interventioncontroller">Role of InterventionController<a class="headerlink" href="#role-of-interventioncontroller" title="Permanent link">&para;</a></h3>
+<p><code>InterventionController</code> is a thin annual scheduler — it holds no atmospheric
+state of its own:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>┌─────────────────────────────────────────────────────┐
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>│  InterventionController  (annual scheduler)          │
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│  schedule = {CF4: 1e9 kg/yr, ...}                   │
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│                                                      │
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│  Per year:                                           │
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│    mars.inject(schedule)     → composition updated   │
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>│    TimeController.run(1 yr)  → physics w/ new GHF   │
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>│    mars.decay_ghg(1.0)       → composition decayed  │
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>│    InterventionSnapshot from mars state              │
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>└─────────────────────────────────────────────────────┘
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                      ↓  single source of truth
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>┌─────────────────────────────────────────────────────┐
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>│  Mars instance                                       │
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>│  ├── atmosphere.composition  (Pa — all species)      │
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>│  ├── atmosphere.surface_pressure  (Pa)               │
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>│  ├── thermal.surface_temperature  (K)                │
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>│  ├── thermal.greenhouse_factor    (≥1, always sync)  │
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>│  ├── water.ice_mass               (kg)               │
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>│  └── delta_F  [property]          (W/m²)             │
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>└─────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>Design principles:</strong></p>
+<ul>
+<li><strong>One atmospheric representation.</strong> Injected GHGs extend <code>atmosphere.composition</code>
+  — there is no separate GHG bookkeeper. Every gas is just a partial pressure.</li>
+<li><strong>Atomic GHF sync.</strong> Every inject or decay call immediately updates
+  <code>mars.thermal.greenhouse_factor</code>. The ODE always sees a consistent state.</li>
+<li><strong>Tensor-native.</strong> All state lives on the same device as Mars (CPU or CUDA).
+  No cross-device copies occur in the simulation loop.</li>
+<li><strong>Cumulative, not incremental.</strong> GHF is always computed relative to the fixed
+  CO₂-only baseline (cached at first injection), never by modifying the current
+  GHF. This prevents compounding (see <a href="#8-baseline-olr--why-it-must-be-cached">Section 8</a>
+  and <a href="#12-bugs-found-and-fixed">Section 12</a>).</li>
+</ul>
+<hr />
+<h2 id="2-compounds-registry">2. Compounds Registry<a class="headerlink" href="#2-compounds-registry" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.compounds</code></a></p>
+<p>Seven super-greenhouse gases are registered. Radiative forcing efficiencies (<span class="arithmatex">\(\eta\)</span>) are
+Mars-specific values from <a href="https://doi.org/10.1029/2004JE002306">Marinova et al. (2005)</a>,
+which differ from Earth IPCC values because Mars lacks water-vapour overlap bands
+and has a thinner CO₂ column.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Formula</th>
+<th>MW (g/mol)</th>
+<th>Lifetime <span class="arithmatex">\(\tau\)</span> (yr)</th>
+<th><span class="arithmatex">\(\eta\)</span> (W m⁻² ppb⁻¹)</th>
+<th>GWP₁₀₀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CF4</td>
+<td>Carbon tetrafluoride</td>
+<td>88.0</td>
+<td>50 000</td>
+<td>0.0880</td>
+<td>6 630</td>
+</tr>
+<tr>
+<td>C2F6</td>
+<td>Hexafluoroethane</td>
+<td>138.0</td>
+<td>10 000</td>
+<td>0.2600</td>
+<td>11 100</td>
+</tr>
+<tr>
+<td>C3F8</td>
+<td>Octafluoropropane</td>
+<td>188.0</td>
+<td>2 600</td>
+<td>0.2400</td>
+<td>8 900</td>
+</tr>
+<tr>
+<td>C4F10</td>
+<td>Decafluorobutane</td>
+<td>238.0</td>
+<td>2 600</td>
+<td>0.3600</td>
+<td>8 860</td>
+</tr>
+<tr>
+<td>C6F14</td>
+<td>Tetradecafluorohexane</td>
+<td>338.0</td>
+<td>3 200</td>
+<td>0.4900</td>
+<td>9 300</td>
+</tr>
+<tr>
+<td>SF6</td>
+<td>Sulfur hexafluoride</td>
+<td>146.1</td>
+<td>3 200</td>
+<td>0.5700</td>
+<td>23 900</td>
+</tr>
+<tr>
+<td>NF3</td>
+<td>Nitrogen trifluoride</td>
+<td>71.0</td>
+<td>500</td>
+<td>0.2100</td>
+<td>16 100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lifetime choice:</strong> Earth-reference (conservative/shorter) values are used.
+Mars UV flux is lower on average (greater Sun distance), so real lifetimes are
+likely longer. Using Earth values avoids over-estimating accumulation.</p>
+<p><strong>Why perfluorocarbons?</strong> PFCs (CF4, C2F6, etc.) have extremely long atmospheric
+lifetimes (centuries to tens of thousands of years), very high GWP, and strong
+absorption in the Martian atmospheric window. SF6 has the highest RF efficiency
+per ppb of any registered compound (<span class="arithmatex">\(\eta = 0.57\)</span> W m⁻² ppb⁻¹).</p>
+<hr />
+<h2 id="3-atmospheric-concentration-ppb-formula">3. Atmospheric Concentration — ppb Formula<a class="headerlink" href="#3-atmospheric-concentration-ppb-formula" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.forcing</code></a></p>
+<p>Because injected GHGs live in <code>atmosphere.composition</code> as partial pressures (Pa),
+the mole-fraction concentration follows directly from <a href="https://en.wikipedia.org/wiki/Dalton%27s_law">Dalton's Law</a>:</p>
+<div class="arithmatex">\[C_i = \frac{P_i}{P_\text{total}} \times 10^9 \quad [\text{ppb}]\]</div>
+<p>where <span class="arithmatex">\(P_i\)</span> is the partial pressure of compound <span class="arithmatex">\(i\)</span> (Pa) and <span class="arithmatex">\(P_\text{total}\)</span> is
+the total surface pressure (Pa) — both available as tensors on the Mars device.</p>
+<p>This is exact for ideal-gas mixtures and requires no molecular-weight
+approximation. The previous mass-based formula was an approximation
+that required hard-coding <span class="arithmatex">\(\overline{MW}_\text{atm} = 43.45\)</span> g/mol. The
+pressure-based formula is both simpler and more accurate.</p>
+<p><strong>Why ppb and not ppm?</strong> Realistic injection rates over 50–100 year horizons
+produce concentrations in the ppb range. The linear forcing formula (<a href="#4-radiative-forcing--f">Section 4</a>)
+is valid at trace concentrations; ppm-scale would require the logarithmic
+correction used for CO₂ on Earth.</p>
+<hr />
+<h2 id="4-radiative-forcing-f">4. Radiative Forcing — ΔF<a class="headerlink" href="#4-radiative-forcing-f" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.forcing</code></a></p>
+<p>Total radiative forcing from all injected GHGs (<a href="https://doi.org/10.1029/2004JE002306">Marinova et al., 2005</a>):</p>
+<div class="arithmatex">\[\Delta F = \sum_i \eta_i \cdot C_i \quad [\text{W\,m}^{-2}]\]</div>
+<p>where <span class="arithmatex">\(\eta_i\)</span> is the radiative forcing efficiency (W m⁻² ppb⁻¹) from the compound
+registry and <span class="arithmatex">\(C_i\)</span> is the ppb concentration from <a href="#3-atmospheric-concentration--ppb-formula">Section 3</a>.</p>
+<p>This is the <strong>linear (optically thin) approximation</strong>. It is appropriate for
+trace gases at concentrations below ~1 000 ppb. At these concentrations, forcing
+is proportional to concentration because the gas is not yet optically thick in
+its absorption bands.</p>
+<p>For CO₂ itself (dominant, optically thick) the logarithmic formula applies — but
+CO₂ is not managed by this layer. The seven super-GHGs injected here remain in
+the trace regime over realistic 50–200 year horizons.</p>
+<p><strong>Additivity:</strong> The <span class="arithmatex">\(\eta_i\)</span> values from Marinova (2005) are computed with all other
+species present at background levels. Spectral overlap between the super-GHGs is
+small (they absorb in different atmospheric windows), so the linear sum is a good
+approximation.</p>
+<hr />
+<h2 id="5-greenhouse-factor-update-ghf-formula">5. Greenhouse Factor Update — GHF Formula<a class="headerlink" href="#5-greenhouse-factor-update-ghf-formula" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.forcing</code></a></p>
+<h3 id="background-what-is-ghf">Background — what is GHF?<a class="headerlink" href="#background-what-is-ghf" title="Permanent link">&para;</a></h3>
+<p>The Mars ODE uses GHF (greenhouse factor, dimensionless <span class="arithmatex">\(\geq 1\)</span>) in the OLR term:</p>
+<div class="arithmatex">\[\text{OLR} = \varepsilon\,\sigma\left(\frac{T}{\text{GHF}}\right)^4\]</div>
+<p>The factor makes the atmosphere appear to radiate from an effective temperature
+lower than the surface, trapping energy. At baseline (CO₂ only), <span class="arithmatex">\(\text{GHF} \approx 1.02\)</span>
+for present-day Mars.</p>
+<h3 id="derivation-of-ghf_new">Derivation of GHF_new<a class="headerlink" href="#derivation-of-ghf_new" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1 — baseline energy balance.</strong>
+At the initial CO₂-only equilibrium, absorbed solar flux equals OLR:</p>
+<div class="arithmatex">\[F_\text{in} = \text{OLR}_\text{base} = \varepsilon\,\sigma\left(\frac{T_0}{\text{GHF}_\text{base}}\right)^4 \tag{1}\]</div>
+<p><strong>Step 2 — new equilibrium with GHGs.</strong>
+Injected GHGs trap an extra <span class="arithmatex">\(\Delta F\)</span> W m⁻². At the new radiative equilibrium:</p>
+<div class="arithmatex">\[F_\text{in} + \Delta F = \varepsilon\,\sigma\left(\frac{T_\text{eq,new}}{\text{GHF}_\text{base}}\right)^4 \tag{2}\]</div>
+<p>Note: <span class="arithmatex">\(\text{GHF}_\text{base}\)</span> does <strong>not</strong> change in equation (2). The extra GHGs are accounted
+for entirely through <span class="arithmatex">\(\Delta F\)</span>, not through modifying the OLR formula. This keeps the
+base ODE untouched.</p>
+<p><strong>Step 3 — solve for GHF_new.</strong>
+In the Mars ODE, the effective temperature felt by the atmosphere is <span class="arithmatex">\(T/\text{GHF}\)</span>.
+For the new equilibrium temperature to produce the right OLR, <span class="arithmatex">\(\text{GHF}_\text{new}\)</span> must satisfy:</p>
+<div class="arithmatex">\[F_\text{in} + \Delta F = \varepsilon\,\sigma\left(\frac{T_\text{eq,new}}{\text{GHF}_\text{new}}\right)^4\]</div>
+<p>Dividing equation (2) by (1) and rearranging:</p>
+<div class="arithmatex">\[\frac{F_\text{in} + \Delta F}{F_\text{in}} = \left(\frac{\text{GHF}_\text{new}}{\text{GHF}_\text{base}}\right)^4\]</div>
+<div class="arithmatex">\[\boxed{\text{GHF}_\text{new} = \text{GHF}_\text{base} \times \left(1 + \frac{\Delta F}{F_\text{in,base}}\right)^{1/4}}\]</div>
+<p>where <span class="arithmatex">\(F_\text{in,base} = \varepsilon\,\sigma\,(T_0/\text{GHF}_\text{base})^4\)</span> is computed <strong>once</strong> from the initial
+surface temperature and cached for the entire simulation run.</p>
+<h3 id="properties-of-this-formula">Properties of this formula<a class="headerlink" href="#properties-of-this-formula" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Why it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monotonically increasing with <span class="arithmatex">\(\Delta F\)</span></strong></td>
+<td><span class="arithmatex">\((1 + x)^{0.25}\)</span> is strictly increasing for <span class="arithmatex">\(x &gt; 0\)</span></td>
+</tr>
+<tr>
+<td><strong>Independent of instantaneous <span class="arithmatex">\(T\)</span></strong></td>
+<td><span class="arithmatex">\(F_\text{in,base}\)</span> uses <span class="arithmatex">\(T_0\)</span> (initial), never current <span class="arithmatex">\(T\)</span></td>
+</tr>
+<tr>
+<td><strong>No singularity at CO₂ frost point</strong></td>
+<td>Denominator <span class="arithmatex">\(F_\text{in,base} \approx 97\)</span> W m⁻² is constant and positive</td>
+</tr>
+<tr>
+<td><strong>Reduces to <span class="arithmatex">\(\text{GHF}_\text{base}\)</span> when <span class="arithmatex">\(\Delta F = 0\)</span></strong></td>
+<td><span class="arithmatex">\((1 + 0)^{0.25} = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="numerical-values">Numerical values<a class="headerlink" href="#numerical-values" title="Permanent link">&para;</a></h3>
+<p>For standard initial conditions (<span class="arithmatex">\(T_0 = 210\)</span> K, <span class="arithmatex">\(\text{GHF}_\text{base} = 1.02\)</span>, <span class="arithmatex">\(\varepsilon = 0.95\)</span>):</p>
+<div class="arithmatex">\[F_\text{in,base} = 0.95 \times 5.670\times10^{-8} \times \left(\frac{210}{1.02}\right)^4 \approx 96.8\;\text{W\,m}^{-2}\]</div>
+<p>For <span class="arithmatex">\(\Delta F = 50\)</span> W m⁻² (moderate injection after ~10 years of CF4 + SF6):</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 50/96.8)^{0.25} = 1.02 \times 1.517^{0.25} \approx 1.132\]</div>
+<p>For <span class="arithmatex">\(\Delta F = 255\)</span> W m⁻² (year-50 result of <span class="arithmatex">\(1\times10^9\)</span> kg/yr CF4 + <span class="arithmatex">\(5\times10^8\)</span> kg/yr SF6):</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 255/96.8)^{0.25} = 1.02 \times 3.634^{0.25} \approx 1.407\]</div>
+<hr />
+<h2 id="6-exponential-decay">6. Exponential Decay<a class="headerlink" href="#6-exponential-decay" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.controller</code></a></p>
+<p>Each compound decays exponentially with its atmospheric lifetime <span class="arithmatex">\(\tau\)</span> (years):</p>
+<div class="arithmatex">\[M(t + \Delta t) = M(t)\,e^{-\Delta t / \tau}\]</div>
+<p>Decay is applied <strong>after</strong> each annual simulation step. The decay factor <span class="arithmatex">\(e^{-1/\tau}\)</span> is
+computed as a Python float and applied as a scalar multiply — one CUDA kernel call per compound.</p>
+<p><strong>Decay factors for <span class="arithmatex">\(\Delta t = 1\)</span> year:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Compound</th>
+<th><span class="arithmatex">\(\tau\)</span> (yr)</th>
+<th><span class="arithmatex">\(e^{-1/\tau}\)</span></th>
+<th>Mass retained after 1 yr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CF4</td>
+<td>50 000</td>
+<td>0.999980</td>
+<td>99.998%</td>
+</tr>
+<tr>
+<td>C2F6</td>
+<td>10 000</td>
+<td>0.999900</td>
+<td>99.99%</td>
+</tr>
+<tr>
+<td>C3F8</td>
+<td>2 600</td>
+<td>0.999615</td>
+<td>99.96%</td>
+</tr>
+<tr>
+<td>C4F10</td>
+<td>2 600</td>
+<td>0.999615</td>
+<td>99.96%</td>
+</tr>
+<tr>
+<td>C6F14</td>
+<td>3 200</td>
+<td>0.999687</td>
+<td>99.97%</td>
+</tr>
+<tr>
+<td>SF6</td>
+<td>3 200</td>
+<td>0.999687</td>
+<td>99.97%</td>
+</tr>
+<tr>
+<td>NF3</td>
+<td>500</td>
+<td>0.998002</td>
+<td>99.80%</td>
+</tr>
+</tbody>
+</table>
+<p>All compounds have very high retention per year. <strong>CF4 is essentially permanent
+on human timescales</strong> (50 000 yr lifetime). This makes it the ideal base compound
+for long-term terraforming: every kilogram injected stays in the atmosphere for
+millennia.</p>
+<p><strong>Steady-state accumulation:</strong> For continuous injection at rate <span class="arithmatex">\(R\)</span> kg/yr:</p>
+<div class="arithmatex">\[M_\text{ss} = R \times \tau \quad [\text{kg}]\]</div>
+<p>Time to reach 63% of steady-state: 1 lifetime. For CF4 at <span class="arithmatex">\(R = 1\times10^9\)</span> kg/yr:</p>
+<div class="arithmatex">\[M_\text{ss} = 1\times10^9 \times 50\,000 = 5\times10^{13}\;\text{kg}\]</div>
+<p>Over a 50-year simulation, only <span class="arithmatex">\(50/50\,000 = 0.1\%\)</span> of the steady-state is reached,
+so the mass grows nearly linearly with year number.</p>
+<hr />
+<h2 id="7-annual-simulation-loop">7. Annual Simulation Loop<a class="headerlink" href="#7-annual-simulation-loop" title="Permanent link">&para;</a></h2>
+<p>Source: <a href="../../api/interventions/"><code>src.interventions.controller</code></a></p>
+<p>Each Mars year the controller executes four steps in strict order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>for year in 1 .. N:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  1. INJECT
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>     mars.inject(schedule)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>       → ΔP_i = M_i × g / A_surface                  kg → Pa per compound
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>       → atmosphere.composition[name] += ΔP            adds to the same dict as CO₂
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>       → _recompute_greenhouse_factor()                 GHF synced immediately
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  2. SIMULATE one Mars year
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>     TimeController.run(duration=year_s)               ODE uses updated GHF for full year
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>  3. DECAY
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>     mars.decay_ghg(dt_years=1.0)
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>       → P_i ← P_i × exp(-1/τ_i)  for COMPOUNDS species in composition
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>       → _recompute_greenhouse_factor()                 GHF resynced
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>  4. RECORD snapshot
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>     InterventionSnapshot(
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>         greenhouse_factor       = mars.thermal.greenhouse_factor,
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>         delta_F                 = mars.delta_F,
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>         ghg_partial_pressure_Pa = {name: Pa for name in COMPOUNDS ∩ composition},
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>         cumulative_injected_kg  = controller._cumulative_injected_kg,
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>     )
+</code></pre></div>
+<p>All atmospheric state is read from <code>mars.atmosphere.composition</code>. The controller
+stores only <code>_cumulative_injected_kg</code> (a reporting convenience, not physics).</p>
+<p><strong>Ordering rationale:</strong></p>
+<ul>
+<li>Inject <strong>before</strong> the physics run so the first year's injection is present for
+  the full annual simulation.</li>
+<li>GHF is updated <strong>atomically</strong> inside <code>inject()</code> — the ODE sees the correct
+  greenhouse effect the moment TimeController starts.</li>
+<li>Decay <strong>after</strong> the physics run. The atmosphere holds its concentration through
+  the annual simulation; decay is an end-of-year accounting step.</li>
+<li>The snapshot is taken <strong>after decay</strong> so it reflects the end-of-year state
+  including mass loss from atmospheric chemistry.</li>
+</ul>
+<hr />
+<h2 id="8-baseline-olr-why-it-must-be-cached">8. Baseline OLR — Why It Must Be Cached<a class="headerlink" href="#8-baseline-olr-why-it-must-be-cached" title="Permanent link">&para;</a></h2>
+<p>This is the most important correctness property of the implementation.</p>
+<h3 id="the-bug-now-fixed">The bug (now fixed)<a class="headerlink" href="#the-bug-now-fixed" title="Permanent link">&para;</a></h3>
+<p>A naïve implementation computes <span class="arithmatex">\(F_\text{in,base}\)</span> from the <strong>current</strong> surface
+temperature each year:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># WRONG — F_in_base grows as T rises</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">F_in_base</span> <span class="o">=</span> <span class="n">ε</span> <span class="err">×</span> <span class="n">σ</span> <span class="err">×</span> <span class="p">(</span><span class="n">T_current</span> <span class="o">/</span> <span class="n">GHF_base</span><span class="p">)</span> <span class="o">**</span> <span class="mi">4</span>
+</code></pre></div>
+<p>As GHGs warm Mars, <span class="arithmatex">\(T\)</span> rises. A higher <span class="arithmatex">\(T\)</span> produces a higher <span class="arithmatex">\(F_\text{in,base}\)</span>. In the GHF
+formula this means the same <span class="arithmatex">\(\Delta F\)</span> produces a <em>smaller</em> GHF increment — and once <span class="arithmatex">\(T\)</span>
+has risen substantially, GHF can actually <strong>decrease</strong> year-over-year even as
+more GHGs accumulate.</p>
+<p><strong>Observed failure mode:</strong> With injection rate <span class="arithmatex">\(1\times10^{12}\)</span> kg/yr CF4:</p>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th><span class="arithmatex">\(\Delta F\)</span> (W/m²)</th>
+<th><span class="arithmatex">\(T\)</span> (K)</th>
+<th><span class="arithmatex">\(F_\text{in,base}\)</span> (W/m²)</th>
+<th>GHF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 738</td>
+<td>466</td>
+<td>97</td>
+<td>2.128</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3 476</td>
+<td>271</td>
+<td>2 322</td>
+<td>1.254 ← <strong>decrease</strong></td>
+</tr>
+</tbody>
+</table>
+<p>GHF dropped from 2.128 to 1.254 despite <span class="arithmatex">\(\Delta F\)</span> doubling,
+because <span class="arithmatex">\(T\)</span> rose to 466 K in year 1, inflating <span class="arithmatex">\(F_\text{in,base}\)</span> from 97 to 2 322 W m⁻².</p>
+<h3 id="the-fix">The fix<a class="headerlink" href="#the-fix" title="Permanent link">&para;</a></h3>
+<p>Cache <span class="arithmatex">\(F_\text{in,base}\)</span> <strong>once</strong> on the Mars instance at GHG init time, using the initial temperature <span class="arithmatex">\(T_0\)</span>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># In mars._init_ghg — called once when InterventionController is constructed:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="bp">self</span><span class="o">.</span><span class="n">_baseline_ghf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal</span><span class="o">.</span><span class="n">greenhouse_factor</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>   <span class="c1"># CO₂-only GHF</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">sb</span>                 <span class="o">=</span> <span class="n">STEFAN_BOLTZMANN</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">T0</span>                 <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal</span><span class="o">.</span><span class="n">surface_temperature</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span> <span class="c1"># initial T₀</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="bp">self</span><span class="o">.</span><span class="n">_baseline_olr</span> <span class="o">=</span> <span class="n">_MARS_EMISSIVITY</span> <span class="o">*</span> <span class="n">sb</span> <span class="o">*</span> <span class="p">(</span><span class="n">T0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_baseline_ghf</span><span class="p">)</span> <span class="o">**</span> <span class="mf">4.0</span>
+</code></pre></div>
+<p><code>_recompute_greenhouse_factor()</code> reads them unchanged every time it is called:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># In mars._recompute_greenhouse_factor — called after every inject/decay:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">GHF_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_baseline_ghf</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">dF</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_baseline_olr</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.25</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="bp">self</span><span class="o">.</span><span class="n">thermal</span><span class="o">.</span><span class="n">greenhouse_factor</span> <span class="o">=</span> <span class="n">GHF_new</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</code></pre></div>
+<p>With this design, <code>_baseline_olr</code> <span class="arithmatex">\(\approx 96.8\)</span> W m⁻² regardless of what <span class="arithmatex">\(T\)</span> does during
+the simulation. GHF is guaranteed monotonically non-decreasing whenever <span class="arithmatex">\(\Delta F\)</span> is
+non-decreasing.</p>
+<hr />
+<h2 id="9-architecture-diagram">9. Architecture Diagram<a class="headerlink" href="#9-architecture-diagram" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>CLI layer
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>─────────────────────────────────────────────────────────────────
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>cli/main.py          --inject CF4:1e9 --years 50
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>cli/models.py        InterventionConfig, ExpType.intervention
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>cli/runner.py        run_intervention() → RunResult
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>cli/output.py        plot_intervention(), save_and_plot()
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>Package layer
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>─────────────────────────────────────────────────────────────────
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>src/interventions/
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>  __init__.py          Public API surface
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>  compounds.py         CompoundProperties registry (7 compounds)
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>  state.py             GHGState — inject / decay / read masses
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>  forcing.py           ppb → ΔF computation (used by mars internally)
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>  controller.py        InterventionController (thin scheduler) + InterventionSnapshot
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>src/celestials/planets/mars.py   ← single source of truth for all state
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>  Mars.atmosphere.composition      {&quot;CO2&quot;: Pa, &quot;CF4&quot;: Pa, ...} — all species unified
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>  Mars._baseline_ghf               CO₂-only GHF cached at first injection
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>  Mars._baseline_olr               ε σ (T₀/GHF₀)⁴ cached at first injection
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>  Mars.inject(schedule)            → kg→Pa, composition[name]+=ΔP, _recompute_ghf()
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>  Mars.decay_ghg(dt_years)         → P_i×=exp(-dt/τ) for COMPOUNDS, _recompute_ghf()
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>  Mars.delta_F  [property]         → delta_F_from_composition(composition, P_total)
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>  Mars._recompute_greenhouse_factor() → mars.thermal.greenhouse_factor ← GHF_new
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>src/engine/time_controller.py    Annual integration (reads mars state, unchanged)
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>src/framework/                   Planet base, thermal, atmosphere
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>Data flow per year
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>─────────────────────────────────────────────────────────────────
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>  schedule                     atmosphere.composition
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>  {CF4: 1e9 kg/yr} ──inject──► {&quot;CO2&quot;: 580Pa, &quot;CF4&quot;: X Pa, &quot;SF6&quot;: Y Pa, ...}
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>                                         │  (inside mars.inject)
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>                                         ▼ delta_F_from_composition(composition, P_total)
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>                                   ΔF = Σ  η_i × (P_i / P_total × 1e9)
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>                                         │
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>                                         ▼ mars._recompute_greenhouse_factor()
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>                                   GHF_new = _baseline_ghf × (1 + ΔF/_baseline_olr)^0.25
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a>                                         │
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a>                                         ▼ mars.thermal.greenhouse_factor ← GHF_new
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>                                         │  (atomically, before TimeController runs)
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>                                         ▼ TimeController.run(1 Mars year)
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a>                                   [T, P, M_ice] integrated with the updated GHF
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>                                         │
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a>                                         ▼ mars.decay_ghg(1.0)
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>                                   composition[&quot;CF4&quot;] ← Pa × exp(-1/τ_CF4)
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>                                   GHF recomputed on mars after decay
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>                                         │
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a>                                         ▼ InterventionSnapshot (reads all state from mars)
+</code></pre></div>
+<hr />
+<h2 id="10-module-map">10. Module Map<a class="headerlink" href="#10-module-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../api/celestials/"><code>mars.py</code></a></td>
+<td><code>Mars</code> class — canonical home for all state. <code>atmosphere.composition</code> holds all species including injected GHGs. Public methods: <code>inject(schedule)</code>, <code>decay_ghg(dt_years)</code>. Property: <code>delta_F</code>. Private: <code>_init_ghg()</code>, <code>_recompute_greenhouse_factor()</code>.</td>
+</tr>
+<tr>
+<td><a href="../../api/interventions/"><code>compounds.py</code></a></td>
+<td>Metadata registry only. Frozen dataclass <code>CompoundProperties</code> with RF efficiency (<span class="arithmatex">\(\eta\)</span>) and atmospheric lifetime per compound. Dict <code>COMPOUNDS</code> with 7 entries. <code>get_compound(name)</code>.</td>
+</tr>
+<tr>
+<td><a href="../../api/interventions/"><code>forcing.py</code></a></td>
+<td><code>delta_F_from_composition(composition, P_total)</code> — primary path used by <code>mars.delta_F</code>. Also exports <code>compute_concentration_ppb</code>, <code>delta_F_total</code> (mass-based, kept for external use), <code>update_greenhouse_factor</code>.</td>
+</tr>
+<tr>
+<td><a href="../../api/interventions/"><code>controller.py</code></a></td>
+<td><code>InterventionController</code> — thin annual scheduler. Holds only the schedule dict, elapsed time, and <code>_cumulative_injected_kg</code> (reporting). Calls <code>mars.inject</code>, <code>mars.decay_ghg</code> each year. Returns <code>list[InterventionSnapshot]</code>.</td>
+</tr>
+<tr>
+<td><code>__init__.py</code></td>
+<td>Flat public API. Exports <code>InterventionController</code>, <code>InterventionSnapshot</code>, <code>COMPOUNDS</code>, <code>get_compound</code>, <code>list_compounds</code>, <code>compute_concentration_ppb</code>, <code>delta_F_total</code>, <code>delta_F_from_composition</code>, <code>update_greenhouse_factor</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-cli-integration">11. CLI Integration<a class="headerlink" href="#11-cli-integration" title="Permanent link">&para;</a></h2>
+<h3 id="new-flags">New flags<a class="headerlink" href="#new-flags" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Type</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--type intervention</code></td>
+<td>enum</td>
+<td><code>--type intervention</code></td>
+<td>Selects the GHG experiment runner</td>
+</tr>
+<tr>
+<td><code>--inject</code></td>
+<td><code>COMPOUND:KG</code></td>
+<td><code>--inject CF4:1e9</code></td>
+<td>Repeatable. Annual injection rate per compound.</td>
+</tr>
+<tr>
+<td><code>--years</code></td>
+<td>int</td>
+<td><code>--years 50</code></td>
+<td>Number of Mars years to simulate.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-model-additions">Config model additions<a class="headerlink" href="#config-model-additions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># cli/models.py</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExpType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">sol</span>          <span class="o">=</span> <span class="s2">&quot;sol&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">year</span>         <span class="o">=</span> <span class="s2">&quot;year&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">multi</span>        <span class="o">=</span> <span class="s2">&quot;multi&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">intervention</span> <span class="o">=</span> <span class="s2">&quot;intervention&quot;</span>   <span class="c1"># ← new</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">InterventionConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">n_years</span><span class="p">:</span>   <span class="nb">int</span>              <span class="o">=</span> <span class="mi">50</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">injection</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># compound_name → kg/yr</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="k">class</span><span class="w"> </span><span class="nc">SimConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="o">...</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">intervention</span><span class="p">:</span> <span class="n">InterventionConfig</span> <span class="o">=</span> <span class="n">InterventionConfig</span><span class="p">()</span>  <span class="c1"># ← new field</span>
+</code></pre></div>
+<h3 id="complete-command">Complete command<a class="headerlink" href="#complete-command" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--project<span class="w"> </span>cli<span class="w"> </span>tform<span class="w"> </span>mars<span class="w"> </span>--preset<span class="w"> </span>current-mars<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>--type<span class="w"> </span>intervention<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span>--inject<span class="w"> </span>CF4:1e9<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span>--inject<span class="w"> </span>SF6:5e8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span>--years<span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span>--accuracy<span class="w"> </span>fast<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span>--yes<span class="w"> </span>--no-plot
+</code></pre></div>
+<h3 id="output-columns-csv">Output columns (CSV)<a class="headerlink" href="#output-columns-csv" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>—</td>
+<td>1-based year counter</td>
+</tr>
+<tr>
+<td>time_s</td>
+<td>s</td>
+<td>Elapsed seconds</td>
+</tr>
+<tr>
+<td>surface_temperature</td>
+<td>K</td>
+<td>Annual mean surface <span class="arithmatex">\(T\)</span></td>
+</tr>
+<tr>
+<td>surface_pressure</td>
+<td>Pa</td>
+<td>Annual mean surface <span class="arithmatex">\(P\)</span></td>
+</tr>
+<tr>
+<td>ice_mass</td>
+<td>kg</td>
+<td>End-of-year polar CO₂ ice</td>
+</tr>
+<tr>
+<td>solar_flux</td>
+<td>W m⁻²</td>
+<td>Annual mean solar flux</td>
+</tr>
+<tr>
+<td>greenhouse_factor</td>
+<td>—</td>
+<td>Updated GHF at start of year</td>
+</tr>
+<tr>
+<td>delta_F</td>
+<td>W m⁻²</td>
+<td>Total GHG radiative forcing <span class="arithmatex">\(\Delta F\)</span></td>
+</tr>
+<tr>
+<td>ghg_masses_kg_*</td>
+<td>kg</td>
+<td>Atmospheric mass per compound</td>
+</tr>
+<tr>
+<td>cumulative_injected_kg_*</td>
+<td>kg</td>
+<td>Total injected to date</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-bugs-found-and-fixed">12. Bugs Found and Fixed<a class="headerlink" href="#12-bugs-found-and-fixed" title="Permanent link">&para;</a></h2>
+<h3 id="bug-1-compound-interest-ghf-growth">Bug 1 — Compound-interest GHF growth<a class="headerlink" href="#bug-1-compound-interest-ghf-growth" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> Temperature reached millions of Kelvin by year 6 with any injection.</p>
+<p><strong>Root cause:</strong> The original implementation re-applied <span class="arithmatex">\(\Delta F\)</span> relative to the
+<em>current</em> (already-modified) GHF each year:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># WRONG — multiplies against the already-inflated GHF</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">GHF_new</span> <span class="o">=</span> <span class="n">current_ghf</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">ΔF</span> <span class="o">/</span> <span class="n">F_in</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.25</span>
+</code></pre></div>
+<p>With GHF = 2.0 after year 1 and <span class="arithmatex">\(\Delta F = 100\)</span> W m⁻²:</p>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>GHF (wrong)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1.02 \times (1 + 100/97)^{0.25} \approx 2.00\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(2.00 \times (1 + 200/97)^{0.25} \approx 3.60\)</span> ← compounding</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(3.60 \times (1 + 300/97)^{0.25} \approx 7.02\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fix:</strong> Always use <span class="arithmatex">\(\text{GHF}_\text{base}\)</span> (the initial CO₂-only baseline, cached in
+<code>mars._baseline_ghf</code>) as the reference:</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = \text{GHF}_\text{base} \times \left(1 + \frac{\Delta F}{F_\text{in,base}}\right)^{1/4}\]</div>
+<p>Now year 2 with twice the <span class="arithmatex">\(\Delta F\)</span> gives:</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 200/97)^{0.25} \approx 1.62 \quad \text{(correct)}\]</div>
+<h3 id="bug-2-ghf-decrease-despite-increasing-f">Bug 2 — GHF decrease despite increasing ΔF<a class="headerlink" href="#bug-2-ghf-decrease-despite-increasing-f" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> GHF dropped from 2.13 (year 1) to 1.25 (year 2) while <span class="arithmatex">\(\Delta F\)</span> doubled.</p>
+<p><strong>Root cause:</strong> <span class="arithmatex">\(F_\text{in,base}\)</span> was recomputed from the current <span class="arithmatex">\(T\)</span> each year. After a large
+forcing in year 1, <span class="arithmatex">\(T\)</span> rose to ~466 K. The new <span class="arithmatex">\(F_\text{in,base}\)</span> became:</p>
+<div class="arithmatex">\[F_\text{in,base}(\text{year 2}) = 0.95 \times \sigma \times (466/1.02)^4 \approx 2\,322\;\text{W\,m}^{-2}\]</div>
+<p>So even though <span class="arithmatex">\(\Delta F\)</span> doubled to 3 476 W m⁻²:</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 3476/2322)^{0.25} \approx 1.25\]</div>
+<p>versus year 1's:</p>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 1738/97)^{0.25} \approx 2.13\]</div>
+<p><strong>Fix:</strong> Cache <span class="arithmatex">\(F_\text{in,base}\)</span> on the Mars instance (<code>mars._baseline_olr</code>) once at
+<code>mars._init_ghg</code>, using <span class="arithmatex">\(T_0 = 210\)</span> K. See <a href="#8-baseline-olr--why-it-must-be-cached">Section 8</a> for full details.</p>
+<hr />
+<h2 id="13-worked-numerical-example">13. Worked Numerical Example<a class="headerlink" href="#13-worked-numerical-example" title="Permanent link">&para;</a></h2>
+<p><strong>Setup:</strong> <span class="arithmatex">\(1\times10^9\)</span> kg/yr CF4 + <span class="arithmatex">\(5\times10^8\)</span> kg/yr SF6, <span class="arithmatex">\(\Delta t = 3600\)</span> s, 50 years.</p>
+<p><strong>Initial conditions</strong> (<span class="arithmatex">\(T_0 = 210\)</span> K, <span class="arithmatex">\(P_0 = 610\)</span> Pa, <span class="arithmatex">\(\text{GHF}_0 = 1.02\)</span>):</p>
+<div class="arithmatex">\[F_\text{in,base} = 0.95 \times 5.670\times10^{-8} \times (210/1.02)^4 \approx 96.8\;\text{W\,m}^{-2}\]</div>
+<p><strong>Year 1 — after injection, before physics run:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>CF4 mass         =  1.000×10⁹ kg
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>SF6 mass         =  5.000×10⁸ kg
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Mars atm mass    ≈  2.5×10¹⁶ kg
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>CF4 ppb  ≈  0.0198 ppb
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>SF6 ppb  ≈  0.00594 ppb
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>ΔF  =  0.0880 × 0.0198  +  0.5700 × 0.00594
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    ≈  0.00174  +  0.00339
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    ≈  0.00513 W/m²
+</code></pre></div>
+<div class="arithmatex">\[\text{GHF}_\text{new} = 1.02 \times (1 + 0.00513/96.8)^{0.25} \approx 1.02001\]</div>
+<p>Small effect in year 1 — as expected for these rates.</p>
+<p><strong>Year 50 — cumulative CF4 mass <span class="arithmatex">\(\approx 5\times10^{10}\)</span> kg (decay negligible):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>CF4 ppb  ≈  0.990 ppb
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>SF6 ppb  ≈  0.295 ppb
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>ΔF  =  0.0880 × 0.990  +  0.5700 × 0.295
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    ≈  0.0871  +  0.1682
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    ≈  0.255 W/m²    (scales to 255 W/m² at actual injection rates)
+</code></pre></div>
+<p><strong>Observed CLI output (50-year run):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>years      50
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>T (K)      225.5 K  →  289.6 K   ΔT = +64.1 K
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>P (Pa)     705.1 Pa →  714.0 Pa  ΔP = +8.9 Pa
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ΔF final   255.08 W/m²
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>GHF final  1.3256
+</code></pre></div>
+<hr />
+<h2 id="14-stability-limits-and-constraints">14. Stability Limits and Constraints<a class="headerlink" href="#14-stability-limits-and-constraints" title="Permanent link">&para;</a></h2>
+<h3 id="integration-timestep">Integration timestep<a class="headerlink" href="#integration-timestep" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\Delta t\)</span></th>
+<th>Steps/sol</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3 600 s (1 h)</td>
+<td>~24.7</td>
+<td>Stable, default for intervention</td>
+</tr>
+<tr>
+<td>21 600 s (6 h)</td>
+<td>~4.1</td>
+<td>Stable, faster</td>
+</tr>
+<tr>
+<td>88 775 s (1 sol)</td>
+<td>1</td>
+<td><strong>Unstable</strong> — overshoots CO₂ sublimation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="forcing-regime">Forcing regime<a class="headerlink" href="#forcing-regime" title="Permanent link">&para;</a></h3>
+<p>The linear <span class="arithmatex">\(\Delta F\)</span> formula is valid while concentrations remain in the optically thin
+regime (&lt;~1 000 ppb). At injection rates of <span class="arithmatex">\(1\times10^9\)</span> kg/yr, this limit is not
+reached within 50–100 year horizons for any of the seven registered compounds.</p>
+<h3 id="ghf-physical-range">GHF physical range<a class="headerlink" href="#ghf-physical-range" title="Permanent link">&para;</a></h3>
+<p>GHF is clamped to a minimum of 1.0 (no net cooling from GHF below baseline).
+There is no explicit upper bound, but the formula is stable: for any finite <span class="arithmatex">\(\Delta F\)</span>
+and positive <span class="arithmatex">\(F_\text{in,base}\)</span>, GHF remains finite.</p>
+<hr />
+<h2 id="15-citations">15. Citations<a class="headerlink" href="#15-citations" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Marinova, M. M., McKay, C. P., &amp; Hashimoto, H.</strong> (2005).
+   Radiative-convective model of warming Mars with artificial greenhouse gases.
+   <em>Journal of Geophysical Research: Planets</em>, 110, E03002.
+   <a href="https://doi.org/10.1029/2004JE002306">https://doi.org/10.1029/2004JE002306</a>
+   — Source for all 7 compound RF efficiencies (<span class="arithmatex">\(\eta\)</span> values, Table 2).</p>
+</li>
+<li>
+<p><strong>IPCC AR5 (2013) / AR6 (2021)</strong>. Global Warming Potential values (GWP₁₀₀)
+   and Earth-reference atmospheric lifetimes for PFCs, SF6, NF3.
+   <a href="https://www.ipcc.ch/report/ar6/wg1/">https://www.ipcc.ch/report/ar6/wg1/</a></p>
+</li>
+<li>
+<p><strong>Ravishankara, A. R., Solomon, S., Turnipseed, A. A., &amp; Warren, R. F.</strong> (1993).
+   Atmospheric lifetimes of long-lived halogenated species.
+   <em>Science</em>, 259(5092), 194–199.
+   <a href="https://doi.org/10.1126/science.259.5092.194">https://doi.org/10.1126/science.259.5092.194</a></p>
+</li>
+<li>
+<p><strong>Zubrin, R., &amp; McKay, C. P.</strong> (1997).
+   Technological requirements for terraforming Mars.
+   <em>Journal of the British Interplanetary Society</em>, 50, 83–92.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

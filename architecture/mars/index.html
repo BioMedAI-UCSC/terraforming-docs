@@ -1,0 +1,3238 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+      
+      
+      
+      
+        <link rel="prev" href="../planet/">
+      
+      
+        <link rel="next" href="../interventions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Mars Model - Terraforming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mars-physics-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mars Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/framework/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Terraforming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planet Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-state-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. State Vector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-planetary-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Planetary Constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-orbital-mechanics-advance_orbit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Orbital Mechanics — advance_orbit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Orbital Mechanics — advance_orbit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-mean-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Mean Motion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-kepler-ellipse-distance_from_sun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Kepler Ellipse — distance_from_sun
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-inverse-square-solar-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Inverse-Square Solar Flux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Data Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-solar-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Solar Geometry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Solar Geometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-solar-longitude-l_s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Solar Longitude \(L_s\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-solar-declination-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Solar Declination \(\delta\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-hour-angle-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Hour Angle \(h\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-cosine-of-solar-zenith-angle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Cosine of Solar Zenith Angle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dtdt-surface-energy-balance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. dT/dt — Surface Energy Balance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. dT/dt — Surface Energy Balance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-q_textin-absorbed-solar-radiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 \(Q_\text{in}\) — Absorbed Solar Radiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-q_textout-thermal-emission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 \(Q_\text{out}\) — Thermal Emission
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-c_textarea-thermal-inertia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 \(C_\text{area}\) — Thermal Inertia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-full-dependency-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Full Dependency Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-dm_icedt-polar-co2-sublimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. dM_ice/dt — Polar CO₂ Sublimation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. dM_ice/dt — Polar CO₂ Sublimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-polar-insolation-simplified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Polar Insolation (Simplified)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-energy-balance-at-frost-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Energy Balance at Frost Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-two-pole-ice-budget-with-per-pole-reservoirs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Two-Pole Ice Budget with Per-Pole Reservoirs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-worked-example-perihelion-l_s-251-south-cap-peak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Worked Example — Perihelion (\(L_s = 251°\), south cap peak)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-dpdt-atmospheric-pressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. dP/dt — Atmospheric Pressure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. dP/dt — Atmospheric Pressure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-iceatmosphere-mass-exchange-dominant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Ice–Atmosphere Mass Exchange (dominant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-non-thermal-atmospheric-escape-secular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Non-thermal Atmospheric Escape (secular)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-thermal-tide-empirical-diurnal-pressure-oscillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Thermal Tide — Empirical Diurnal Pressure Oscillation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-fast-path-compute_fast_physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. FAST Path — compute_fast_physics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. FAST Path — compute_fast_physics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-daily-mean-insolation-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Daily-Mean Insolation Factor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-radiative-equilibrium-temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Radiative Equilibrium Temperature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-exponential-relaxation-newtonian-cooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Exponential Relaxation (Newtonian Cooling)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-rk4-vs-relaxation-numerical-trade-offs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 RK4 vs Relaxation — Numerical Trade-offs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-dependency-graph-compute_fast_physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Dependency Graph — compute_fast_physics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-full-dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Full Dependency Graph
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Full Dependency Graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ode-coupling-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ODE coupling summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-model-scope-and-known-approximations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Model Scope and Known Approximations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-citations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Citations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Citations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physics-laws-and-mathematical-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physics Laws and Mathematical Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scientific-literature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scientific Literature
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="mars-physics-model">Mars Physics Model<a class="headerlink" href="#mars-physics-model" title="Permanent link">&para;</a></h1>
+<p>Complete derivation, dependency graph, and worked examples for every equation in
+<a href="../../api/celestials/"><code>src.celestials</code></a> and its supporting framework in <a href="../../api/framework/"><code>src.framework</code></a>.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-state-vector">State Vector</a></li>
+<li><a href="#2-planetary-constants">Planetary Constants</a></li>
+<li><a href="#3-orbital-mechanics--advance_orbit">Orbital Mechanics — advance_orbit</a></li>
+<li><a href="#4-solar-geometry">Solar Geometry — compute_derivatives step 1</a></li>
+<li><a href="#5-dtdt--surface-energy-balance">dT/dt — Surface Energy Balance</a></li>
+<li><a href="#6-dm_icedt--polar-co-sublimation">dM_ice/dt — Polar CO₂ Sublimation</a></li>
+<li><a href="#7-dpdt--atmospheric-pressure">dP/dt — Atmospheric Pressure</a></li>
+<li><a href="#8-fast-path--compute_fast_physics">FAST path — compute_fast_physics</a></li>
+<li><a href="#9-full-dependency-graph">Full Dependency Graph</a></li>
+<li><a href="#10-model-scope-and-known-approximations">Model Scope and Known Approximations</a></li>
+<li><a href="#11-citations">Citations</a></li>
+</ol>
+<hr />
+<h2 id="1-state-vector">1. State Vector<a class="headerlink" href="#1-state-vector" title="Permanent link">&para;</a></h2>
+<p>The coupled ODE system evolves three variables:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>y = [T,  P,  M_ice]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>     │    │    │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>     │    │    └─ Total polar CO₂ ice mass          [kg]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>     │    └────── Global mean surface pressure       [Pa]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     └─────────── Surface temperature at (φ, λ)     [K]
+</code></pre></div>
+<p>At every timestep the engine calls <code>advance_orbit(dt)</code> first (updates orbital
+angle and solar flux), then either:</p>
+<ul>
+<li><code>compute_derivatives(y)</code> → <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">RK4 integrator</a> (ACCURATE path)</li>
+<li><code>compute_fast_physics(dt)</code> → <a href="https://en.wikipedia.org/wiki/Newton%27s_law_of_cooling">exponential relaxation</a> (FAST path)</li>
+</ul>
+<hr />
+<h2 id="2-planetary-constants">2. Planetary Constants<a class="headerlink" href="#2-planetary-constants" title="Permanent link">&para;</a></h2>
+<p>All constants are <code>torch.float64</code> tensors defined at module level.</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(M\)</span></td>
+<td>Mass</td>
+<td><span class="arithmatex">\(6.4171\times10^{23}\)</span> kg</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R\)</span></td>
+<td>Radius</td>
+<td><span class="arithmatex">\(3.3895\times10^6\)</span> m</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g\)</span></td>
+<td>Surface gravity</td>
+<td><span class="arithmatex">\(3.72076\)</span> m s⁻²</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_\text{rot}\)</span></td>
+<td>Rotation period</td>
+<td><span class="arithmatex">\(88\,775.244\)</span> s (1 sol)</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td>Semi-major axis</td>
+<td><span class="arithmatex">\(2.27939\times10^{11}\)</span> m (1.524 AU)</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(e\)</span></td>
+<td>Eccentricity</td>
+<td><span class="arithmatex">\(0.0934\)</span></td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_\text{orb}\)</span></td>
+<td>Orbital period</td>
+<td><span class="arithmatex">\(5.93568\times10^7\)</span> s (686.97 days)</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\varepsilon_\text{tilt}\)</span></td>
+<td>Axial tilt</td>
+<td><span class="arithmatex">\(25.19° = 0.4396\)</span> rad</td>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Fact Sheet</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Atmospheric composition (default, partial pressures):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Species</th>
+<th>Pressure (Pa)</th>
+<th>Fraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CO₂</td>
+<td>580</td>
+<td>95.1%</td>
+</tr>
+<tr>
+<td>N₂</td>
+<td>15</td>
+<td>2.5%</td>
+</tr>
+<tr>
+<td>Ar</td>
+<td>12</td>
+<td>2.0%</td>
+</tr>
+<tr>
+<td>O₂</td>
+<td>0.8</td>
+<td>0.1%</td>
+</tr>
+<tr>
+<td>CO</td>
+<td>0.4</td>
+<td>0.07%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Physics calibration constants</strong> (tuned to REMS observations):</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARS_THERMAL_INERTIA</code></td>
+<td><span class="arithmatex">\(6.0\times10^4\)</span> J K⁻¹ m⁻²</td>
+<td>Surface thermal mass per unit area — controls diurnal temperature amplitude</td>
+</tr>
+<tr>
+<td><code>MARS_POLAR_CAP_FRACTION</code></td>
+<td><span class="arithmatex">\(0.01\)</span></td>
+<td>Effective fractional surface area of each sublimating polar cap</td>
+</tr>
+<tr>
+<td><code>MARS_THERMAL_TIDE_PA</code></td>
+<td><span class="arithmatex">\(30.0\)</span> Pa</td>
+<td>Half-amplitude of empirical diurnal pressure oscillation</td>
+</tr>
+<tr>
+<td><code>MARS_THERMAL_TIDE_PHASE</code></td>
+<td><span class="arithmatex">\(-0.7\pi\)</span> rad</td>
+<td>Phase offset — puts pressure max at ~08:37 LMST</td>
+</tr>
+<tr>
+<td><code>MARS_CO2_FROST_POINT</code></td>
+<td><span class="arithmatex">\(149.0\)</span> K</td>
+<td>CO₂ condensation/sublimation temperature at Mars surface pressure</td>
+</tr>
+<tr>
+<td><code>MARS_CO2_LATENT_HEAT</code></td>
+<td><span class="arithmatex">\(5.7\times10^5\)</span> J kg⁻¹</td>
+<td>Latent heat of CO₂ sublimation</td>
+</tr>
+<tr>
+<td><code>MARS_MAVEN_ESCAPE_RATE</code></td>
+<td><span class="arithmatex">\(0.2\)</span> kg s⁻¹</td>
+<td>Non-thermal atmospheric escape (<a href="https://doi.org/10.1126/science.aan5015">Jakosky et al. 2018</a>)</td>
+</tr>
+<tr>
+<td><code>MARS_SURFACE_EMISSIVITY</code></td>
+<td><span class="arithmatex">\(0.95\)</span></td>
+<td>Near-blackbody IR emissivity of basaltic regolith</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-orbital-mechanics-advance_orbit">3. Orbital Mechanics — <code>advance_orbit</code><a class="headerlink" href="#3-orbital-mechanics-advance_orbit" title="Permanent link">&para;</a></h2>
+<p>Called at the start of every timestep by the engine. Updates <code>elapsed_time</code> and
+<code>orbital_angle</code>, then recomputes <code>solar_flux</code>.</p>
+<h3 id="31-mean-motion">3.1 Mean Motion<a class="headerlink" href="#31-mean-motion" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion#Second_law">Kepler's Second Law</a> · <a href="https://en.wikipedia.org/wiki/Mean_motion">Mean motion</a> · <a href="https://en.wikipedia.org/wiki/Mean_anomaly">Mean anomaly</a></p>
+</blockquote>
+<div class="arithmatex">\[\frac{d\theta}{dt} = \frac{2\pi}{T_\text{orb}}\]</div>
+<div class="arithmatex">\[\theta(t + \Delta t) = \left(\theta(t) + \frac{2\pi\,\Delta t}{T_\text{orb}}\right) \bmod 2\pi\]</div>
+<p><strong>Derivation:</strong> A planet completing one full orbit (<span class="arithmatex">\(2\pi\)</span> rad) in time <span class="arithmatex">\(T_\text{orb}\)</span> sweeps
+angle at constant rate <span class="arithmatex">\(2\pi/T_\text{orb}\)</span>. The <span class="arithmatex">\(\bmod\,2\pi\)</span> wraps the angle back into <span class="arithmatex">\([0, 2\pi)\)</span>
+after each complete orbit, preventing unbounded accumulation.</p>
+<p><strong>Approximation:</strong> This advances <span class="arithmatex">\(\theta\)</span> as the <a href="https://en.wikipedia.org/wiki/Mean_anomaly">mean anomaly</a>
+(constant angular rate) but uses it as the <a href="https://en.wikipedia.org/wiki/True_anomaly">true anomaly</a>
+(actual ellipse position). In reality <a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion#Second_law">Kepler's second law</a> requires the planet to move faster at perihelion and slower at aphelion.
+For Mars (<span class="arithmatex">\(e = 0.0934\)</span>) this introduces a phase error of up to ±10° in solar
+longitude — roughly ±5–10 sols timing error on seasonal peaks.</p>
+<p><strong>Worked example (<span class="arithmatex">\(\Delta t = 1\)</span> s):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Δθ = 2π × 1 / 59 356 800
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   = 6.283185 / 59 356 800
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   = 1.05853×10⁻⁷ rad  =  6.065×10⁻⁶ °
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>After one full year (59 356 800 steps):
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  θ = 59 356 800 × 1.05853×10⁻⁷ = 2π rad → mod 2π = 0  ✓
+</code></pre></div>
+<p><strong>Per-timestep values:</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\Delta t\)</span></th>
+<th><span class="arithmatex">\(\Delta\theta\)</span> (rad)</th>
+<th><span class="arithmatex">\(\Delta\theta\)</span> (degrees)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 s</td>
+<td><span class="arithmatex">\(1.059\times10^{-7}\)</span></td>
+<td><span class="arithmatex">\(6.07\times10^{-6}\)</span>°</td>
+</tr>
+<tr>
+<td>900 s</td>
+<td><span class="arithmatex">\(9.53\times10^{-5}\)</span></td>
+<td><span class="arithmatex">\(0.00546\)</span>°</td>
+</tr>
+<tr>
+<td>3 600 s</td>
+<td><span class="arithmatex">\(3.81\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(0.0218\)</span>°</td>
+</tr>
+<tr>
+<td>88 775 s (1 sol)</td>
+<td><span class="arithmatex">\(9.395\times10^{-3}\)</span></td>
+<td><span class="arithmatex">\(0.538\)</span>°</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-kepler-ellipse-distance_from_sun">3.2 Kepler Ellipse — distance_from_sun<a class="headerlink" href="#32-kepler-ellipse-distance_from_sun" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion#First_law">Kepler's First Law</a> · <a href="https://en.wikipedia.org/wiki/Elliptic_orbit">Elliptic orbit</a> · <a href="https://en.wikipedia.org/wiki/Orbital_eccentricity">Orbital eccentricity</a></p>
+</blockquote>
+<div class="arithmatex">\[r(\theta) = \frac{a\,(1 - e^2)}{1 + e\cos\theta}\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th>Location</th>
+<th><span class="arithmatex">\(r\)</span> (m)</th>
+<th>Solar flux <span class="arithmatex">\(F\)</span> (W m⁻²)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td>Perihelion</td>
+<td><span class="arithmatex">\(2.066\times10^{11}\)</span></td>
+<td>717</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi\)</span></td>
+<td>Aphelion</td>
+<td><span class="arithmatex">\(2.493\times10^{11}\)</span></td>
+<td>492</td>
+</tr>
+</tbody>
+</table>
+<p>Mars receives <strong>45% more solar power at perihelion than aphelion</strong> — the primary
+driver of its strong seasonal asymmetry.</p>
+<h3 id="33-inverse-square-solar-flux">3.3 Inverse-Square Solar Flux<a class="headerlink" href="#33-inverse-square-solar-flux" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Inverse-square_law">Inverse-square law</a> · <a href="https://en.wikipedia.org/wiki/Solar_irradiance">Solar irradiance</a> · <a href="https://en.wikipedia.org/wiki/Solar_constant">Solar constant</a></p>
+</blockquote>
+<div class="arithmatex">\[F = F_0 \left(\frac{1\,\text{AU}}{r}\right)^2, \qquad F_0 = 1361\;\text{W\,m}^{-2},\quad 1\,\text{AU} = 1.496\times10^{11}\;\text{m}\]</div>
+<p><strong>At perihelion</strong> (<span class="arithmatex">\(\theta = 0\)</span>, <span class="arithmatex">\(r = 2.066\times10^{11}\)</span> m):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>F = 1361 × (1.496×10¹¹ / 2.066×10¹¹)² = 1361 × 0.525 = 714 W/m²
+</code></pre></div>
+<p><strong>At aphelion</strong> (<span class="arithmatex">\(\theta = \pi\)</span>, <span class="arithmatex">\(r = 2.493\times10^{11}\)</span> m):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>F = 1361 × (1.496×10¹¹ / 2.493×10¹¹)² = 1361 × 0.360 = 490 W/m²
+</code></pre></div>
+<h3 id="34-data-flow">3.4 Data Flow<a class="headerlink" href="#34-data-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>dt
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a> ├─► elapsed_time += dt          (integration clock, used for hour angle)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a> │
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> ├─► θ += 2π·dt/T_orb  mod 2π   (mean motion)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> │          │
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> │     r = a(1−e²)/(1+e·cosθ)   (Kepler ellipse)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a> │          │
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a> └─► F = F₀·(1AU/r)²            (written to radiation.solar_flux)
+</code></pre></div>
+<hr />
+<h2 id="4-solar-geometry">4. Solar Geometry<a class="headerlink" href="#4-solar-geometry" title="Permanent link">&para;</a></h2>
+<p>Computed inside <code>compute_derivatives</code> before <span class="arithmatex">\(dT/dt\)</span>. Determines how much of the
+solar flux actually hits a surface patch at latitude <span class="arithmatex">\(\phi\)</span>, longitude <span class="arithmatex">\(\lambda\)</span>, time <span class="arithmatex">\(t\)</span>.</p>
+<h3 id="41-solar-longitude-l_s">4.1 Solar Longitude <span class="arithmatex">\(L_s\)</span><a class="headerlink" href="#41-solar-longitude-l_s" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Solar_longitude">Solar longitude</a> · <a href="https://en.wikipedia.org/wiki/Mars#Seasons">Areocentric coordinates</a></p>
+</blockquote>
+<div class="arithmatex">\[L_s = \theta + 251°\]</div>
+<p><span class="arithmatex">\(L_s\)</span> maps the orbital angle to the areocentric solar longitude — the standard Mars
+seasonal calendar. <span class="arithmatex">\(L_s = 251°\)</span> is perihelion (deep southern summer).</p>
+<h3 id="42-solar-declination-delta">4.2 Solar Declination <span class="arithmatex">\(\delta\)</span><a class="headerlink" href="#42-solar-declination-delta" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Position_of_the_Sun">Position of the Sun</a> · <a href="https://en.wikipedia.org/wiki/Position_of_the_Sun#Declination_of_the_Sun_as_seen_from_Earth">Solar declination</a> · <a href="https://en.wikipedia.org/wiki/Axial_tilt">Axial tilt</a></p>
+</blockquote>
+<div class="arithmatex">\[\delta = \arcsin\!\bigl(\sin\varepsilon_\text{tilt}\cdot\sin L_s\bigr)\]</div>
+<p><span class="arithmatex">\(\delta\)</span> is the latitude of the sub-solar point — where the Sun is directly overhead.</p>
+<p><strong>At perihelion</strong> (<span class="arithmatex">\(L_s = 251°\)</span>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sin(25.19°) = 0.42533
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sin(251°)   = −sin(71°) = −0.94552
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>δ = arcsin(0.42533 × −0.94552) = arcsin(−0.40222) = −23.71°
+</code></pre></div>
+<p>Sub-solar point is 23.71° south — southern hemisphere summer.</p>
+<p><strong>Seasonal declination cycle:</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(L_s\)</span></th>
+<th>Season</th>
+<th><span class="arithmatex">\(\delta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0°\)</span></td>
+<td>N. spring equinox</td>
+<td><span class="arithmatex">\(0°\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(90°\)</span></td>
+<td>N. summer solstice</td>
+<td><span class="arithmatex">\(+25.19°\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(180°\)</span></td>
+<td>N. autumn equinox</td>
+<td><span class="arithmatex">\(0°\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(251°\)</span></td>
+<td>Perihelion</td>
+<td><span class="arithmatex">\(-23.71°\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(270°\)</span></td>
+<td>N. winter solstice</td>
+<td><span class="arithmatex">\(-25.19°\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-hour-angle-h">4.3 Hour Angle <span class="arithmatex">\(h\)</span><a class="headerlink" href="#43-hour-angle-h" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Hour_angle">Hour angle</a> · <a href="https://en.wikipedia.org/wiki/Solar_time">Solar time</a></p>
+</blockquote>
+<div class="arithmatex">\[\omega = \frac{2\pi}{T_\text{rot}} = 7.0792\times10^{-5}\;\text{rad\,s}^{-1}, \qquad h = \omega t - \pi + \lambda\]</div>
+<p><span class="arithmatex">\(t=0 \Rightarrow h = -\pi\)</span> (midnight). The planet rotates eastward so <span class="arithmatex">\(h\)</span> increases with time.
+<span class="arithmatex">\(\lambda\)</span> shifts the reference: eastern longitudes see solar noon earlier.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span> (s)</th>
+<th><span class="arithmatex">\(h\)</span> (rad)</th>
+<th>Local time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(-\pi\)</span></td>
+<td>Midnight</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_\text{rot}/4\)</span></td>
+<td><span class="arithmatex">\(-\pi/2\)</span></td>
+<td>Dawn</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_\text{rot}/2\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>Solar noon</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3T_\text{rot}/4\)</span></td>
+<td><span class="arithmatex">\(+\pi/2\)</span></td>
+<td>Dusk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T_\text{rot}\)</span></td>
+<td><span class="arithmatex">\(+\pi \to -\pi\)</span></td>
+<td>Midnight</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-cosine-of-solar-zenith-angle">4.4 Cosine of Solar Zenith Angle<a class="headerlink" href="#44-cosine-of-solar-zenith-angle" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Solar_zenith_angle">Solar zenith angle</a> · <a href="https://en.wikipedia.org/wiki/Spherical_trigonometry">Spherical trigonometry</a></p>
+</blockquote>
+<div class="arithmatex">\[\cos z = \max\!\bigl(0,\;\sin\phi\sin\delta + \cos\phi\cos\delta\cos h\bigr)\]</div>
+<p>Clamped to zero when the Sun is below the horizon.</p>
+<p><strong>Worked example — perihelion, <span class="arithmatex">\(\phi = 22°\)</span>N, <span class="arithmatex">\(\lambda = 0°\)</span>:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>A = sin(22°)·sin(−23.71°) = 0.37461 × (−0.40222) = −0.15062
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>B = cos(22°)·cos(−23.71°) = 0.92718 × 0.91558    = +0.84913
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>cos(z) = max(0,  −0.15062  +  0.84913 · cos(h))
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span> (s)</th>
+<th><span class="arithmatex">\(h\)</span></th>
+<th><span class="arithmatex">\(\cos h\)</span></th>
+<th><span class="arithmatex">\(\cos z\)</span></th>
+<th>Sun elevation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(-180°\)</span></td>
+<td><span class="arithmatex">\(-1.000\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td>Below horizon</td>
+</tr>
+<tr>
+<td>22 194</td>
+<td><span class="arithmatex">\(-90°\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td>Below horizon</td>
+</tr>
+<tr>
+<td>44 388</td>
+<td><span class="arithmatex">\(0°\)</span></td>
+<td><span class="arithmatex">\(+1.000\)</span></td>
+<td><span class="arithmatex">\(\mathbf{0.699}\)</span></td>
+<td><strong>44.3°</strong></td>
+</tr>
+<tr>
+<td>66 581</td>
+<td><span class="arithmatex">\(+90°\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td>Below horizon</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sunrise/sunset hour angle <span class="arithmatex">\(h_0\)</span>:</strong></p>
+<div class="arithmatex">\[\cos h_0 = -\tan\phi\tan\delta = -\tan(22°)\tan(-23.71°) = 0.17732\]</div>
+<div class="arithmatex">\[h_0 = \arccos(0.17732) = 79.79°\]</div>
+<div class="arithmatex">\[\text{Day length} = \frac{2 \times 79.79°}{360°} \times 88\,775\;\text{s} = 39\,360\;\text{s} \approx 10.93\;\text{hours}\]</div>
+<p>Winter at 22°N — only 10.93 of 24.66 hours are daylit.</p>
+<hr />
+<h2 id="5-dtdt-surface-energy-balance">5. dT/dt — Surface Energy Balance<a class="headerlink" href="#5-dtdt-surface-energy-balance" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/First_law_of_thermodynamics">First Law of Thermodynamics</a> · <a href="https://en.wikipedia.org/wiki/Earth%27s_energy_budget">Radiative energy balance</a> · <a href="https://en.wikipedia.org/wiki/Ordinary_differential_equation">Ordinary differential equation</a></p>
+</blockquote>
+<div class="arithmatex">\[\frac{dT}{dt} = \frac{Q_\text{in} - Q_\text{out}}{C_\text{area}} \quad [\text{K\,s}^{-1}]\]</div>
+<h3 id="51-q_textin-absorbed-solar-radiation">5.1 <span class="arithmatex">\(Q_\text{in}\)</span> — Absorbed Solar Radiation<a class="headerlink" href="#51-q_textin-absorbed-solar-radiation" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Lambert%27s_cosine_law">Lambert's cosine law</a> · <a href="https://en.wikipedia.org/wiki/Albedo">Albedo</a></p>
+</blockquote>
+<div class="arithmatex">\[Q_\text{in} = (1 - \alpha)\,F\cos z \quad [\text{W\,m}^{-2}]\]</div>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\alpha\)</span></td>
+<td><span class="arithmatex">\(0.25\)</span></td>
+<td>Bond albedo — 25% of incident light reflected</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(F\)</span></td>
+<td>492–717 W m⁻²</td>
+<td>Solar flux (from <code>advance_orbit</code>)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\cos z\)</span></td>
+<td><span class="arithmatex">\(0\)</span>–<span class="arithmatex">\(1\)</span></td>
+<td>Geometric projection onto surface</td>
+</tr>
+</tbody>
+</table>
+<p><strong>At solar noon, perihelion:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Q_in = (1 − 0.25) × 714 × 0.699 = 0.75 × 714 × 0.699 = 374 W/m²
+</code></pre></div>
+<p><strong>At midnight:</strong> <span class="arithmatex">\(Q_\text{in} = 0\)</span> (<span class="arithmatex">\(\cos z\)</span> clamped to 0).</p>
+<h3 id="52-q_textout-thermal-emission">5.2 <span class="arithmatex">\(Q_\text{out}\)</span> — Thermal Emission<a class="headerlink" href="#52-q_textout-thermal-emission" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law">Stefan-Boltzmann law</a> · <a href="https://en.wikipedia.org/wiki/Greenhouse_effect">Greenhouse effect</a> · <a href="https://en.wikipedia.org/wiki/Thermal_radiation">Thermal radiation</a></p>
+</blockquote>
+<div class="arithmatex">\[T_\text{eff} = \frac{T}{\max(f_\text{gh},\,1.0)}, \qquad Q_\text{out} = \varepsilon\,\sigma\,T_\text{eff}^4 \quad [\text{W\,m}^{-2}]\]</div>
+<p>where <span class="arithmatex">\(\varepsilon = 0.95\)</span> (near-blackbody IR emissivity) and <span class="arithmatex">\(\sigma = 5.670374\times10^{-8}\)</span> W m⁻² K⁻⁴.</p>
+<p><strong>Greenhouse factor <span class="arithmatex">\(f_\text{gh} = 1.02\)</span>:</strong></p>
+<p>Mars's thin CO₂ column absorbs weakly in the 15 μm infrared band, trapping ~8% of outgoing radiation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Q_out_bare     = ε · σ · 210⁴ = 109.4 W/m²   (no atmosphere)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Q_out_with_fgh = ε · σ · (210/1.02)⁴ = 102.6 W/m²
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Trapped = 6.8 W/m²  (~4 K surface warming)
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Body</th>
+<th><span class="arithmatex">\(f_\text{gh}\)</span></th>
+<th>Warming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mars</td>
+<td>1.02</td>
+<td>~4 K</td>
+</tr>
+<tr>
+<td>Earth</td>
+<td>1.33</td>
+<td>~33 K</td>
+</tr>
+<tr>
+<td>Venus</td>
+<td>~3.2</td>
+<td>~500 K</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-c_textarea-thermal-inertia">5.3 <span class="arithmatex">\(C_\text{area}\)</span> — Thermal Inertia<a class="headerlink" href="#53-c_textarea-thermal-inertia" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Thermal_inertia">Thermal inertia</a> · <a href="https://en.wikipedia.org/wiki/Thermal_contact_conductance">Thermal skin depth</a> · <a href="https://en.wikipedia.org/wiki/2001_Mars_Odyssey#THEMIS">THEMIS instrument</a></p>
+</blockquote>
+<div class="arithmatex">\[C_\text{area} = \rho\,c_p\,d = 6.0\times10^4\;\text{J\,K}^{-1}\,\text{m}^{-2}\]</div>
+<p>where <span class="arithmatex">\(\rho \approx 2000\)</span>–<span class="arithmatex">\(3000\)</span> kg m⁻³ (regolith), <span class="arithmatex">\(c_p \approx 800\)</span> J kg⁻¹ K⁻¹ (basalt at 200 K),
+<span class="arithmatex">\(d \approx 0.025\)</span>–<span class="arithmatex">\(0.037\)</span> m (diurnal thermal skin depth).</p>
+<p><strong>Why this value:</strong> THEMIS and TES measurements at Gale Crater give thermal inertia
+TI ≈ 200–350 TIU. Converting: <span class="arithmatex">\(C_\text{area} = \text{TI} \times \sqrt{T_\text{rot}/\pi} \approx \text{TI} \times 168\)</span>,
+giving a range of <span class="arithmatex">\(3.4\)</span>–<span class="arithmatex">\(5.9\times10^4\)</span>. The value <span class="arithmatex">\(6.0\times10^4\)</span> sits at the upper end,
+consistent with the rockier sections of Gale Crater visible in REMS diurnal profiles.</p>
+<p><strong>Calibration history:</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(C_\text{area}\)</span></th>
+<th>Diurnal swing (model)</th>
+<th>REMS Sol 224</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(2.0\times10^4\)</span> (old — loose dust)</td>
+<td>~180 K</td>
+<td>~65 K</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(6.0\times10^4\)</span> (current — rocky/sandy)</td>
+<td>~60 K</td>
+<td>~65 K ✓</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>3× increase in <span class="arithmatex">\(C_\text{area}\)</span></strong> → <strong>3× smaller <span class="arithmatex">\(dT/dt\)</span></strong> at the same <span class="arithmatex">\(Q_\text{in}-Q_\text{out}\)</span>.</p>
+<h3 id="54-full-dependency-table">5.4 Full Dependency Table<a class="headerlink" href="#54-full-dependency-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Fixed or dynamic</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\alpha\)</span></td>
+<td>Fixed</td>
+<td><code>radiation.albedo</code> (init param)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(F\)</span></td>
+<td>Dynamic each step</td>
+<td><code>advance_orbit</code> → Kepler</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\cos z\)</span></td>
+<td>Dynamic each step</td>
+<td><span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(\lambda\)</span>, <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(\delta(\theta)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\varepsilon\)</span></td>
+<td>Fixed (0.95)</td>
+<td>Hardcoded</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f_\text{gh}\)</span></td>
+<td>Fixed (1.02)</td>
+<td><code>thermal.greenhouse_factor</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T\)</span></td>
+<td>State variable</td>
+<td>ODE solution</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C_\text{area}\)</span></td>
+<td>Fixed (<span class="arithmatex">\(6.0\times10^4\)</span>)</td>
+<td>Calibrated to REMS Sol 224 Gale Crater</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-dm_icedt-polar-co2-sublimation">6. dM_ice/dt — Polar CO₂ Sublimation<a class="headerlink" href="#6-dm_icedt-polar-co2-sublimation" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Latent_heat">Latent heat</a> · <a href="https://en.wikipedia.org/wiki/Phase_transition">Phase transition</a> · <a href="https://en.wikipedia.org/wiki/Sublimation_(phase_transition)">Sublimation</a> · <a href="https://en.wikipedia.org/wiki/Dew_point#Frost_point">Frost point</a></p>
+</blockquote>
+<p>CO₂ ice caps are pinned at the <strong>frost point <span class="arithmatex">\(T_\text{frost} = 149\)</span> K</strong>. While ice
+exists, all net radiative energy goes into phase change rather than warming.</p>
+<h3 id="61-polar-insolation-simplified">6.1 Polar Insolation (Simplified)<a class="headerlink" href="#61-polar-insolation-simplified" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Polar_night">Polar night</a> · <a href="https://en.wikipedia.org/wiki/Midnight_sun">Midnight sun</a> · <a href="https://en.wikipedia.org/wiki/Solar_irradiance#Insolation">Insolation</a></p>
+</blockquote>
+<p>At the geographic poles the hour angle averages out over one full sol and the mean daily insolation factor collapses to <span class="arithmatex">\(\sin\delta\)</span>:</p>
+<div class="arithmatex">\[\cos z_N = \max(0,\,{+}\sin\delta), \qquad \cos z_S = \max(0,\,-\sin\delta)\]</div>
+<p><strong>Seasonal behaviour:</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(L_s\)</span></th>
+<th><span class="arithmatex">\(\delta\)</span></th>
+<th><span class="arithmatex">\(\cos z_N\)</span></th>
+<th><span class="arithmatex">\(\cos z_S\)</span></th>
+<th>Which cap sublimates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(90°\)</span> (N. summer)</td>
+<td><span class="arithmatex">\(+25.19°\)</span></td>
+<td>0.425</td>
+<td>0</td>
+<td>North</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(180°\)</span> (equinox)</td>
+<td><span class="arithmatex">\(0°\)</span></td>
+<td>0</td>
+<td>0</td>
+<td>Neither</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(251°\)</span> (perihelion)</td>
+<td><span class="arithmatex">\(-23.71°\)</span></td>
+<td>0</td>
+<td>0.402</td>
+<td>South</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(270°\)</span> (N. winter)</td>
+<td><span class="arithmatex">\(-25.19°\)</span></td>
+<td>0</td>
+<td>0.425</td>
+<td>South (peak)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-energy-balance-at-frost-point">6.2 Energy Balance at Frost Point<a class="headerlink" href="#62-energy-balance-at-frost-point" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law">Stefan-Boltzmann law</a> · <a href="https://en.wikipedia.org/wiki/Enthalpy_of_sublimation">Latent heat of sublimation</a> · <a href="https://en.wikipedia.org/wiki/Earth%27s_energy_budget">Energy balance</a></p>
+</blockquote>
+<div class="arithmatex">\[Q_\text{in,pole} = (1-\alpha)\,F\cos z_\text{pole} \quad [\text{W\,m}^{-2}]\]</div>
+<div class="arithmatex">\[Q_\text{out,pole} = \varepsilon\,\sigma\,T_\text{frost}^4 = 0.95 \times 5.670374\times10^{-8} \times 149^4 = 26.51\;\text{W\,m}^{-2}\]</div>
+<div class="arithmatex">\[\Delta Q = Q_\text{in,pole} - Q_\text{out,pole}\]</div>
+<p><span class="arithmatex">\(\Delta Q &gt; 0\)</span> → ice <strong>sublimates</strong> (gains energy, turns to gas).
+<span class="arithmatex">\(\Delta Q &lt; 0\)</span> → CO₂ <strong>condenses</strong> (loses energy, freezes from atmosphere).</p>
+<h3 id="63-two-pole-ice-budget-with-per-pole-reservoirs">6.3 Two-Pole Ice Budget with Per-Pole Reservoirs<a class="headerlink" href="#63-two-pole-ice-budget-with-per-pole-reservoirs" title="Permanent link">&para;</a></h3>
+<p>The model tracks north and south caps <strong>independently</strong>, each with its own ice
+reservoir.</p>
+<p><strong>Initial ice split</strong> (set in <code>setup_properties</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">if</span> <span class="mi">0</span><span class="err">°</span> <span class="err">≤</span> <span class="n">Ls</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="err">°</span><span class="p">:</span>          <span class="c1"># Northern summer — north CO₂ already sublimated</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">f_north</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">else</span><span class="p">:</span>                        <span class="c1"># Northern winter — north cap growing</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">f_north</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="err">×</span> <span class="p">(</span><span class="n">Ls</span> <span class="err">−</span> <span class="mi">180</span><span class="err">°</span><span class="p">)</span> <span class="o">/</span> <span class="mi">180</span><span class="err">°</span>   <span class="c1"># linearly 0→0.4</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">f_south</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="err">−</span> <span class="n">f_north</span>
+</code></pre></div>
+<p><strong>Mass rate equations:</strong></p>
+<div class="arithmatex">\[A_\text{cap} = 0.01 \times 4\pi R^2 = 1.443\times10^{12}\;\text{m}^2, \qquad L_\text{sub} = 5.7\times10^5\;\text{J\,kg}^{-1}\]</div>
+<div class="arithmatex">\[\dot{M}_\text{sub,N} = \frac{\Delta Q_N \cdot A_\text{cap}}{L_\text{sub}}, \qquad \dot{M}_\text{sub,S} = \frac{\Delta Q_S \cdot A_\text{cap}}{L_\text{sub}}\]</div>
+<div class="arithmatex">\[\frac{dM_\text{ice,N}}{dt} = -\dot{M}_\text{sub,N}, \qquad \frac{dM_\text{ice,S}}{dt} = -\dot{M}_\text{sub,S}, \qquad \frac{dM_\text{ice}}{dt} = \frac{dM_\text{ice,N}}{dt} + \frac{dM_\text{ice,S}}{dt}\]</div>
+<p><strong>Guard conditions:</strong></p>
+<ul>
+<li>Sublimation (<span class="arithmatex">\(dM_\text{ice,N} &lt; 0\)</span>) blocked if <code>ice_mass_north = 0</code></li>
+<li>Sublimation (<span class="arithmatex">\(dM_\text{ice,S} &lt; 0\)</span>) blocked if <code>ice_mass_south = 0</code></li>
+<li>Condensation always allowed (CO₂ can always refreeze)</li>
+</ul>
+<h3 id="64-worked-example-perihelion-l_s-251-south-cap-peak">6.4 Worked Example — Perihelion (<span class="arithmatex">\(L_s = 251°\)</span>, south cap peak)<a class="headerlink" href="#64-worked-example-perihelion-l_s-251-south-cap-peak" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>δ = −23.71°
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>cos(z)_S = max(0, −sin(−23.71°)) = 0.40222
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>cos(z)_N = 0
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>F = 714 W/m²  (perihelion)
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>Q_in_S = (1 − 0.25) × 714 × 0.40222 = 214.9 W/m²
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Q_out_pole = 26.51 W/m²
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>ΔQ_S = 214.9 − 26.51 = 188.4 W/m²
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>A_cap = 1.443×10¹² m²
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>net_sub_S = 188.4 × 1.443×10¹² / 5.7×10⁵ = 4.77×10⁸ kg/s
+</code></pre></div>
+<div class="arithmatex">\[\frac{dM_\text{ice}}{dt} \approx -4.77\times10^8\;\text{kg\,s}^{-1}\]</div>
+<p>Over one sol (88 775 s):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ΔM_ice ≈ −4.77×10⁸ × 88 775 = −4.23×10¹³ kg/sol
+</code></pre></div>
+<p>Starting from <span class="arithmatex">\(M_\text{ice} = 5\times10^{15}\)</span> kg, the south cap would fully sublimate in
+~118 sols at peak perihelion insolation.</p>
+<hr />
+<h2 id="7-dpdt-atmospheric-pressure">7. dP/dt — Atmospheric Pressure<a class="headerlink" href="#7-dpdt-atmospheric-pressure" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Hydrostatic_equilibrium">Hydrostatic equilibrium</a> · <a href="https://en.wikipedia.org/wiki/Atmospheric_pressure">Atmospheric pressure</a> · <a href="https://en.wikipedia.org/wiki/Conservation_of_mass">Conservation of mass</a></p>
+</blockquote>
+<p>Three contributions to global mean surface pressure:</p>
+<div class="arithmatex">\[\frac{dP}{dt} = \frac{dP_\text{escape}}{dt} + \frac{dP_\text{sub}}{dt} + \frac{dP_\text{tide}}{dt}\]</div>
+<h3 id="71-iceatmosphere-mass-exchange-dominant">7.1 Ice–Atmosphere Mass Exchange (dominant)<a class="headerlink" href="#71-iceatmosphere-mass-exchange-dominant" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Hydrostatic_equilibrium">Hydrostatic equilibrium</a> · <a href="https://en.wikipedia.org/wiki/Ideal_gas_law">Ideal gas law</a> · <a href="https://en.wikipedia.org/wiki/Barometric_formula">Barometric formula</a></p>
+</blockquote>
+<p>From hydrostatic equilibrium: <span class="arithmatex">\(P = M_\text{atm}\,g / A_\text{planet}\)</span>.
+Conservation of mass gives <span class="arithmatex">\(M_\text{atm} + M_\text{ice} = \text{const}\)</span>, so:</p>
+<div class="arithmatex">\[\frac{dP_\text{sub}}{dt} = -\frac{dM_\text{ice}}{dt} \cdot \frac{g}{A_\text{planet}}\]</div>
+<p><strong>Signs:</strong>
+- Sublimation (<span class="arithmatex">\(dM_\text{ice}/dt &lt; 0\)</span>) → <span class="arithmatex">\(dP/dt &gt; 0\)</span> (pressure rises as CO₂ enters atmosphere) ✓
+- Condensation (<span class="arithmatex">\(dM_\text{ice}/dt &gt; 0\)</span>) → <span class="arithmatex">\(dP/dt &lt; 0\)</span> (pressure falls as CO₂ leaves atmosphere) ✓</p>
+<p><strong>Real Mars observations (Viking landers):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Season</th>
+<th><span class="arithmatex">\(P\)</span> (Pa)</th>
+<th>Driver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N. winter / S. summer (perihelion)</td>
+<td>~740</td>
+<td>South cap sublimating</td>
+</tr>
+<tr>
+<td>N. summer / S. winter</td>
+<td>~560</td>
+<td>South cap condensing</td>
+</tr>
+<tr>
+<td>Swing</td>
+<td>~25%</td>
+<td>Entirely from <span class="arithmatex">\(dM_\text{ice}/dt\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-non-thermal-atmospheric-escape-secular">7.2 Non-thermal Atmospheric Escape (secular)<a class="headerlink" href="#72-non-thermal-atmospheric-escape-secular" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Atmospheric_escape">Atmospheric escape</a> · <a href="https://en.wikipedia.org/wiki/Sputtering">Sputtering</a> · <a href="https://en.wikipedia.org/wiki/MAVEN">MAVEN mission</a></p>
+</blockquote>
+<p>Mars loses atmosphere primarily via <strong>non-thermal</strong> mechanisms — solar wind
+sputtering and photochemical escape — measured by the MAVEN spacecraft
+(<a href="https://doi.org/10.1126/science.aan5015">Jakosky et al. 2018</a>):</p>
+<div class="arithmatex">\[\frac{dP_\text{escape}}{dt} = -\frac{0.2\;\text{kg\,s}^{-1} \times g}{A_\text{planet}} = -5.14\times10^{-15}\;\text{Pa\,s}^{-1}\]</div>
+<p>Per sol: <span class="arithmatex">\(\Delta P_\text{escape} \approx 4.56\times10^{-10}\)</span> Pa/sol — completely negligible vs the ~180 Pa
+seasonal swing. Becomes significant only on geological timescales (millions of years).</p>
+<p><strong>Why not Jeans escape?</strong></p>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Atmospheric_escape#Jeans_escape">Jeans escape</a> · <a href="https://en.wikipedia.org/wiki/Maxwell%E2%80%93Boltzmann_distribution">Maxwell-Boltzmann distribution</a></p>
+</blockquote>
+<p>For CO₂ at <span class="arithmatex">\(T = 210\)</span> K, the Jeans escape parameter is:</p>
+<div class="arithmatex">\[\lambda = \frac{G M m_{\text{CO}_2}}{k_B\,T\,R_\text{exo}} \approx 299 \implies e^{-\lambda} = e^{-299} \approx 10^{-130}\]</div>
+<p>CO₂ molecules are too massive to escape Mars thermally. Jeans escape is the
+correct mechanism for hydrogen and helium, not CO₂. The empirical MAVEN constant
+correctly represents the actual non-thermal mechanisms.</p>
+<h3 id="73-thermal-tide-empirical-diurnal-pressure-oscillation">7.3 Thermal Tide — Empirical Diurnal Pressure Oscillation<a class="headerlink" href="#73-thermal-tide-empirical-diurnal-pressure-oscillation" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Atmospheric_tide">Atmospheric tide</a> · <a href="https://en.wikipedia.org/wiki/Diurnal_cycle">Diurnal cycle</a> · <a href="https://en.wikipedia.org/wiki/Harmonic_oscillator">Harmonic oscillator</a></p>
+</blockquote>
+<p>Real Mars exhibits a ~40–60 Pa diurnal pressure wave at Gale Crater (clearly
+visible in REMS data). The parameterisation adds the time-derivative of a sinusoid directly to <span class="arithmatex">\(dP/dt\)</span>:</p>
+<div class="arithmatex">\[\frac{dP_\text{tide}}{dt} = -A\,\omega\sin(\omega t + \varphi)\]</div>
+<p>where <span class="arithmatex">\(A = 30.0\)</span> Pa, <span class="arithmatex">\(\varphi = -0.7\pi\)</span> rad, <span class="arithmatex">\(\omega = 2\pi/T_\text{rot} = 7.0792\times10^{-5}\)</span> rad s⁻¹.</p>
+<p>This is the analytical derivative of <span class="arithmatex">\(P_\text{tide}(t) = A\cos(\omega t + \varphi)\)</span>, giving
+pressure a <strong>zero-mean sinusoidal oscillation of amplitude 30 Pa</strong>.</p>
+<p><strong>Phase derivation — when is pressure maximum?</strong></p>
+<p><span class="arithmatex">\(P_\text{tide}\)</span> is maximum when <span class="arithmatex">\(\cos(\omega t + \varphi) = 1\)</span>:</p>
+<div class="arithmatex">\[\omega t = -\varphi = 0.7\pi \implies t = 0.35 \times T_\text{rot} = 31\,071\;\text{s} \approx 08{:}37\;\text{LMST} \checkmark\]</div>
+<p><span class="arithmatex">\(P_\text{tide}\)</span> is minimum at <span class="arithmatex">\(\omega t = 1.7\pi \implies t = 75\,459\;\text{s} \approx 20{:}57\;\text{LMST}\)</span> ✓</p>
+<p><strong>Zero mean — no secular drift:</strong></p>
+<div class="arithmatex">\[\int_0^{T_\text{rot}} P_\text{tide}\,dt = \int_0^{T_\text{rot}} A\cos(\omega t + \varphi)\,dt = 0\]</div>
+<p>Over any integer number of sols, the tide adds/removes exactly equal amounts of
+pressure — it does not bias the long-term seasonal trend.</p>
+<hr />
+<h2 id="8-fast-path-compute_fast_physics">8. FAST Path — <code>compute_fast_physics</code><a class="headerlink" href="#8-fast-path-compute_fast_physics" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Methods applied:</strong> <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta methods</a> · <a href="https://en.wikipedia.org/wiki/Stiff_equation">Stiff ODE</a> · <a href="https://en.wikipedia.org/wiki/Newton%27s_law_of_cooling">Newtonian cooling</a> · <a href="https://en.wikipedia.org/wiki/Euler_method">Euler method</a></p>
+</blockquote>
+<p>An alternative to full RK4 integration for large timesteps. Computes the same
+physics analytically via equilibrium + relaxation.</p>
+<h3 id="81-daily-mean-insolation-factor">8.1 Daily-Mean Insolation Factor<a class="headerlink" href="#81-daily-mean-insolation-factor" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Reference:</strong> <a href="https://en.wikipedia.org/wiki/Solar_irradiance#Insolation">Insolation</a> · <a href="https://en.wikipedia.org/wiki/Sunrise_equation">Sunrise equation</a> · <a href="https://en.wikipedia.org/wiki/Integral">Definite integral</a></p>
+</blockquote>
+<p>Instead of instantaneous <span class="arithmatex">\(\cos z\)</span>, the fast path computes the daily average analytically:</p>
+<div class="arithmatex">\[\cos h_0 = \mathrm{clamp}(-\tan\phi\tan\delta,\;-1,\;1), \qquad h_0 = \arccos(\cos h_0)\]</div>
+<div class="arithmatex">\[\bar{I} = \frac{h_0\sin\phi\sin\delta + \cos\phi\cos\delta\sin h_0}{\pi}\]</div>
+<p>This is the closed-form integral of <span class="arithmatex">\(\cos z\)</span> over one full sol.</p>
+<h3 id="82-radiative-equilibrium-temperature">8.2 Radiative Equilibrium Temperature<a class="headerlink" href="#82-radiative-equilibrium-temperature" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Radiative_equilibrium">Radiative equilibrium</a> · <a href="https://en.wikipedia.org/wiki/Effective_temperature">Effective temperature</a> · <a href="https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law">Stefan-Boltzmann law</a></p>
+</blockquote>
+<div class="arithmatex">\[T_\text{eq,base} = \left[\frac{(1-\alpha)\,F\,\bar{I}}{\varepsilon\,\sigma}\right]^{1/4}, \qquad T_\text{eq} = T_\text{eq,base} \times f_\text{gh}\]</div>
+<p>The surface equilibrium temperature — where <span class="arithmatex">\(Q_\text{in} = Q_\text{out}\)</span> if the surface had
+infinite time to adjust.</p>
+<p><strong>Diurnal swing superimposed:</strong></p>
+<div class="arithmatex">\[T_\text{eq} \;\leftarrow\; T_\text{eq} - 50\cos\phi \cdot \cos(\omega t + \lambda)\]</div>
+<p>(Amplitude drops to zero at poles; <span class="arithmatex">\(50\)</span> K is the equatorial diurnal half-amplitude.)</p>
+<h3 id="83-exponential-relaxation-newtonian-cooling">8.3 Exponential Relaxation (Newtonian Cooling)<a class="headerlink" href="#83-exponential-relaxation-newtonian-cooling" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Methods applied:</strong> <a href="https://en.wikipedia.org/wiki/Newton%27s_law_of_cooling">Newton's law of cooling</a> · <a href="https://en.wikipedia.org/wiki/Linearization">Linearisation</a> · <a href="https://en.wikipedia.org/wiki/Exponential_decay">Exponential decay</a> · <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a> (first-order)</p>
+</blockquote>
+<div class="arithmatex">\[\tau = \frac{C_\text{area}}{4\,\varepsilon\,\sigma\,T^3} \qquad \text{(thermal inertia timescale)}\]</div>
+<div class="arithmatex">\[T(t+\Delta t) = T_\text{eq} + (T - T_\text{eq})\,e^{-\Delta t/\tau}\]</div>
+<p><span class="arithmatex">\(\tau\)</span> is derived by linearising <span class="arithmatex">\(Q_\text{out} = \varepsilon\sigma T^4\)</span> around the current temperature:</p>
+<div class="arithmatex">\[\frac{\partial Q_\text{out}}{\partial T} = 4\varepsilon\sigma T^3, \qquad \tau = \frac{C_\text{area}}{4\varepsilon\sigma T^3}\]</div>
+<p>The exact analytical solution to the linearised ODE <span class="arithmatex">\(dT/dt = -(T - T_\text{eq})/\tau\)</span> makes the
+FAST path unconditionally stable for any <span class="arithmatex">\(\Delta t\)</span> — unlike RK4 which requires <span class="arithmatex">\(\Delta t \ll \tau\)</span>.</p>
+<p><strong>At <span class="arithmatex">\(T = 210\)</span> K</strong> (<span class="arithmatex">\(C_\text{area} = 6.0\times10^4\)</span>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>τ = 6.0×10⁴ / (4 × 0.95 × 5.670×10⁻⁸ × 210³)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  = 6.0×10⁴ / 1.992
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  = 30 120 s  ≈  0.34 sols
+</code></pre></div>
+<p>The surface relaxes toward equilibrium with a timescale of about one-third of a sol.</p>
+<h3 id="84-rk4-vs-relaxation-numerical-trade-offs">8.4 RK4 vs Relaxation — Numerical Trade-offs<a class="headerlink" href="#84-rk4-vs-relaxation-numerical-trade-offs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Methods applied:</strong> <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta 4th order</a> · <a href="https://en.wikipedia.org/wiki/Numerical_stability">Numerical stability</a> · <a href="https://en.wikipedia.org/wiki/Stiff_equation">Stiff equation</a></p>
+</blockquote>
+<p>The efficiency gain of FAST is <strong>not</strong> fewer ops per call — it is <strong>larger timestep size</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>ACCURATE (RK4)</th>
+<th>FAST (relaxation)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stability</td>
+<td>Requires <span class="arithmatex">\(\Delta t \ll \tau\)</span></td>
+<td>Unconditionally stable</td>
+</tr>
+<tr>
+<td>Min practical <span class="arithmatex">\(\Delta t\)</span></td>
+<td>~900–3 600 s</td>
+<td>~1 sol (88 775 s) or larger</td>
+</tr>
+<tr>
+<td>Calls per step</td>
+<td>4 × <code>compute_derivatives</code></td>
+<td>1 × <code>compute_fast_physics</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Steps to simulate 100 Martian years:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th><span class="arithmatex">\(\Delta t\)</span></th>
+<th>Steps</th>
+<th>Derivative evals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACCURATE</td>
+<td>3 600 s</td>
+<td>1 648 800</td>
+<td><strong>6.6M</strong></td>
+</tr>
+<tr>
+<td>FAST</td>
+<td>1 sol</td>
+<td>66 860</td>
+<td>66 860</td>
+</tr>
+<tr>
+<td>FAST</td>
+<td>10 sols</td>
+<td>6 686</td>
+<td>6 686</td>
+</tr>
+<tr>
+<td>FAST</td>
+<td>1 year</td>
+<td>100</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>For century-scale simulations the FAST path is <strong>100–66 000× cheaper</strong>.</p>
+<p><strong>What accuracy is traded away:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ACCURATE</th>
+<th>FAST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insolation</td>
+<td>Instantaneous <span class="arithmatex">\(\cos z\)</span></td>
+<td>Daily-mean <span class="arithmatex">\(\bar{I}\)</span></td>
+</tr>
+<tr>
+<td>Diurnal signal</td>
+<td>Emerges from ODE</td>
+<td>Synthetic <span class="arithmatex">\(50\,\text{K}\cos\phi\)</span> hardcoded</td>
+</tr>
+<tr>
+<td>Temperature stepping</td>
+<td>RK4 (4th-order)</td>
+<td>Exact exponential (1st-order linear)</td>
+</tr>
+<tr>
+<td>Ice and pressure</td>
+<td>RK4 sub-steps</td>
+<td>First-order Euler</td>
+</tr>
+</tbody>
+</table>
+<p><strong>When to use each:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Use ACCURATE when:                Use FAST when:
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  - dt &lt; 1 sol                     - dt ≥ 1 sol
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  - Studying diurnal cycle          - Studying seasonal cycle
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  - Validating against REMS data    - Terraforming trajectories
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  - Physics accuracy critical       - Many-year runs
+</code></pre></div>
+<h3 id="85-dependency-graph-compute_fast_physics">8.5 Dependency Graph — <code>compute_fast_physics</code><a class="headerlink" href="#85-dependency-graph-compute_fast_physics" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>advance_orbit(dt)  [called by engine before fast physics]
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>└── orbital_angle, elapsed_time, radiation.solar_flux  ← prerequisites
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>compute_fast_physics(dt)
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>│
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>├── [Step 1: Daily-mean insolation]
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>│       │
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>│       ├── Ls = orbital_angle + 251°
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>│       ├── δ  = arcsin(sin(ε_tilt) · sin(Ls))
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>│       ├── cos_h0 = clamp(−tan(φ) · tan(δ), −1, 1)
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>│       ├── h0 = arccos(cos_h0)                          (sunrise hour angle)
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>│       └── I_bar = (h0·sin(φ)·sin(δ) + cos(φ)·cos(δ)·sin(h0)) / π
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>│                                      │
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>│                                      φ = _init_latitude (fixed)
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>│
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>├── [Step 2: Equilibrium temperature]
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>│       │
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>│       ├── absorbed = (1−α) · F · I_bar
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>│       │                   │   │
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>│       │                   │   └── radiation.solar_flux  ← advance_orbit
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>│       │                   └── radiation.albedo  (fixed)
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>│       │
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>│       ├── T_eq_base = (absorbed / (ε·σ))^0.25
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>│       ├── T_eq      = T_eq_base × greenhouse_factor     (greenhouse scaling)
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>│       │
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>│       └── T_eq -= 50·cos(φ) · cos(ω·t + λ)             (synthetic diurnal swing)
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>│
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>├── [Step 3: Exponential relaxation → thermal.surface_temperature]
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>│       │
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>│       ├── τ = C_area / (4·ε·σ·T_cur³)                  (linearised timescale)
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>│       │
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>│       └── T_new = T_eq + (T_cur − T_eq) · exp(−dt/τ)   (exact ODE solution)
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>│
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>├── [Step 4: Ice mass → water.ice_mass_north/south]
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>│       │
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>│       ├── cos_zenith_N = max(0, +sin(δ))
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>│       ├── cos_zenith_S = max(0, −sin(δ))
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>│       ├── Q_in_N/S = (1−α) · F · cos_zenith_N/S
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>│       ├── Q_out_pole = ε·σ·149⁴ = 26.51 W/m²   (fixed)
+<a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>│       ├── dMice_N/S = −net_sub_N/S · dt         (per-pole Euler step)
+<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>│       └── Guard: clamp each pole independently if that pole&#39;s ice = 0
+<a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a>│
+<a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>└── [Step 5: Pressure → atmosphere.surface_pressure]
+<a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a>        │
+<a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a>        ├── dP_escape      = −0.2 · g / (4πR²) · dt       (MAVEN constant)
+<a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>        ├── dP_sublimation = −dMice · g / (4πR²)
+<a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>        └── dP_tide        = −A·ω·sin(ω·t + φ) · dt       (thermal tide)
+</code></pre></div>
+<hr />
+<h2 id="9-full-dependency-graph">9. Full Dependency Graph<a class="headerlink" href="#9-full-dependency-graph" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>advance_orbit(dt)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>├── elapsed_time += dt
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>└── orbital_angle += 2π·dt/T_orb  mod 2π
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>        │
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        ├── r = a(1−e²)/(1+e·cosθ)
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        └── F = F₀·(1AU/r)²  →  radiation.solar_flux
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>compute_derivatives(y = [T, P, M_ice])
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>│
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>├── [dT/dt]  = (Q_in − Q_out) / C_area
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>│       │
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>│       ├── Q_in = (1−α)·F·cos(z)
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>│       │           │   │    │
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>│       │           │   │    └── cos(z) = max(0, sin(φ)sin(δ) + cos(φ)cos(δ)cos(h))
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>│       │           │   │                          │      │               │      │
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>│       │           │   │                          φ      δ               φ      h = ω·t−π+λ
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>│       │           │   │                                 │
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>│       │           │   │              δ = arcsin(sin(ε)·sin(Ls))
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>│       │           │   │                                    │
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>│       │           │   │                         Ls = θ + 251°  ←  orbital_angle
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>│       │           │   │
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>│       │           │   └── F = radiation.solar_flux  ← advance_orbit
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>│       │           └── α = radiation.albedo  (fixed)
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>│       │
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>│       ├── Q_out = ε·σ·(T/f_gh)⁴
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>│       │
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>│       └── C_area = 6.0×10⁴  (fixed, calibrated to REMS Sol 224 Gale Crater)
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>│
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>│
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>├── [dM_ice/dt]  = dMice_N + dMice_S   (two independent pole budgets)
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>│       │
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>│       ├── net_sub_N/S = (Q_in_pole − Q_out_pole) · A_cap / L_sub
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>│       │                     │              │          │       │
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>│       │                     │         ε·σ·149⁴       │    5.7×10⁵ J/kg
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>│       │                     │         = 26.51 W/m²   │
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>│       │                     │                   0.01·4πR²
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>│       │          (1−α)·F·max(0, ±sin(δ))
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>│       │
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>│       └── Guard: each pole clamped independently if that pole&#39;s ice = 0
+<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a>│
+<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a>│
+<a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a>└── [dP/dt]  = dP_escape + dP_sublimation + dP_tide
+<a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>        │               │                       │
+<a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>        │       −dM_ice/dt · g / (4πR²)         −A·ω·sin(ω·t + φ)
+<a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a>        │
+<a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>        └── −0.2 kg/s · g / (4πR²)   (MAVEN empirical constant)
+</code></pre></div>
+<h3 id="ode-coupling-summary">ODE coupling summary<a class="headerlink" href="#ode-coupling-summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Equation</th>
+<th>Reads from other equations?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(dT/dt\)</span></td>
+<td>No — depends on orbital state and own <span class="arithmatex">\(T\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(dM_\text{ice}/dt\)</span></td>
+<td>No — depends on orbital state only</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(dP/dt\)</span></td>
+<td><strong>Yes</strong> — depends on <span class="arithmatex">\(dM_\text{ice}/dt\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Only one coupling: ice sublimation feeds directly into pressure.</p>
+<hr />
+<h2 id="10-model-scope-and-known-approximations">10. Model Scope and Known Approximations<a class="headerlink" href="#10-model-scope-and-known-approximations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Approximation</th>
+<th>Impact</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mean anomaly used as true anomaly</td>
+<td>±10° <span class="arithmatex">\(L_s\)</span> error, ±5–10 sol timing offset on seasonal peaks</td>
+<td><code>advance_orbit</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C_\text{area} = 6.0\times10^4\)</span> constant everywhere</td>
+<td>All surface points have Gale Crater's rocky-sandy thermal inertia</td>
+<td><code>MARS_THERMAL_INERTIA</code></td>
+</tr>
+<tr>
+<td>Polar <span class="arithmatex">\(\cos z = \max(0, \pm\sin\delta)\)</span></td>
+<td>Exact at 90° poles, approximate at cap edges</td>
+<td>polar section</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A_\text{cap} = 1\%\)</span> per pole (fixed)</td>
+<td>Fixed sublimating area; no seasonal cap extent evolution</td>
+<td><code>MARS_POLAR_CAP_FRACTION</code></td>
+</tr>
+<tr>
+<td>Thermal tide empirical (<span class="arithmatex">\(A=30\)</span> Pa, <span class="arithmatex">\(\varphi=-0.7\pi\)</span>)</td>
+<td>Reproduces REMS diurnal <span class="arithmatex">\(P\)</span> oscillation but not spatial structure</td>
+<td><code>MARS_THERMAL_TIDE_PA/PHASE</code></td>
+</tr>
+<tr>
+<td>0D global pressure</td>
+<td>No spatial pressure gradient or local weather</td>
+<td><span class="arithmatex">\(dP/dt\)</span> formulation</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f_\text{gh} = 1.02\)</span> fixed</td>
+<td>Greenhouse does not evolve with pressure changes</td>
+<td><code>thermal.greenhouse_factor</code></td>
+</tr>
+<tr>
+<td>MAVEN escape rate constant</td>
+<td>Does not vary with solar activity or season</td>
+<td><code>MARS_MAVEN_ESCAPE_RATE</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-citations">11. Citations<a class="headerlink" href="#11-citations" title="Permanent link">&para;</a></h2>
+<h3 id="physics-laws-and-mathematical-methods">Physics Laws and Mathematical Methods<a class="headerlink" href="#physics-laws-and-mathematical-methods" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Law / Method</th>
+<th>Section</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kepler's First Law — <span class="arithmatex">\(r(\theta) = a(1-e^2)/(1+e\cos\theta)\)</span></td>
+<td>§3.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler's laws</a></td>
+</tr>
+<tr>
+<td>Kepler's Second Law — equal areas in equal times</td>
+<td>§3.1</td>
+<td><a href="https://en.wikipedia.org/wiki/Mean_motion">Mean motion</a></td>
+</tr>
+<tr>
+<td>Mean motion — <span class="arithmatex">\(d\theta/dt = 2\pi/T\)</span></td>
+<td>§3.1</td>
+<td><a href="https://en.wikipedia.org/wiki/Mean_anomaly">Mean anomaly</a> · <a href="https://en.wikipedia.org/wiki/True_anomaly">True anomaly</a></td>
+</tr>
+<tr>
+<td>Inverse-square law — <span class="arithmatex">\(F = F_0(1\,\text{AU}/r)^2\)</span></td>
+<td>§3.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Inverse-square_law">Inverse-square law</a></td>
+</tr>
+<tr>
+<td>Solar declination — <span class="arithmatex">\(\delta = \arcsin(\sin\varepsilon\sin L_s)\)</span></td>
+<td>§4.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Position_of_the_Sun">Position of the Sun</a></td>
+</tr>
+<tr>
+<td>Hour angle — <span class="arithmatex">\(h = \omega t - \pi + \lambda\)</span></td>
+<td>§4.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Hour_angle">Hour angle</a></td>
+</tr>
+<tr>
+<td>Solar zenith angle — <span class="arithmatex">\(\cos z = \sin\phi\sin\delta + \cos\phi\cos\delta\cos h\)</span></td>
+<td>§4.4</td>
+<td><a href="https://en.wikipedia.org/wiki/Solar_zenith_angle">Solar zenith angle</a></td>
+</tr>
+<tr>
+<td>First Law of Thermodynamics — <span class="arithmatex">\(C\,dT/dt = Q_\text{in} - Q_\text{out}\)</span></td>
+<td>§5</td>
+<td><a href="https://en.wikipedia.org/wiki/First_law_of_thermodynamics">First law of thermodynamics</a></td>
+</tr>
+<tr>
+<td>Lambert's cosine law — <span class="arithmatex">\(Q_\text{in} = (1-\alpha)F\cos z\)</span></td>
+<td>§5.1</td>
+<td><a href="https://en.wikipedia.org/wiki/Lambert%27s_cosine_law">Lambert's cosine law</a></td>
+</tr>
+<tr>
+<td>Stefan-Boltzmann law — <span class="arithmatex">\(Q_\text{out} = \varepsilon\sigma T^4\)</span></td>
+<td>§5.2, §6.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law">Stefan-Boltzmann law</a></td>
+</tr>
+<tr>
+<td>Thermal inertia — <span class="arithmatex">\(C_\text{area} = \rho\,c_p\,d\)</span></td>
+<td>§5.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Thermal_inertia">Thermal inertia</a></td>
+</tr>
+<tr>
+<td>Latent heat of sublimation — <span class="arithmatex">\(\Delta E = L\,\Delta M\)</span></td>
+<td>§6.2–6.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Latent_heat">Latent heat</a> · <a href="https://en.wikipedia.org/wiki/Sublimation_(phase_transition)">Sublimation</a></td>
+</tr>
+<tr>
+<td>Hydrostatic equilibrium — <span class="arithmatex">\(P = Mg/A\)</span></td>
+<td>§7.1</td>
+<td><a href="https://en.wikipedia.org/wiki/Hydrostatic_equilibrium">Hydrostatic equilibrium</a></td>
+</tr>
+<tr>
+<td>Atmospheric escape (non-thermal)</td>
+<td>§7.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Atmospheric_escape">Atmospheric escape</a></td>
+</tr>
+<tr>
+<td>Jeans escape parameter <span class="arithmatex">\(\lambda = GMm/(k_B T R)\)</span></td>
+<td>§7.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Atmospheric_escape#Jeans_escape">Jeans escape</a></td>
+</tr>
+<tr>
+<td>Atmospheric thermal tide — <span class="arithmatex">\(P_\text{tide} = A\cos(\omega t + \varphi)\)</span></td>
+<td>§7.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Atmospheric_tide">Atmospheric tide</a></td>
+</tr>
+<tr>
+<td>Sunrise hour angle — <span class="arithmatex">\(\cos h_0 = -\tan\phi\tan\delta\)</span></td>
+<td>§8.1</td>
+<td><a href="https://en.wikipedia.org/wiki/Sunrise_equation">Sunrise equation</a></td>
+</tr>
+<tr>
+<td>Radiative equilibrium — <span class="arithmatex">\(T_\text{eq} = [(1-\alpha)F\bar{I}/(\varepsilon\sigma)]^{1/4}\)</span></td>
+<td>§8.2</td>
+<td><a href="https://en.wikipedia.org/wiki/Radiative_equilibrium">Radiative equilibrium</a></td>
+</tr>
+<tr>
+<td>Newton's law of cooling / exponential relaxation</td>
+<td>§8.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Newton%27s_law_of_cooling">Newton's law of cooling</a></td>
+</tr>
+<tr>
+<td>Taylor linearisation — <span class="arithmatex">\(\tau = C/(4\varepsilon\sigma T^3)\)</span></td>
+<td>§8.3</td>
+<td><a href="https://en.wikipedia.org/wiki/Linearization">Linearization</a> · <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a></td>
+</tr>
+<tr>
+<td>4th-order Runge-Kutta (ACCURATE path)</td>
+<td>§1, §8.4</td>
+<td><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta methods</a></td>
+</tr>
+<tr>
+<td>Forward Euler method (ice/pressure in FAST path)</td>
+<td>§8.4</td>
+<td><a href="https://en.wikipedia.org/wiki/Euler_method">Euler method</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scientific-literature">Scientific Literature<a class="headerlink" href="#scientific-literature" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Reference</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">NASA Mars Fact Sheet</a></td>
+<td>All planetary constants (<span class="arithmatex">\(M\)</span>, <span class="arithmatex">\(R\)</span>, <span class="arithmatex">\(g\)</span>, <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(e\)</span>, <span class="arithmatex">\(T_\text{orb}\)</span>, <span class="arithmatex">\(\varepsilon_\text{tilt}\)</span>)</td>
+</tr>
+<tr>
+<td>Kepler, J. (1609). <em>Astronomia Nova</em></td>
+<td>Orbital ellipse law</td>
+</tr>
+<tr>
+<td>Lambert, J.H. (1760). <em>Photometria</em></td>
+<td>Lambert's cosine law — <span class="arithmatex">\(Q = F\cos z\)</span></td>
+</tr>
+<tr>
+<td>Stefan, J. (1879); Boltzmann, L. (1884)</td>
+<td>Thermal emission <span class="arithmatex">\(Q = \varepsilon\sigma T^4\)</span></td>
+</tr>
+<tr>
+<td>Clausius, R. (1850). First Law of Thermodynamics</td>
+<td><span class="arithmatex">\(dU/dt = Q_\text{in} - Q_\text{out}\)</span></td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1126/science.aan5015">Jakosky, B.M. et al. (2018). <em>Science</em>, 355(6323).</a></td>
+<td>MAVEN non-thermal escape rate ~0.2 kg s⁻¹</td>
+</tr>
+<tr>
+<td>Kieffer, H.H. et al. (1977). <em>JGR</em>, 82(28)</td>
+<td>CO₂ frost point 149 K at Mars surface pressure</td>
+</tr>
+<tr>
+<td>Smith, M.D. (2004). <em>Icarus</em>, 167(1), 148–165</td>
+<td>CO₂ latent heat <span class="arithmatex">\(L_\text{sub} = 5.7\times10^5\)</span> J kg⁻¹</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1029/92JE02679">Haberle, R.M. et al. (1993). <em>JGR</em>, 98(E2)</a></td>
+<td>Seasonal pressure swing driven by polar cap exchange</td>
+</tr>
+<tr>
+<td>Vasavada, A.R. et al. (2017). <em>JGR Planets</em>, 122(5)</td>
+<td>REMS Gale Crater temperature profiles, Sol 224 calibration</td>
+</tr>
+<tr>
+<td>Christensen, P.R. et al. (2001). <em>JGR</em>, 106(E10). THEMIS</td>
+<td>Thermal inertia maps — TI ≈ 200–350 TIU at Gale Crater</td>
+</tr>
+<tr>
+<td>Wilson, R.J. &amp; Hamilton, K. (1996). <em>JAS</em>, 53(9)</td>
+<td>Martian atmospheric thermal tides — amplitude and phase</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
