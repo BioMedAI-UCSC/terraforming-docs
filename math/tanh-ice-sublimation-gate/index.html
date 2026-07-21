@@ -1,0 +1,1760 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Tanh ice sublimation gate - Terraforming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#summary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tanh ice sublimation gate
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/framework/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Terraforming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planet Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/BioMedAI-UCSC/terraforming/edit/main/docs/math/tanh-ice-sublimation-gate.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+  <h1>Tanh ice sublimation gate</h1>
+
+<hr />
+<p>title: Smooth ice-exhaustion gate — tanh gating of the polar CO₂ sublimation flux
+date: 2026-07-08
+target: package/src/celestials/planets/mars.py :: _gate_sublimation
+domain: [algebraic, numerical]
+variables: [dM, M_ice, M_ref, Φ, g, A, σ_SB, ε, L_sub, T_frost]
+status: verified</p>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Reviews the opt-in smooth replacement (<code>Mars(smooth_gates=True)</code>) for the hard
+ice-exhaustion gate on the polar CO₂ sublimation flux. The hard gate
+<code>torch.where((M_ice ≤ 0) ∧ (dM &lt; 0), 0, dM)</code> is physically correct but has zero
+gradient with respect to every input once a cap empties. The smooth gate
+multiplies the sublimating branch by <code>tanh(M_ice / M_ref)</code> with
+<code>M_ref = 10¹² kg</code>. <strong>Verdict: verified</strong> — the gate saturates to exactly 1.0 in
+IEEE-754 float64 for <code>M_ice ≳ 20·M_ref</code>, is exactly 0 with a nonzero derivative
+<code>Φ/M_ref</code> at the empty-cap boundary, conserves mass where the originally
+specified sigmoid form would leak ≈313 Pa of surface pressure per Mars year
+(about half the present atmosphere), and reduces bit-exactly to the hard gate at
+both extremes.</p>
+<h2 id="variables-and-units">Variables and Units<a class="headerlink" href="#variables-and-units" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+<th>SI Unit</th>
+<th>Value used in example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dM</code> (= −Φ)</td>
+<td>gated cap mass flux (negative = sublimation)</td>
+<td>kg s⁻¹</td>
+<td>−4.09778×10⁸</td>
+</tr>
+<tr>
+<td><code>M_ice</code></td>
+<td>polar cap CO₂ ice mass (one pole)</td>
+<td>kg</td>
+<td>0 … 2.5×10¹⁵</td>
+</tr>
+<tr>
+<td><code>M_ref</code></td>
+<td>gate width (<code>ice_ref_kg</code>)</td>
+<td>kg</td>
+<td>10¹²</td>
+</tr>
+<tr>
+<td><code>Q_in</code></td>
+<td>absorbed insolation at the pole</td>
+<td>W m⁻²</td>
+<td>188.3375</td>
+</tr>
+<tr>
+<td><code>Q_out</code></td>
+<td>frost-point thermal emission <code>ε σ_SB T_frost⁴</code></td>
+<td>W m⁻²</td>
+<td>26.5510</td>
+</tr>
+<tr>
+<td><code>A_cap</code></td>
+<td>polar cap area (fraction 0.01 of 4πR²)</td>
+<td>m²</td>
+<td>1.44371×10¹²</td>
+</tr>
+<tr>
+<td><code>L_sub</code></td>
+<td>CO₂ latent heat of sublimation</td>
+<td>J kg⁻¹</td>
+<td>5.7×10⁵</td>
+</tr>
+<tr>
+<td><code>ε</code></td>
+<td>surface emissivity</td>
+<td>—</td>
+<td>0.95</td>
+</tr>
+<tr>
+<td><code>σ_SB</code></td>
+<td>Stefan–Boltzmann constant</td>
+<td>W m⁻² K⁻⁴</td>
+<td>5.670374419×10⁻⁸</td>
+</tr>
+<tr>
+<td><code>T_frost</code></td>
+<td>CO₂ frost point</td>
+<td>K</td>
+<td>149.0</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Mars surface gravity</td>
+<td>m s⁻²</td>
+<td>3.72076</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>Mars surface area 4πR²</td>
+<td>m²</td>
+<td>1.4437×10¹⁴</td>
+</tr>
+</tbody>
+</table>
+<h2 id="physical-law-starting-point">Physical Law / Starting Point<a class="headerlink" href="#physical-law-starting-point" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Law (energy-limited sublimation)</strong>: the mass flux off a CO₂ cap held at its
+frost point is the net absorbed power divided by the latent heat of
+sublimation, Φ = (Q_in − Q_out)·A_cap / L_sub, and <strong>an empty reservoir can
+supply no flux</strong>: M_ice = 0 ⟹ sublimation must vanish (conservation of mass).
+<strong>Source</strong>: Leighton &amp; Murray (1966), "Behavior of Carbon Dioxide and Other
+Volatiles on Mars", <em>Science</em> 153, 136–144 —
+https://www.science.org/doi/10.1126/science.153.3732.136</p>
+</blockquote>
+<h2 id="derivation">Derivation<a class="headerlink" href="#derivation" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-the-hard-gate-and-its-dead-gradient">Step 1: The hard gate and its dead gradient<a class="headerlink" href="#step-1-the-hard-gate-and-its-dead-gradient" title="Permanent link">&para;</a></h3>
+<p>The pre-existing gate implements the reservoir constraint exactly:</p>
+<div class="arithmatex">\[
+\mathrm{gate_{hard}}(dM, M_{ice}) =
+\begin{cases}
+0 &amp; M_{ice} \le 0 \ \wedge\ dM &lt; 0 \\
+dM &amp; \text{otherwise.}
+\end{cases}
+\]</div>
+<p>Both branch outputs (<code>0</code> and <code>dM</code>) are constants with respect to <code>M_ice</code>, so</p>
+<div class="arithmatex">\[
+\frac{\partial\, \mathrm{gate_{hard}}}{\partial M_{ice}} = 0
+\quad \text{everywhere it is defined,}
+\]</div>
+<p>and it is undefined (a jump) at the switching surface <code>M_ice = 0</code>. A
+gradient-based optimizer therefore receives no signal from the cap-depletion
+regime — the motivating defect (audit item D1,
+<a href="../ideas/iclr2027-workplan.md">iclr2027-workplan.md</a>).</p>
+<h3 id="step-2-the-smooth-gate">Step 2: The smooth gate<a class="headerlink" href="#step-2-the-smooth-gate" title="Permanent link">&para;</a></h3>
+<p>Replace the indicator with a C^∞ multiplier on the sublimating branch only:</p>
+<div class="arithmatex">\[
+\mathrm{gate_{smooth}}(dM, M_{ice}) =
+\begin{cases}
+dM \cdot \tanh\!\left(\dfrac{M_{ice}}{M_{ref}}\right) &amp; dM &lt; 0 \\
+dM &amp; dM \ge 0.
+\end{cases}
+\]</div>
+<p>By definition, <span class="arithmatex">\(\tanh x = \dfrac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span>, which is smooth,
+strictly increasing, with <span class="arithmatex">\(\tanh 0 = 0\)</span> and <span class="arithmatex">\(\tanh x \to 1\)</span> as <span class="arithmatex">\(x \to \infty\)</span>.
+Since both integration paths clamp <span class="arithmatex">\(M_{ice} \ge 0\)</span>
+(<code>planet.py:137-150</code>, <code>mars.py</code> fast path), the argument is never negative.</p>
+<h3 id="step-3-boundary-behaviour-the-mass-conservation-requirement">Step 3: Boundary behaviour (the mass-conservation requirement)<a class="headerlink" href="#step-3-boundary-behaviour-the-mass-conservation-requirement" title="Permanent link">&para;</a></h3>
+<p>At the empty cap, <span class="arithmatex">\(M_{ice}=0\)</span>:</p>
+<div class="arithmatex">\[
+\mathrm{gate_{smooth}} = dM \cdot \tanh 0 = dM \cdot 0 = 0
+= \mathrm{gate_{hard}},
+\]</div>
+<p>so no mass leaves an empty reservoir — <strong>exactly</strong> matching the hard gate, not
+approximately. The derivative there, by the chain rule with
+<span class="arithmatex">\(u = M_{ice}/M_{ref}\)</span>:</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial M_{ice}}\left[dM\,\tanh\frac{M_{ice}}{M_{ref}}\right]
+= dM \cdot \operatorname{sech}^2\!\left(\frac{M_{ice}}{M_{ref}}\right)
+  \cdot \frac{1}{M_{ref}}
+\;\Bigg|_{M_{ice}=0}
+= \frac{dM}{M_{ref}} \neq 0 ,
+\]</div>
+<p>because <span class="arithmatex">\(\operatorname{sech}^2 0 = 1\)</span>. The gate is <em>flat in value</em> but <em>alive in
+gradient</em> at the boundary — precisely the property the optimizer needs.</p>
+<h3 id="step-4-saturation-for-abundant-ice-float64">Step 4: Saturation for abundant ice (float64)<a class="headerlink" href="#step-4-saturation-for-abundant-ice-float64" title="Permanent link">&para;</a></h3>
+<p>For large <span class="arithmatex">\(x\)</span>: <span class="arithmatex">\(1 - \tanh x = \dfrac{2}{e^{2x}+1} &lt; 2e^{-2x}\)</span> (Taylor/asymptotic
+bound). IEEE-754 double precision rounds any value above <span class="arithmatex">\(1 - 2^{-54}\)</span> to
+exactly 1.0 (the ulp below 1 is <span class="arithmatex">\(2^{-53}\)</span>; round-to-nearest). Solving</p>
+<div class="arithmatex">\[
+2e^{-2x} &lt; 2^{-54} \iff x &gt; \tfrac{55}{2}\ln 2 \approx 19.06 ,
+\]</div>
+<p>so for <span class="arithmatex">\(M_{ice} \gtrsim 20\,M_{ref} = 2\times10^{13}\,\mathrm{kg}\)</span> the gate is
+<strong>bit-identical to 1.0</strong> and the smooth-mode physics equals hard-mode physics
+exactly. Present-day cap inventories in the model are ~2.5×10¹⁵ kg
+(<span class="arithmatex">\(x = 2500\)</span>), deep inside saturation.</p>
+<h3 id="step-5-why-tanh-and-not-the-sigmoid-of-the-original-spec">Step 5: Why tanh and not the sigmoid of the original spec<a class="headerlink" href="#step-5-why-tanh-and-not-the-sigmoid-of-the-original-spec" title="Permanent link">&para;</a></h3>
+<p>The feature spec (<a href="../ideas/differentiable-framework-features.md">differentiable-framework-features.md</a>,
+A3) proposed <span class="arithmatex">\(\sigma(M_{ice}/M_{ref})\)</span> with <span class="arithmatex">\(\sigma(x) = 1/(1+e^{-x})\)</span>. But
+<span class="arithmatex">\(\sigma(0) = \tfrac12\)</span>: an <strong>empty</strong> cap would keep sublimating at half rate
+indefinitely, creating CO₂ from nothing. Quantitatively (worked example below),
+the leak is <span class="arithmatex">\(\tfrac12 \Phi \approx 2.05\times10^{8}\)</span> kg s⁻¹, i.e. a spurious
+pressure source of</p>
+<div class="arithmatex">\[
+\Delta P_{leak} = \frac{\tfrac12 \Phi\, g}{A}\, t_{year}
+\approx 313\ \mathrm{Pa\ per\ Mars\ year}
+\]</div>
+<p>— half of Mars's present 610 Pa atmosphere per year. <span class="arithmatex">\(\tanh\)</span> has the same
+right-tail (indeed <span class="arithmatex">\(\sigma(2x) = \tfrac{1+\tanh x}{2}\)</span>, so both saturate
+identically fast) but passes through the origin, eliminating the leak while
+keeping the boundary derivative nonzero. <code>[DISCREPANCY with spec — resolved]</code>:
+the implementation deviates from the spec's σ deliberately; this document is
+the record of why.</p>
+<h3 id="final-expression">Final Expression<a class="headerlink" href="#final-expression" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boxed{\;
+\dot M_{gated} =
+\begin{cases}
+\dot M \cdot \tanh\!\left(\dfrac{M_{ice}}{M_{ref}}\right) &amp; \dot M &lt; 0
+\quad\text{(sublimation)}\\[4pt]
+\dot M &amp; \dot M \ge 0 \quad\text{(condensation, never gated)}
+\end{cases}
+\;}
+\]</div>
+<p><strong>Code mapping</strong> (<code>package/src/celestials/planets/mars.py</code>, <code>_gate_sublimation</code>):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smooth_gates</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n">dM</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">dM</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">ice</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ICE_REF</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">dM</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="p">(</span><span class="n">ice</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dM</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">),</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">dM</span><span class="p">),</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">dM</span><span class="p">,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">)</span>
+</code></pre></div>
+[VERIFIED] — <code>torch.where</code> propagates gradients through the selected branch;
+the condition <code>dM &lt; 0</code> switches on the <em>flux direction</em> (a kink in <code>dM</code>, not a
+dead zone in <code>M_ice</code>), and the hard branch is the original expression unchanged.</p>
+<h2 id="worked-numerical-example">Worked Numerical Example<a class="headerlink" href="#worked-numerical-example" title="Permanent link">&para;</a></h2>
+<p><strong>Inputs</strong> (northern summer, Ls = 90°, the configuration used in
+<code>tests/mars/basic/test_smooth_gates.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>solar flux F</td>
+<td>590 W m⁻²</td>
+<td>Mars mean at 1.52 AU</td>
+</tr>
+<tr>
+<td>albedo α</td>
+<td>0.25</td>
+<td><code>Mars()</code> default</td>
+</tr>
+<tr>
+<td>axial tilt</td>
+<td>25.19°</td>
+<td><code>MARS_AXIAL_TILT</code></td>
+</tr>
+<tr>
+<td>M_ice (north)</td>
+<td>5×10¹¹ kg</td>
+<td>test value, gate half-active</td>
+</tr>
+<tr>
+<td>M_ref</td>
+<td>10¹² kg</td>
+<td><code>ice_ref_kg</code> default</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calculation</strong> (step-by-step):</p>
+<ol>
+<li>Pole insolation: <code>Q_in = (1−α)·F·sin(tilt) = 0.75 × 590 × sin 25.19° = 0.75 × 590 × 0.425634 = 188.3375 W m⁻²</code>.</li>
+<li>Frost-point emission: <code>Q_out = ε σ_SB T⁴ = 0.95 × 5.670374419×10⁻⁸ × 149⁴</code>.
+   <code>149² = 22201; 149⁴ = 22201² = 4.928844×10⁸</code> → <code>Q_out = 26.5510 W m⁻²</code>.</li>
+<li>Cap area: <code>A_cap = 0.01 × 4π × (3.3895×10⁶)² = 1.44371×10¹² m²</code>.</li>
+<li>Sublimation flux: <code>Φ = (188.3375 − 26.5510) × 1.44371×10¹² / 5.7×10⁵ = 4.09778×10⁸ kg s⁻¹</code>, so <code>dM = −4.09778×10⁸ kg s⁻¹</code>.</li>
+<li>Gate: <code>tanh(5×10¹¹ / 10¹²) = tanh(0.5) = 0.4621171573</code>.</li>
+<li>Gated flux: <code>−4.09778×10⁸ × 0.4621171573 = −1.893654×10⁸ kg s⁻¹</code>.</li>
+<li>South cap (dark, Q_in = 0) condenses: <code>+26.5510 × 1.44371×10¹² / 5.7×10⁵ = +6.724913×10⁷ kg s⁻¹</code> (ungated in both modes).</li>
+<li>Net: <code>−1.893654×10⁸ + 6.724913×10⁷ = −1.221163×10⁸ kg s⁻¹</code>.</li>
+</ol>
+<p><strong>Result</strong>: <code>dM_ice/dt = −1.221163×10⁸ kg s⁻¹</code>
+<strong>Code output</strong> (<code>compute_derivatives</code>, <code>smooth_gates=True</code>): <code>−1.221163×10⁸ kg s⁻¹</code>
+<strong>Relative error</strong>: <code>&lt; 10⁻⁶</code> (agreement to all printed digits)</p>
+<p>Hard mode on the same state gives <code>−4.09778×10⁸ + 6.724913×10⁷ =
+−3.425287×10⁸ kg s⁻¹</code>, matching the code's <code>−3.425287×10⁸</code> — the two modes
+differ only because <code>M_ice ≈ M_ref</code> here, i.e. inside the intended transition
+band.</p>
+<p>Boundary derivative check (autograd, float64): at <code>M_ice = 0</code>,
+<code>∂(gate)/∂M_ice = 1.000000×10⁻¹²</code> = <code>1/M_ref</code> exactly as derived; at
+<code>M_ice = 1.9×10¹³</code> the gate is <code>0.99999999999999989</code> and at <code>2.5×10¹⁵</code> it is
+<code>1.0</code> exactly (saturation as computed in Step 4).</p>
+<h2 id="theorems-rules-and-laws-used">Theorems, Rules, and Laws Used<a class="headerlink" href="#theorems-rules-and-laws-used" title="Permanent link">&para;</a></h2>
+<h3 id="hyperbolic-tangent-definition-and-asymptotics">Hyperbolic tangent — definition and asymptotics<a class="headerlink" href="#hyperbolic-tangent-definition-and-asymptotics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Statement</strong>: tanh x = (eˣ−e⁻ˣ)/(eˣ+e⁻ˣ); tanh 0 = 0, tanh′x = sech²x, 1−tanh x = 2/(e²ˣ+1).</li>
+<li><strong>Wikipedia</strong>: https://en.wikipedia.org/wiki/Hyperbolic_functions</li>
+<li><strong>YouTube</strong>: https://www.youtube.com/watch?v=3d6DsjIBzJ4 (3Blue1Brown — Taylor series, for the asymptotic expansion technique used in Step 4)</li>
+<li><strong>Textbook</strong>: Abramowitz &amp; Stegun, <em>Handbook of Mathematical Functions</em>, §4.5.</li>
+<li><strong>Applied here</strong>: gives exact zero at the origin, the saturation bound, and the derivative sech²(0)=1.</li>
+</ul>
+<h3 id="chain-rule">Chain rule<a class="headerlink" href="#chain-rule" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Statement</strong>: d/dx f(g(x)) = f′(g(x))·g′(x).</li>
+<li><strong>Wikipedia</strong>: https://en.wikipedia.org/wiki/Chain_rule</li>
+<li><strong>YouTube</strong>: https://www.youtube.com/watch?v=YG15m2VwSjA (3Blue1Brown — Essence of Calculus ch. 4)</li>
+<li><strong>Textbook</strong>: Stewart, <em>Calculus: Early Transcendentals</em>, 8th ed., §3.4.</li>
+<li><strong>Applied here</strong>: Step 3 — ∂/∂M_ice of dM·tanh(M_ice/M_ref) = dM·sech²(·)/M_ref.</li>
+</ul>
+<h3 id="conservation-of-mass">Conservation of mass<a class="headerlink" href="#conservation-of-mass" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Statement</strong>: mass is neither created nor destroyed in a closed exchange between reservoirs (cap ↔ atmosphere).</li>
+<li><strong>Wikipedia</strong>: https://en.wikipedia.org/wiki/Conservation_of_mass</li>
+<li><strong>YouTube</strong>: no suitable single verified lecture found — flagged rather than guessed; see textbook.</li>
+<li><strong>Textbook</strong>: Jacobson, <em>Fundamentals of Atmospheric Modeling</em>, 2nd ed., ch. 3 (continuity equation).</li>
+<li><strong>Applied here</strong>: Steps 3 &amp; 5 — the gate must vanish at M_ice = 0; σ(0)=½ violates this at a rate of ~313 Pa/Mars-year.</li>
+</ul>
+<h3 id="ieee-754-double-precision-rounding">IEEE-754 double precision rounding<a class="headerlink" href="#ieee-754-double-precision-rounding" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Statement</strong>: binary64 has a 53-bit significand; the ulp below 1.0 is 2⁻⁵³, so any real in (1−2⁻⁵⁴, 1] rounds to 1.0 under round-to-nearest-even.</li>
+<li><strong>Wikipedia</strong>: https://en.wikipedia.org/wiki/Double-precision_floating-point_format</li>
+<li><strong>YouTube</strong>: https://www.youtube.com/watch?v=PZRI1IfStY0 (Computerphile — Floating Point Numbers)</li>
+<li><strong>Textbook</strong>: Goldberg, "What Every Computer Scientist Should Know About Floating-Point Arithmetic", <em>ACM Computing Surveys</em> 23(1), 1991.</li>
+<li><strong>Applied here</strong>: Step 4 — proves smooth mode is bit-identical to hard mode for M_ice ≳ 20·M_ref, which the agreement tests assert with <code>torch.equal</code>.</li>
+</ul>
+<h3 id="stefanboltzmann-law">Stefan–Boltzmann law<a class="headerlink" href="#stefanboltzmann-law" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Statement</strong>: radiant exitance of a grey body = ε σ T⁴.</li>
+<li><strong>Wikipedia</strong>: https://en.wikipedia.org/wiki/Stefan%E2%80%93Boltzmann_law</li>
+<li><strong>YouTube</strong>: https://www.youtube.com/watch?v=fPKGwvmWmvo (Khan Academy — blackbody radiation; used for Q_out in the worked example)</li>
+<li><strong>Textbook</strong>: Pierrehumbert, <em>Principles of Planetary Climate</em>, §3.3.</li>
+<li><strong>Applied here</strong>: Q_out = ε σ T_frost⁴ term of the sublimation flux in the worked example.</li>
+</ul>
+<h2 id="findings-and-recommendations">Findings and Recommendations<a class="headerlink" href="#findings-and-recommendations" title="Permanent link">&para;</a></h2>
+<h3 id="verified-tanh-gate-value-derivative-saturation-conservation">[VERIFIED] tanh gate — value, derivative, saturation, conservation<a class="headerlink" href="#verified-tanh-gate-value-derivative-saturation-conservation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>All four required properties hold; worked example matches code to all printed digits.</li>
+<li>Affected lines: <code>mars.py :: _gate_sublimation</code> and its two call sites (RK4 and fast paths).</li>
+</ul>
+<h3 id="approximation-warning-transition-band-bias">[APPROXIMATION WARNING] transition-band bias<a class="headerlink" href="#approximation-warning-transition-band-bias" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For 0 &lt; M_ice ≲ 20·M_ref the smooth flux is deliberately smaller than the
+  physical (hard) flux — a bias of up to a factor tanh(x)/1 at x = M_ice/M_ref.
+  With the default M_ref = 10¹² kg this band is &lt; 0.001 % of the present cap
+  inventory; report M_ref alongside any optimization result and re-verify
+  conclusions with the hard gate.</li>
+</ul>
+<h3 id="discrepancy-resolved-spec-said-sigmoid-implementation-uses-tanh">[DISCREPANCY — resolved] spec said sigmoid, implementation uses tanh<a class="headerlink" href="#discrepancy-resolved-spec-said-sigmoid-implementation-uses-tanh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>σ(0) = ½ leaks ≈ 2.05×10⁸ kg s⁻¹ (≈ 313 Pa/Mars-year) from an empty cap;
+  tanh(0) = 0 does not. Deviation is intentional and strictly dominant
+  (same saturation tail, exact boundary). Recommended: update the A3 feature
+  spec text when it is next revised.</li>
+</ul>
+<h3 id="note-condensation-branch-switch">[NOTE] condensation branch switch<a class="headerlink" href="#note-condensation-branch-switch" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>torch.where(dM &lt; 0, …)</code> introduces a derivative kink in <code>dM</code> at dM = 0
+  (gradient jumps between gate and 1). This is a corner, not a dead zone —
+  both one-sided derivatives are finite — and it affects only the measure-zero
+  moment when a pole crosses sublimation ↔ condensation.</li>
+</ul>
+<h2 id="cross-references">Cross-references<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../ideas/iclr2027-workplan.md">docs/ideas/iclr2027-workplan.md</a> — audit item D1, task T5</li>
+<li><a href="../ideas/differentiable-framework-features.md">docs/ideas/differentiable-framework-features.md</a> — feature A3</li>
+<li><a href="../ideas/master-task-list.md">docs/ideas/master-task-list.md</a> — Track A-1, task 6</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Leighton, R. B. &amp; Murray, B. C. (1966). <em>Science</em> 153, 136–144.</li>
+<li>Abramowitz, M. &amp; Stegun, I. A. (1964). <em>Handbook of Mathematical Functions</em>. Dover.</li>
+<li>Goldberg, D. (1991). <em>ACM Computing Surveys</em> 23(1), 5–48.</li>
+<li>Pierrehumbert, R. T. (2010). <em>Principles of Planetary Climate</em>. Cambridge UP.</li>
+<li>Jakosky, B. M. et al. (2018). MAVEN loss rates (escape-rate constant used in the same RHS). <em>Icarus</em> 315, 146–157.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
