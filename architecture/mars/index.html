@@ -1877,13 +1877,19 @@
 </ol>
 <hr />
 <h2 id="1-state-vector">1. State Vector<a class="headerlink" href="#1-state-vector" title="Permanent link">&para;</a></h2>
-<p>The coupled ODE system evolves three variables:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>y = [T,  P,  M_ice]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>     │    │    │
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>     │    │    └─ Total polar CO₂ ice mass          [kg]
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>     │    └────── Global mean surface pressure       [Pa]
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     └─────────── Surface temperature at (φ, λ)     [K]
+<p>The coupled ODE system evolves four variables — the two polar caps are carried
+<strong>independently</strong> so the RK4 integrator evolves each on its own (collapsing them
+to a single total and re-apportioning afterwards destroyed the seasonal
+anti-phase exchange and drained the caps to zero on the ACCURATE path):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>y = [T,  P,  M_north,  M_south]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>     │    │    │          │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>     │    │    │          └─ South polar-cap CO₂ ice mass  [kg]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>     │    │    └───────────── North polar-cap CO₂ ice mass  [kg]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     │    └──────────────────  Global mean surface pressure  [Pa]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>     └─────────────────────── Surface temperature at (φ, λ)  [K]
 </code></pre></div>
+<p>Total ice mass is <code>M_north + M_south</code>. Each cap gates its own sublimation on its
+own reservoir, through every RK4 sub-step.</p>
 <p>At every timestep the engine calls <code>advance_orbit(dt)</code> first (updates orbital
 angle and solar flux), then either:</p>
 <ul>
@@ -2551,7 +2557,7 @@ reservoir.</p>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">f_south</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="err">−</span> <span class="n">f_north</span>
 </code></pre></div>
 <p><strong>Mass rate equations:</strong></p>
-<div class="arithmatex">\[A_\text{cap} = 0.01 \times 4\pi R^2 = 1.443\times10^{12}\;\text{m}^2, \qquad L_\text{sub} = 5.7\times10^5\;\text{J\,kg}^{-1}\]</div>
+<div class="arithmatex">\[A_\text{cap} = 0.04 \times 4\pi R^2 = 5.774\times10^{12}\;\text{m}^2, \qquad L_\text{sub} = 5.7\times10^5\;\text{J\,kg}^{-1}\]</div>
 <div class="arithmatex">\[\dot{M}_\text{sub,N} = \frac{\Delta Q_N \cdot A_\text{cap}}{L_\text{sub}}, \qquad \dot{M}_\text{sub,S} = \frac{\Delta Q_S \cdot A_\text{cap}}{L_\text{sub}}\]</div>
 <div class="arithmatex">\[\frac{dM_\text{ice,N}}{dt} = -\dot{M}_\text{sub,N}, \qquad \frac{dM_\text{ice,S}}{dt} = -\dot{M}_\text{sub,S}, \qquad \frac{dM_\text{ice}}{dt} = \frac{dM_\text{ice,N}}{dt} + \frac{dM_\text{ice,S}}{dt}\]</div>
 <p><strong>Guard conditions:</strong></p>
@@ -2570,16 +2576,20 @@ reservoir.</p>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Q_out_pole = 26.51 W/m²
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>ΔQ_S = 214.9 − 26.51 = 188.4 W/m²
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>A_cap = 1.443×10¹² m²
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>A_cap = 5.774×10¹² m²
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>net_sub_S = 188.4 × 1.443×10¹² / 5.7×10⁵ = 4.77×10⁸ kg/s
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>net_sub_S = 188.4 × 5.774×10¹² / 5.7×10⁵ = 1.909×10⁹ kg/s
 </code></pre></div>
-<div class="arithmatex">\[\frac{dM_\text{ice}}{dt} \approx -4.77\times10^8\;\text{kg\,s}^{-1}\]</div>
+<div class="arithmatex">\[\frac{dM_\text{ice,S}}{dt} \approx -1.909\times10^9\;\text{kg\,s}^{-1}\]</div>
 <p>Over one sol (88 775 s):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ΔM_ice ≈ −4.77×10⁸ × 88 775 = −4.23×10¹³ kg/sol
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ΔM_ice,S ≈ −1.909×10⁹ × 88 775 = −1.694×10¹⁴ kg/sol
 </code></pre></div>
-<p>Starting from <span class="arithmatex">\(M_\text{ice} = 5\times10^{15}\)</span> kg, the south cap would fully sublimate in
-~118 sols at peak perihelion insolation.</p>
+<p>At <span class="arithmatex">\(L_s = 251°\)</span> the south cap holds <span class="arithmatex">\(f_\text{south}\times5\times10^{15} \approx 4.2\times10^{15}\)</span> kg,
+so at peak perihelion insolation it fully sublimates in <strong>~25 sols</strong> — the seasonal
+cap really does disappear each summer. Because the caps are integrated
+independently (state <code>[T, P, M_north, M_south]</code>), the sublimation gate stops this
+cap at zero while the north cap keeps condensing; the ODE state does <strong>not</strong>
+collapse both caps into one total (which drained them together on the RK4 path).</p>
 <hr />
 <h2 id="7-dpdt-atmospheric-pressure">7. dP/dt — Atmospheric Pressure<a class="headerlink" href="#7-dpdt-atmospheric-pressure" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -2592,7 +2602,8 @@ reservoir.</p>
 <p><strong>Laws applied:</strong> <a href="https://en.wikipedia.org/wiki/Hydrostatic_equilibrium">Hydrostatic equilibrium</a> · <a href="https://en.wikipedia.org/wiki/Ideal_gas_law">Ideal gas law</a> · <a href="https://en.wikipedia.org/wiki/Barometric_formula">Barometric formula</a></p>
 </blockquote>
 <p>From hydrostatic equilibrium: <span class="arithmatex">\(P = M_\text{atm}\,g / A_\text{planet}\)</span>.
-Conservation of mass gives <span class="arithmatex">\(M_\text{atm} + M_\text{ice} = \text{const}\)</span>, so:</p>
+Conservation of mass gives <span class="arithmatex">\(M_\text{atm} + M_\text{ice} = \text{const}\)</span> (with
+<span class="arithmatex">\(M_\text{ice} = M_\text{north} + M_\text{south}\)</span>, minus the escape sink below), so:</p>
 <div class="arithmatex">\[\frac{dP_\text{sub}}{dt} = -\frac{dM_\text{ice}}{dt} \cdot \frac{g}{A_\text{planet}}\]</div>
 <p><strong>Signs:</strong>
 - Sublimation (<span class="arithmatex">\(dM_\text{ice}/dt &lt; 0\)</span>) → <span class="arithmatex">\(dP/dt &gt; 0\)</span> (pressure rises as CO₂ enters atmosphere) ✓
@@ -2870,7 +2881,7 @@ FAST path unconditionally stable for any <span class="arithmatex">\(\Delta t\)</
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        └── F = F₀·(1AU/r)²  →  radiation.solar_flux
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
 <a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>compute_derivatives(y = [T, P, M_ice])
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>compute_derivatives(y = [T, P, M_north, M_south])
 <a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>│
 <a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>├── [dT/dt]  = (Q_in − Q_out) / C_area
 <a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>│       │
@@ -2898,7 +2909,7 @@ FAST path unconditionally stable for any <span class="arithmatex">\(\Delta t\)</
 <a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>│       │                     │              │          │       │
 <a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>│       │                     │         ε·σ·149⁴       │    5.7×10⁵ J/kg
 <a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>│       │                     │         = 26.51 W/m²   │
-<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>│       │                     │                   0.01·4πR²
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>│       │                     │                   0.04·4πR²
 <a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>│       │          (1−α)·F·max(0, ±sin(δ))
 <a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>│       │
 <a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>│       └── Guard: each pole clamped independently if that pole&#39;s ice = 0
@@ -2924,16 +2935,17 @@ FAST path unconditionally stable for any <span class="arithmatex">\(\Delta t\)</
 <td>No — depends on orbital state and own <span class="arithmatex">\(T\)</span></td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(dM_\text{ice}/dt\)</span></td>
-<td>No — depends on orbital state only</td>
+<td><span class="arithmatex">\(dM_\text{ice,N}/dt\)</span>, <span class="arithmatex">\(dM_\text{ice,S}/dt\)</span></td>
+<td>Orbital state, plus each cap's own reservoir <span class="arithmatex">\(M_\text{north}\)</span>/<span class="arithmatex">\(M_\text{south}\)</span> (the exhaustion gate)</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(dP/dt\)</span></td>
-<td><strong>Yes</strong> — depends on <span class="arithmatex">\(dM_\text{ice}/dt\)</span></td>
+<td><strong>Yes</strong> — depends on <span class="arithmatex">\(dM_\text{ice}/dt = dM_\text{ice,N}/dt + dM_\text{ice,S}/dt\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Only one coupling: ice sublimation feeds directly into pressure.</p>
+<p>Couplings: each cap's sublimation is gated by its own reservoir, and the two
+caps' combined mass change feeds directly into pressure.</p>
 <hr />
 <h2 id="10-model-scope-and-known-approximations">10. Model Scope and Known Approximations<a class="headerlink" href="#10-model-scope-and-known-approximations" title="Permanent link">&para;</a></h2>
 <table>
@@ -2961,8 +2973,8 @@ FAST path unconditionally stable for any <span class="arithmatex">\(\Delta t\)</
 <td>polar section</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(A_\text{cap} = 1\%\)</span> per pole (fixed)</td>
-<td>Fixed sublimating area; no seasonal cap extent evolution</td>
+<td><span class="arithmatex">\(A_\text{cap} = 4\%\)</span> per pole (fixed)</td>
+<td>Fixed effective sublimating area (calibrated to the observed seasonal swing); no explicit seasonal cap-extent evolution</td>
 <td><code>MARS_POLAR_CAP_FRACTION</code></td>
 </tr>
 <tr>
