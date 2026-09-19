@@ -1,0 +1,2118 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+      
+      
+      
+      
+        <link rel="prev" href="../architecture/">
+      
+      
+        <link rel="next" href="../implementation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>API Reference - Terraforming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-gcm3d" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../api/framework/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Package · gcm3d (3-D GCM)
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Terraforming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planet Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package · gcm3d (3-D GCM)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Package · gcm3d (3-D GCM)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#body-abstraction-bodypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Body abstraction — body.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Body abstraction — body.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bodyconstants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BodyConstants
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discretisation-coordinatespy-specspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discretisation — coordinates.py, specs.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discretisation — coordinates.py, specs.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gridtruncationt42-spherical_harmonicgrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        grid(truncation="T42") -&gt; spherical_harmonic.Grid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coordinate_systemtruncationt42-n_layers25-coordinatesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coordinate_system(truncation="T42", n_layers=25) -&gt; CoordinateSystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physics_specsbody-unitssimunits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        physics_specs(body) -&gt; units.SimUnits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nondimensionalization_scalebody-scalesscale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nondimensionalization_scale(body) -&gt; scales.Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dry-dynamics-dynamicspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry dynamics — dynamics.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column-physics-frameworkphysicsgcmpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column physics — framework/physics/gcm.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Column physics — framework/physics/gcm.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#radiativeforcing-dataclass-mars-radiative_forcing-radiativeforcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RadiativeForcing (dataclass) / Mars radiative_forcing(...) -&gt; RadiativeForcing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co2forcing-dataclass-mars-co2_forcing-co2forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CO2Forcing (dataclass) / Mars co2_forcing(...) -&gt; CO2Forcing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-tendency-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State &amp; tendency containers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equation-builders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equation builders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physics-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physics functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orbit-geometry-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orbit / geometry helpers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlated-k-radiation-frameworkphysicsames_radiationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correlated-k radiation — framework/physics/ames_radiation.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-d-maps-mapspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-D maps — maps.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-d-seasonal-ode-terraforming_odepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0-D seasonal ODE — terraforming_ode.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restart-averaging-restartpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restart / averaging — restart.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topography-topographypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topography — topography.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmarks-benchmarkspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmarks — benchmarks.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcd-validation-client-mcdpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MCD validation client — mcd.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/BioMedAI-UCSC/terraforming/edit/main/docs/package/gcm3d/api.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="api-reference-gcm3d">API Reference — gcm3d<a class="headerlink" href="#api-reference-gcm3d" title="Permanent link">&para;</a></h1>
+<p>Reusable imports live under <code>src.framework.gcm</code> and <code>src.framework.physics</code>.
+Mars forcing, maps, datasets, and seasonal components live under
+<code>src.celestials.planets.mars</code>. There is no top-level <code>src.gcm3d</code> package.
+<code>BodyConstants</code>/<code>EARTH</code> are always available; everything else requires the
+<code>gcm3d</code> extra. Signatures reflect the current implementation.</p>
+<h2 id="body-abstraction-bodypy">Body abstraction — <code>body.py</code><a class="headerlink" href="#body-abstraction-bodypy" title="Permanent link">&para;</a></h2>
+<h3 id="bodyconstants"><code>BodyConstants</code><a class="headerlink" href="#bodyconstants" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: frozen SI constants a planet/moon supplies to the dry dynamical core.
+<strong>Location</strong>: <code>package/src/framework/gcm/body.py</code></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Body name</td>
+</tr>
+<tr>
+<td><code>radius_m</code></td>
+<td>float</td>
+<td>Mean radius (m)</td>
+</tr>
+<tr>
+<td><code>gravity_m_s2</code></td>
+<td>float</td>
+<td>Surface gravity (m s⁻²)</td>
+</tr>
+<tr>
+<td><code>rotation_period_s</code></td>
+<td>float</td>
+<td>Sidereal rotation period (s) → Ω</td>
+</tr>
+<tr>
+<td><code>gas_constant_j_kg_k</code></td>
+<td>float</td>
+<td>Specific gas constant R = R_univ/M</td>
+</tr>
+<tr>
+<td><code>cp_j_kg_k</code></td>
+<td>float</td>
+<td>Isobaric heat capacity (sets κ = R/cp)</td>
+</tr>
+<tr>
+<td><code>reference_temperature_k</code></td>
+<td>float</td>
+<td>Semi-implicit linearisation anchor (default 250)</td>
+</tr>
+<tr>
+<td><code>reference_surface_pressure_pa</code></td>
+<td>float</td>
+<td>Reference p_s</td>
+</tr>
+</tbody>
+</table>
+<p>Properties: <code>angular_velocity_s</code> (2π/period), <code>kappa</code> (R/cp), <code>surface_area_m2</code>
+(4πR²). Validates all quantities positive in <code>__post_init__</code>. <code>EARTH</code> is a
+standard dry-air instance used to prove the core is planet-agnostic in tests.</p>
+<h2 id="discretisation-coordinatespy-specspy">Discretisation — <code>coordinates.py</code>, <code>specs.py</code><a class="headerlink" href="#discretisation-coordinatespy-specspy" title="Permanent link">&para;</a></h2>
+<h3 id="gridtruncationt42-spherical_harmonicgrid"><code>grid(truncation="T42") -&gt; spherical_harmonic.Grid</code><a class="headerlink" href="#gridtruncationt42-spherical_harmonicgrid" title="Permanent link">&para;</a></h3>
+<p>Named triangular truncations: <code>T21</code>(64×32), <code>T31</code>, <code>T42</code>(default), <code>T85</code>, <code>T106</code>, <code>T170</code>.</p>
+<h3 id="coordinate_systemtruncationt42-n_layers25-coordinatesystem"><code>coordinate_system(truncation="T42", n_layers=25) -&gt; CoordinateSystem</code><a class="headerlink" href="#coordinate_systemtruncationt42-n_layers25-coordinatesystem" title="Permanent link">&para;</a></h3>
+<p>Spectral grid × <code>n_layers</code> equidistant terrain-following sigma (p/pₛ) levels.</p>
+<h3 id="physics_specsbody-unitssimunits"><code>physics_specs(body) -&gt; units.SimUnits</code><a class="headerlink" href="#physics_specsbody-unitssimunits" title="Permanent link">&para;</a></h3>
+<p>Body-anchored dinosaur <code>SimUnits</code>; <strong>Raises</strong> if the body's radius ≠ 1 under the scale.</p>
+<h3 id="nondimensionalization_scalebody-scalesscale"><code>nondimensionalization_scale(body) -&gt; scales.Scale</code><a class="headerlink" href="#nondimensionalization_scalebody-scalesscale" title="Permanent link">&para;</a></h3>
+<p>Length = radius, time = 1/(2Ω), mass = 1 kg, temperature = 1 K.</p>
+<h2 id="dry-dynamics-dynamicspy">Dry dynamics — <code>dynamics.py</code><a class="headerlink" href="#dry-dynamics-dynamicspy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>primitive_equations(coords, body, specs=None, orography=None) -&gt; PrimitiveEquationsSigma</code> — dry <code>ImplicitExplicitODE</code>; flat orography by default.</li>
+<li><code>reference_temperature(coords, body) -&gt; np.ndarray[n_layers]</code> — constant linearisation profile (nondimensional).</li>
+<li><code>stepper(equation, dt_seconds, specs) -&gt; step_fn</code> — semi-implicit IMEX-RK-SIL3; nondimensionalises <code>dt</code>.</li>
+<li><code>integrate(step_fn, state, n_steps) -&gt; state</code> — <code>jax.lax.scan</code> rollout; differentiable. <strong>Raises</strong> <code>ValueError</code> if <code>n_steps &lt; 1</code>.</li>
+</ul>
+<h2 id="column-physics-frameworkphysicsgcmpy">Column physics — <code>framework/physics/gcm.py</code><a class="headerlink" href="#column-physics-frameworkphysicsgcmpy" title="Permanent link">&para;</a></h2>
+<h3 id="radiativeforcing-dataclass-mars-radiative_forcing-radiativeforcing"><code>RadiativeForcing</code> (dataclass) / Mars <code>radiative_forcing(...) -&gt; RadiativeForcing</code><a class="headerlink" href="#radiativeforcing-dataclass-mars-radiative_forcing-radiativeforcing" title="Permanent link">&para;</a></h3>
+<p>Radiative + orbital + surface-scheme constants for the per-column energy balance.
+<code>src.celestials.planets.mars.gcm.radiative_forcing</code> supplies Mars's
+obliquity/precession/orbit/emissivity/thermal-inertia. Key toggles: <code>diurnal</code>, <code>co2_radiation_enabled</code>,
+<code>ames_correlated_k_enabled</code> (default True), <code>regolith_enabled</code>,
+<code>stability_exchange_enabled</code>, <code>pbl_diffusion_enabled</code>,
+<code>convective_adjustment_enabled</code>, dust fields (<code>dust_visible_optical_depth</code>,
+<code>dust_longwave_optical_depth</code>, <code>dust_top_height_km</code>, <code>dust_conrath_parameter</code>).</p>
+<h3 id="co2forcing-dataclass-mars-co2_forcing-co2forcing"><code>CO2Forcing</code> (dataclass) / Mars <code>co2_forcing(...) -&gt; CO2Forcing</code><a class="headerlink" href="#co2forcing-dataclass-mars-co2_forcing-co2forcing" title="Permanent link">&para;</a></h3>
+<p>Constants for the 3-D CO₂ condensation/sublimation cycle. <code>energy_limited=True</code>
+drives phase change off the surface-energy residual (no tunable relaxation rate);
+<code>use_pressure_frost</code> uses the Clausius–Clapeyron frost point; <code>escape_rate_kg_s</code>
+is a uniform non-thermal mass sink.</p>
+<h3 id="state-tendency-containers">State &amp; tendency containers<a class="headerlink" href="#state-tendency-containers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ColumnPhysicsState(dynamics, surface_temperature, co2_ice, ground_temperature)</code> — JAX pytree.</li>
+<li><code>ColumnPhysicsTendencies(vorticity, divergence, temperature_variation, log_surface_pressure, surface_temperature, co2_ice, ground_temperature, tracers)</code>.</li>
+<li><code>SurfaceEnergyDiagnostics</code>, <code>RadiativeFluxDiagnostics</code> — NamedTuples of diagnostic fields.</li>
+</ul>
+<h3 id="equation-builders">Equation builders<a class="headerlink" href="#equation-builders" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>forced_primitive_equations(coords, body, forcing, specs=None, orography=None) -&gt; ImplicitExplicitODE</code> — dry dynamics + radiative energy balance.</li>
+<li><code>forced_co2_primitive_equations(coords, body, forcing, co2_forcing, specs=None, orography=None) -&gt; ImplicitExplicitODE</code> — the above + CO₂ cycle.</li>
+<li><code>column_primitive_equations(base, parameterization) -&gt; ImplicitExplicitODE</code> — the generic dynamics⊕physics seam (conventional or learned).</li>
+<li><code>initial_column_state(dyn_state, coords, surface_temperature_k, specs, ice_pa=0.0, forcing=None) -&gt; ColumnPhysicsState</code> — pass the run's <code>RadiativeForcing</code> when using a custom regolith layer layout.</li>
+</ul>
+<h3 id="physics-functions">Physics functions<a class="headerlink" href="#physics-functions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>two_stream_radiative_fluxes(state, coords, specs, body, f, *, air_temperature_k=None, surface_pressure_pa=None) -&gt; RadiativeFluxDiagnostics</code>.</li>
+<li><code>surface_energy_tendencies(state, coords, specs, body, f, …) -&gt; (atm_modal, surface_nd, diagnostics)</code>.</li>
+<li><code>radiative_heating_tendency(state, coords, specs, body, f)</code> — atmospheric-only accessor; requires a <code>ColumnPhysicsState</code>.</li>
+<li><code>positivity_preserving_co2_step(step_fn, coords, specs) -&gt; step_fn</code> and <code>project_co2_reservoirs(state, coords, specs)</code> — enforce frost ≥ 0.</li>
+</ul>
+<h3 id="orbit-geometry-helpers">Orbit / geometry helpers<a class="headerlink" href="#orbit-geometry-helpers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>cos_zenith_nodal(t_s, lat_rad, lon_rad, f)</code> — cos(zenith) on the <code>(n_lon, n_lat)</code> grid; diurnal terminator or daily-mean.</li>
+<li><code>orbital_distance(t_s, f)</code>, <code>mean_anomaly_for_ls(ls_rad, f)</code>, <code>co2_frost_point_k(pressure_pa)</code>.</li>
+</ul>
+<h2 id="correlated-k-radiation-frameworkphysicsames_radiationpy">Correlated-k radiation — <code>framework/physics/ames_radiation.py</code><a class="headerlink" href="#correlated-k-radiation-frameworkphysicsames_radiationpy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>load_ames_co2_tables()</code> / <code>load_ames_co2_tables_jax()</code> — the bundled 12-band correlated-k asset.</li>
+<li><code>correlated_k_optical_depths(temperature_k, pressure_mid_pa, delta_pressure_pa) -&gt; (sw_tau, lw_tau)</code>.</li>
+<li><code>channel_weights(clear_fraction)</code>, <code>planck_band_fractions(temperature_k)</code>.</li>
+<li>Fixed-dust optics constants: <code>DUST_SW_EXTINCTION</code>, <code>DUST_IR_EXTINCTION</code>, etc. (Reff=1.5 µm).</li>
+</ul>
+<h2 id="3-d-maps-mapspy">3-D maps — <code>maps.py</code><a class="headerlink" href="#3-d-maps-mapspy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>run_maps(body=None, truncation="T42", n_layers=25, dt_seconds=600.0, n_steps=200, *, forcing=None, co2_forcing=None, surface_properties_path=None, mola_path=None, initial_state=None, return_final_state=False, progress_callback=None, diagnostic_callback=None, stop_requested=None, …) -&gt; MarsMapFields | (MarsMapFields, state)</code>.</li>
+<li><code>MarsMapFields</code> — lat/lon fields (<code>surface_pressure_pa</code>, <code>temperature_k</code>, <code>u_ms</code>, <code>v_ms</code>, <code>co2_ice_pa</code>, <code>elevation_m</code>) + provenance; properties <code>wind_speed_ms</code>, <code>duration_sols</code>, <code>is_transient</code>, <code>approximate_wind_height_m</code>.</li>
+<li><code>save_netcdf(fields, path)</code>, <code>plot_maps(fields, outdir, prefix="mars")</code>, <code>save_maps(fields, outdir, prefix="mars")</code>.</li>
+<li>Scale presets: <code>MAP_SCALES</code> (<code>fast</code>/<code>balanced</code>/<code>high</code>/<code>ultra</code>), <code>DEFAULT_SCALE</code>, <code>resolve_scale(name)</code>.
+<strong>Raises</strong>: <code>ValueError</code> for a diurnal timestep coarser than the terminator CFL; <code>FloatingPointError</code> if the state becomes non-finite.</li>
+</ul>
+<h2 id="0-d-seasonal-ode-terraforming_odepy">0-D seasonal ODE — <code>terraforming_ode.py</code><a class="headerlink" href="#0-d-seasonal-ode-terraforming_odepy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>SeasonalForcing</code> (dataclass), <code>initial_seasonal_state(T, P, ice_north, ice_south, t0_s=0.0)</code>.</li>
+<li><code>seasonal_tendency(y, f)</code>, <code>seasonal_ode(f)</code>, <code>solar_flux(t, f)</code>, <code>solar_longitude(t, f)</code>.</li>
+<li><code>run_seasonal(f, y0, dt_seconds, n_steps, sample_every=1) -&gt; SeasonalTrajectory</code> — <strong>Raises</strong> if <code>dt_seconds &gt; rotation_period/8</code> (diurnal aliasing) or bad sampling.</li>
+<li><code>SeasonalTrajectory</code> — Ls-indexed arrays; <code>.write_csv(path)</code> matches the torch Mars exports.</li>
+</ul>
+<h2 id="restart-averaging-restartpy">Restart / averaging — <code>restart.py</code><a class="headerlink" href="#restart-averaging-restartpy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>RESTART_FORMAT_VERSION</code>, <code>save_restart(state, path)</code>, <code>load_restart(path)</code> — NPZ+JSON, version-checked, no pickle.</li>
+<li><code>integrate_with_averaging(step_fn, initial_state, spinup_steps, average_steps, sample_every=1, diagnostic_fn=…) -&gt; (final, time_mean)</code>.</li>
+</ul>
+<h2 id="topography-topographypy">Topography — <code>topography.py</code><a class="headerlink" href="#topography-topographypy" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>load_mola_meg(path=None) -&gt; (elevation_m, lats_deg, lons_deg)</code> — SHA-256-verified MEGDR raster.</li>
+<li><code>regrid_to_nodal(coords, elevation_m=None, mola_path=None)</code>, <code>mola_modal_orography(coords, specs, …)</code>.</li>
+</ul>
+<h2 id="benchmarks-benchmarkspy">Benchmarks — <code>benchmarks.py</code><a class="headerlink" href="#benchmarks-benchmarkspy" title="Permanent link">&para;</a></h2>
+<p>Dycore acceptance + conservation diagnostics: <code>run_resting_atmosphere</code>,
+<code>run_solid_body_tracer</code>, <code>run_balanced_jet</code>, <code>run_held_suarez</code>,
+<code>dry_conserved_quantities</code>, <code>conservation_drift</code>, <code>dry_drift_diagnostics</code>,
+<code>resting_convergence_matrix</code>, and their <code>*Diagnostics</code> dataclasses.</p>
+<h2 id="mcd-validation-client-mcdpy">MCD validation client — <code>mcd.py</code><a class="headerlink" href="#mcd-validation-client-mcdpy" title="Permanent link">&para;</a></h2>
+<p><code>query_url</code>, <code>fetch_ascii</code>, <code>parse_ascii</code>, <code>interpolate_periodic</code>,
+<code>weighted_metrics</code> — fetch Mars Climate Database v6.1 reference maps and compute
+area-weighted bias/RMSE/correlation against a <code>gcm3d</code> run.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

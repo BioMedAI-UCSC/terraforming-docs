@@ -337,6 +337,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../package/gcm3d/" class="md-tabs__link">
+          
+  
+  
+  Package · gcm3d (3-D GCM)
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -1297,6 +1317,233 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package · gcm3d (3-D GCM)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Package · gcm3d (3-D GCM)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1484,6 +1731,19 @@ crosshair across all panels at the same x-axis value (year or hour).</p>
 <p>Temperature uses an <code>AreaChart</code> with a min/max band for intervention runs, where
 <code>InterventionSnapshot</code> carries <code>temp_min</code> and <code>temp_max</code> from the annual
 integration.</p>
+<h3 id="gcm-map-and-mcd-comparison-mode">GCM map and MCD comparison mode<a class="headerlink" href="#gcm-map-and-mcd-comparison-mode" title="Permanent link">&para;</a></h3>
+<p>The top-left model selector defaults to <strong>GCM</strong>. A single map run renders all
+available surface fields in a responsive grid: temperature, pressure, zonal and
+scalar wind, CO₂ frost, and MOLA elevation. The run form controls season (<code>Ls</code>),
+duration, pressure, temperature, albedo, greenhouse factor, and GCM resolution.</p>
+<p>Selecting <strong>GCM + MCD comparison</strong> keeps the GCM run as the model result and asks
+the server for MCD v6.1 maps at the same requested <code>Ls</code>, dust scenario, and the
+diagnostic height of the GCM's lowest layer. Daily-mean comparisons assemble the
+12 fixed-local-time MCD samples. The field viewer can switch among <strong>GCM</strong>,
+<strong>MCD</strong>, and <strong>GCM − MCD</strong> grids and reports cosine-latitude-weighted bias, MAE,
+RMSE, correlation, and area means. MCD responses are cached in memory by their
+season/time/dust/height key. These are diagnostic transient-versus-climatology
+comparisons until the GCM run has completed a seasonal spin-up.</p>
 <hr />
 <h2 id="development-workflow">Development workflow<a class="headerlink" href="#development-workflow" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Terminal 1 — FastAPI backend (hot-reloads Python on file change)</span>
