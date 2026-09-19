@@ -1,0 +1,2319 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ICLR submission plan: a differentiable neural GCM for Mars - Terraforming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iclr-submission-plan-a-differentiable-neural-gcm-for-mars" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ICLR submission plan: a differentiable neural GCM for Mars
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/framework/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../package/gcm3d/" class="md-tabs__link">
+          
+  
+  
+  Package · gcm3d (3-D GCM)
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Terraforming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planet Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package · gcm3d (3-D GCM)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Package · gcm3d (3-D GCM)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/BioMedAI-UCSC/terraforming/edit/main/docs/ideas/iclr-submission-plan.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="iclr-submission-plan-a-differentiable-neural-gcm-for-mars">ICLR submission plan: a differentiable neural GCM for Mars<a class="headerlink" href="#iclr-submission-plan-a-differentiable-neural-gcm-for-mars" title="Permanent link">&para;</a></h1>
+<p><strong>Living document — last updated 2026-09-05</strong><br />
+<strong>Internal submission deadline: 2026-09-26 (21 calendar days)</strong><br />
+<strong>Paper freeze: 2026-09-24; upload and compliance buffer: 2026-09-25–26</strong></p>
+<blockquote>
+<p>Verify the official ICLR year, time zone, abstract-registration date, and paper
+deadline in the submission portal today. This plan treats September 26 as the
+user-specified hard deadline, not as a verified conference date.</p>
+</blockquote>
+<h2 id="north-star-goal">North-star goal<a class="headerlink" href="#north-star-goal" title="Permanent link">&para;</a></h2>
+<p>Build and evaluate a <strong>neural-GCM-inspired, end-to-end differentiable simulator
+for present-day Mars</strong>: a Dinosaur/JAX primitive-equation dynamical core coupled
+to differentiable, conservation-aware Mars physics, with a constrained learned
+residual or gradient-based calibration experiment. The paper must show what
+differentiability buys, not merely that the simulator was rewritten in JAX.</p>
+<p>The submission is not a claim of a complete Mars Planetary Climate Model (PCM),
+nor a terraforming-results paper. The water cycle, interactive dust lifting,
+cloud microphysics, photochemistry, and intervention scenarios are out of scope
+unless the minimum paper is already complete.</p>
+<h2 id="proposed-paper-claim">Proposed paper claim<a class="headerlink" href="#proposed-paper-claim" title="Permanent link">&para;</a></h2>
+<p><strong>Working title:</strong> <em>A Differentiable General Circulation Model for Mars</em></p>
+<p><strong>One-sentence claim:</strong> We introduce a modular differentiable Mars GCM that
+preserves explicit physical structure and budgets, supports gradients through
+multi-step atmospheric rollouts, and improves a deterministic baseline through
+constrained learning or gradient calibration while remaining stable under
+seasonal and out-of-distribution evaluation.</p>
+<p>The paper needs all four pillars:</p>
+<ol>
+<li><strong>Simulator:</strong> 3-D primitive-equation dynamics plus a credible dry-Mars
+   physics package, end-to-end differentiable and restartable.</li>
+<li><strong>Verification:</strong> standard dycore tests, isolated physics tests, conservation,
+   gradient correctness, runtime/memory, and rollout stability.</li>
+<li><strong>Mars evaluation:</strong> observations/reanalysis as the primary empirical target;
+   LMD PCM/Mars Climate Database (MCD) and NASA Ames MGCM as model references.</li>
+<li><strong>Learning result:</strong> at least one reproducible result where gradients or a
+   constrained residual model improve held-out performance over the deterministic
+   model and simple tuning baselines.</li>
+</ol>
+<p>If pillar 4 is not obtained by September 17, reposition the paper as a
+differentiable-simulator/benchmark paper only if the venue fit and results are
+strong enough; do not imply a neural model that was not trained.</p>
+<h2 id="naming-and-evidence-rules">Naming and evidence rules<a class="headerlink" href="#naming-and-evidence-rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use <strong>LMD Mars PCM</strong> for the Laboratoire de Météorologie Dynamique model and
+  <strong>MCD v6.1</strong> for its database product.</li>
+<li>Use <strong>NASA Ames Mars GCM (Ames MGCM)</strong> for the second model reference.</li>
+<li>“MSTCM,” “MSDCM,” and “PCM LMB” are not used until their intended expansions
+  are confirmed. They are likely transcription variants of Mars GCM / LMD PCM.</li>
+<li>Confirm the exact title, DOI, license, variables, spatial/temporal coverage,
+  and download mechanism for the user-mentioned <strong>ArcoMars</strong> resource before it
+  enters the methods section. Do not build the schedule around an unverified name.</li>
+<li>MCD and Ames are simulated climates, not observational truth. A model trained
+  on one is evaluated on held-out periods from that source and independently on
+  spacecraft observations/reanalysis; agreement with MCD alone is not validation.</li>
+<li>Every table identifies run length, spin-up, resolution, dust scenario, Mars
+  year/season, local time, vertical coordinate, and whether the value is a
+  transient diagnostic or an equilibrated climatology.</li>
+</ul>
+<h2 id="current-evidence-base-repository-audit-2026-09-05">Current evidence base (repository audit, 2026-09-05)<a class="headerlink" href="#current-evidence-base-repository-audit-2026-09-05" title="Permanent link">&para;</a></h2>
+<h3 id="implemented-and-tested">Implemented and tested<a class="headerlink" href="#implemented-and-tested" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Dinosaur spectral primitive-equation core, JAX rollouts, replaceable structured
+  physics tendencies, differentiability tests, and T21/T42 conservation tests.</li>
+<li>MOLA topography; independent TES bolometric albedo and thermal inertia staging.</li>
+<li>Kepler-consistent seasonal/diurnal forcing; surface-atmosphere energy exchange;
+  prognostic surface temperature and four-layer regolith.</li>
+<li>Surface drag, Richardson-dependent exchange, implicit conservative PBL momentum
+  mixing, heat/tracer diffusion, and differentiable dry convective adjustment.</li>
+<li>CO2 condensation/sublimation with mass and latent-energy coupling.</li>
+<li>Differentiable two-stream radiation and staged NASA Ames 12-band correlated-k
+  CO2 tables; prescribed radiatively active dust operators.</li>
+<li>Exact restart machinery, averaging windows, NetCDF/maps, a restartable 668-sol
+  driver, and an MCD v6.1 comparison harness.</li>
+<li>At commit <code>8314609cac7fcd91c6a38dc8440392493c7eccc2</code>, the focused GCM
+  non-slow suite passes: <strong>125 passed, 3 skipped, 2 deselected in 74.43 s</strong>.
+  The complete package non-slow suite also passes: <strong>290 passed, 3 skipped,
+  5 deselected in 102.39 s</strong>. These are local CPU results from Python 3.12.3;
+  the five deselected tests are two GCM climate/convergence benchmarks and three
+  long 0-D intervention/pressure-budget tests. The three skips are stale parity
+  cases for an older three-element JAX seasonal state after the Torch reference
+  moved to a four-element two-cap state; they are known technical debt, not
+  missing dependencies. These exclusions still require resolution or an explicit
+  submission rationale.</li>
+<li>The two slow GCM benchmarks also pass independently after making their required
+  JAX float64 precision explicit: <strong>5/5 tests in the complete benchmark module
+  pass</strong> (33.48 s on the warm local compilation cache). This removes hidden test
+  order dependence from the roundoff-level conservation claim.</li>
+</ul>
+<h3 id="existing-quantitative-evidence-diagnostic-only">Existing quantitative evidence (diagnostic only)<a class="headerlink" href="#existing-quantitative-evidence-diagnostic-only" title="Permanent link">&para;</a></h3>
+<p>The current checked-in MCD comparisons are 3.5-sol transients at Ls=0 and cannot
+support climatology claims. The most favorable drag-only matched-height result has
+surface-temperature bias <strong>+7.56 K</strong>, RMSE <strong>11.35 K</strong>, and spatial correlation
+<strong>0.901</strong>; wind-speed bias <strong>+0.95 m/s</strong>, RMSE <strong>6.90 m/s</strong>, and correlation
+<strong>0.184</strong>. Adding TES surface structure/regolith/Richardson/PBL/convection raises
+temperature correlation to <strong>0.920</strong> but worsens RMSE to <strong>13.30 K</strong>, while the
+wind RMSE rises to <strong>18.97 m/s</strong>. These numbers diagnose spin-up/PBL problems;
+they are not paper headline results.</p>
+<h3 id="open-scientific-blockers">Open scientific blockers<a class="headerlink" href="#open-scientific-blockers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The full deterministic coupled model has not completed a documented one-year
+  spin-up plus one-year evaluation run.</li>
+<li>Correlated-k radiation still needs a published Mars column benchmark.</li>
+<li>Regolith needs sinusoidal amplitude/phase and timestep-convergence acceptance.</li>
+<li>PBL needs stable nocturnal and daytime LES/single-column benchmarks.</li>
+<li>CO2 condensation needs Viking seasonal-pressure validation.</li>
+<li>Prescribed dust needs a versioned seasonal scenario and comparison protocol.</li>
+<li>No learned residual module, training pipeline, dataset contract, or held-out
+  learned-model result exists yet.</li>
+<li>No matched Ames MGCM reference experiment is recorded yet.</li>
+</ul>
+<h2 id="minimum-publishable-experiment">Minimum publishable experiment<a class="headerlink" href="#minimum-publishable-experiment" title="Permanent link">&para;</a></h2>
+<p>Freeze a single canonical configuration by September 10:</p>
+<ul>
+<li><strong>Production grid:</strong> T21 with 12 sigma levels and a <strong>300 s timestep</strong> for the
+  deterministic baseline and initial calibration. A 600 s step is rejected for
+  this configuration because it becomes non-finite within one sol. Use one T42
+  evaluation run for resolution sensitivity if compute permits; do not assume
+  its throughput from T21.</li>
+<li><strong>Physics:</strong> correlated-k CO2 radiation, prescribed climatological dust, TES
+  surface fields and regolith, PBL/drag, dry adjustment, and CO2 surface cycle.</li>
+<li><strong>Learning task:</strong> prefer low-dimensional gradient calibration first (dust
+  opacity scale, surface exchange/roughness, thermal-inertia scale, and at most
+  one radiation multiplier). In parallel only if capacity exists, implement a
+  small column-local residual network that predicts bounded temperature and
+  momentum tendencies with zero dry-mass tendency and explicit energy diagnostics.</li>
+<li><strong>Training target:</strong> one versioned reanalysis or combined observational product
+  after a 48-hour data audit. MCD may bootstrap/pretrain but cannot be the only
+  test target.</li>
+<li><strong>Primary evaluation:</strong> held-out seasons/local times/vertical levels from
+  observations or reanalysis.</li>
+<li><strong>Independent model comparisons:</strong> matched LMD/MCD and Ames MGCM climatologies.</li>
+<li><strong>OOD evaluation:</strong> a held-out dust scenario or Mars year, plus longer rollout
+  than used during training.</li>
+</ul>
+<h3 id="required-baselines">Required baselines<a class="headerlink" href="#required-baselines" title="Permanent link">&para;</a></h3>
+<ol>
+<li>deterministic model with nominal parameters;</li>
+<li>deterministic model with conventional derivative-free/random-search tuning;</li>
+<li>gradient-calibrated deterministic model;</li>
+<li>learned residual model, only if it clears the September 17 gate;</li>
+<li>persistence or climatology where appropriate for forecast-style metrics.</li>
+</ol>
+<h3 id="predeclared-metrics">Predeclared metrics<a class="headerlink" href="#predeclared-metrics" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Area-weighted RMSE, mean bias, MAE, and anomaly/spatial correlation for surface
+  pressure, surface temperature, atmospheric temperature, and horizontal winds.</li>
+<li>Zonal-mean latitude-pressure temperature and wind error at four seasonal bins.</li>
+<li>Diurnal surface-temperature amplitude and phase at representative sites.</li>
+<li>Viking Lander pressure-cycle amplitude/phase.</li>
+<li>Global dry mass, atmosphere-plus-cap CO2 mass, TOA/surface energy residual, and
+  axial-angular-momentum drift.</li>
+<li>Rollout failure rate, longest stable rollout, gradient norm/finite-gradient rate,
+  wall time, accelerator memory, and scaling with resolution.</li>
+<li>Spectral kinetic-energy comparison if it can be produced consistently; otherwise
+  list it as future work rather than adding an unreviewed metric late.</li>
+</ul>
+<p>Report confidence intervals across seeds for learning results. Do not select
+hyperparameters on the held-out test season or Ames comparison.</p>
+<h2 id="dataset-decision-finish-in-48-hours">Dataset decision: finish in 48 hours<a class="headerlink" href="#dataset-decision-finish-in-48-hours" title="Permanent link">&para;</a></h2>
+<p>Create a dataset card for each candidate with license, citation, URL, variables,
+Mars years, cadence, coordinates, missingness, uncertainty, volume, and intended
+split. Audit these candidates: the verified ArcoMars resource, EMARS, OpenMARS,
+MACDA, direct MCS temperature, TES/THEMIS temperature and surface products,
+Viking pressure, MCD v6.1, and Ames MGCM outputs.</p>
+<p>Use this role separation:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Preferred source</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boundary/static data</td>
+<td>MOLA + TES surface products</td>
+<td>Never take boundary fields from the evaluation target</td>
+</tr>
+<tr>
+<td>Training/calibration</td>
+<td>One accessible reanalysis/combined product</td>
+<td>Version preprocessing and split by season/Mars year</td>
+</tr>
+<tr>
+<td>Empirical test</td>
+<td>Withheld spacecraft/reanalysis periods</td>
+<td>Never used for parameter or checkpoint selection</td>
+</tr>
+<tr>
+<td>PCM reference</td>
+<td>LMD PCM through MCD v6.1</td>
+<td>Matched scenario, altitude, local time, season, and dust</td>
+</tr>
+<tr>
+<td>Second-model reference</td>
+<td>NASA Ames MGCM</td>
+<td>Same initial/boundary configuration as far as possible</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Data gate, September 7:</strong> choose the source that is downloadable, legally usable,
+documented, and convertible to the canonical schema by September 9. If no
+reanalysis clears the gate, use direct MCS/TES/Viking observations for calibration
+and reserve MCD/Ames strictly as secondary comparisons. Do not spend the final two
+weeks negotiating access.</p>
+<p>Canonical sample keys: <code>(source, Mars year, Ls, local solar time, latitude,
+longitude, vertical coordinate)</code>. Store source-native values, masks, uncertainty,
+conversion metadata, and provenance checksum before regridding.</p>
+<h2 id="benchmark-protocol">Benchmark protocol<a class="headerlink" href="#benchmark-protocol" title="Permanent link">&para;</a></h2>
+<h3 id="a-unit-and-column-verification">A. Unit and column verification<a class="headerlink" href="#a-unit-and-column-verification" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Gradient check selected radiation, regolith, PBL, and CO2-cycle parameters
+  against centered finite differences in float64.</li>
+<li>Complete the Forget et al.-style radiation column, regolith periodic-forcing,
+  PBL stable-night/daytime case, and CO2 frost/pressure tests.</li>
+<li>Publish pass thresholds before model tuning.</li>
+</ul>
+<h3 id="b-dynamical-core-verification">B. Dynamical-core verification<a class="headerlink" href="#b-dynamical-core-verification" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Retain the existing resting atmosphere, tracer advection, balanced jet, and
+  Held–Suarez suite.</li>
+<li>Produce a reproducible table at T21/T42 and at least two timesteps, including
+  mass, energy, and AAM drift and runtime.</li>
+</ul>
+<h3 id="c-present-mars-climate">C. Present-Mars climate<a class="headerlink" href="#c-present-mars-climate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Spin up for at least one Mars year and evaluate a subsequent year. Demonstrate
+  equilibration with annual-mean energy imbalance, soil-temperature drift, and
+  repeatability of pressure/temperature seasonal cycles.</li>
+<li>Evaluate four seasonal bins centered near Ls 0, 90, 180, and 270 and matched
+  local times/vertical levels.</li>
+<li>Use exactly the same postprocessing and masks for deterministic, calibrated,
+  learned, MCD, and Ames products.</li>
+</ul>
+<h3 id="d-matched-pcmmgcm-experiments">D. Matched PCM/MGCM experiments<a class="headerlink" href="#d-matched-pcmmgcm-experiments" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pin dust scenario, topography, solar forcing, surface pressure, surface fields,
+  resolution/regridding, sampling times, and comparison height.</li>
+<li>For MCD, record every query and cached response checksum.</li>
+<li>For Ames, first make a minimal standard present-Mars run; save namelists, source
+  version, build environment, restart/spin-up length, and diagnostics. Use Ames to
+  localize disagreements, not to claim ground truth.</li>
+</ul>
+<h3 id="e-learninggradient-experiment">E. Learning/gradient experiment<a class="headerlink" href="#e-learninggradient-experiment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Train on short rollouts with a curriculum to longer windows.</li>
+<li>Bound parameter ranges and residual tendencies; project prohibited mass changes;
+  diagnose all energy and momentum introduced by the learned term.</li>
+<li>Select checkpoints on validation climate error plus stability/budget penalties.</li>
+<li>Test at longer horizons and a held-out season/dust case without fine-tuning.</li>
+</ul>
+<h2 id="critical-path-to-september-26">Critical path to September 26<a class="headerlink" href="#critical-path-to-september-26" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Deliverable and exit criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sep 5</strong></td>
+<td>Freeze north-star claim, owner list, compute inventory, paper repository, official deadline check, and this plan.</td>
+</tr>
+<tr>
+<td><strong>Sep 6–7</strong></td>
+<td>Dataset audit and one-page related-work matrix; select training and empirical-test sources. Data download and license must be confirmed.</td>
+</tr>
+<tr>
+<td><strong>Sep 6–9</strong></td>
+<td>Run full tests; repair only paper-blocking regressions. Finish four isolated physics benchmarks and gradient checks.</td>
+</tr>
+<tr>
+<td><strong>Sep 8–10</strong></td>
+<td>Freeze canonical configuration, schema, train/validation/test split, metrics, and experiment IDs. Generate a 10-sol end-to-end smoke result.</td>
+</tr>
+<tr>
+<td><strong>Sep 10–12</strong></td>
+<td>Complete canonical T21 spin-up infrastructure and launch deterministic year(s). Launch matched Ames standard run. Draft methods and benchmark sections.</td>
+</tr>
+<tr>
+<td><strong>Sep 11–14</strong></td>
+<td>Implement low-dimensional differentiable calibration and derivative-free baseline. Demonstrate loss decrease on a tiny overfit case, then launch real runs.</td>
+</tr>
+<tr>
+<td><strong>Sep 13–16</strong></td>
+<td>Implement/train constrained residual only if calibration and data pipelines are stable. Produce first held-out comparison and long-rollout stability plot.</td>
+</tr>
+<tr>
+<td><strong>Sep 17 — hard gate</strong></td>
+<td>Results review. A paper path exists only if the full pipeline is reproducible and at least one differentiable method beats the nominal baseline on held-out data without unacceptable drift. Freeze model scope.</td>
+</tr>
+<tr>
+<td><strong>Sep 18–20</strong></td>
+<td>Finish three seeds/ablations, MCD comparison, Ames comparison, T42 sensitivity if feasible. Freeze main tables by Sep 20 night.</td>
+</tr>
+<tr>
+<td><strong>Sep 18–21</strong></td>
+<td>Write complete draft, figures, limitations, impact statement, reproducibility appendix, and related work. No placeholder claims after Sep 21.</td>
+</tr>
+<tr>
+<td><strong>Sep 22</strong></td>
+<td>Internal scientific review: claim/evidence audit, leakage check, units, budgets, captions, and citations.</td>
+</tr>
+<tr>
+<td><strong>Sep 23</strong></td>
+<td>External cold read and reproducibility run from a clean environment. Fix only correctness and clarity issues.</td>
+</tr>
+<tr>
+<td><strong>Sep 24</strong></td>
+<td>Final PDF freeze; anonymization, format, page limit, supplements, artifact links, and author metadata checked.</td>
+</tr>
+<tr>
+<td><strong>Sep 25</strong></td>
+<td>Upload full submission and inspect rendered PDF/supplement.</td>
+</tr>
+<tr>
+<td><strong>Sep 26</strong></td>
+<td>Buffer for portal or compliance problems; no new experiments.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parallel-workstreams-and-ownership-slots">Parallel workstreams and ownership slots<a class="headerlink" href="#parallel-workstreams-and-ownership-slots" title="Permanent link">&para;</a></h2>
+<p>Assign one named owner and one backup today for each stream:</p>
+<table>
+<thead>
+<tr>
+<th>Stream</th>
+<th>Outputs</th>
+<th>Owner</th>
+<th>Backup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physics/verification</td>
+<td>Four missing column tests; budget table</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Dataset cards; canonical Zarr/NetCDF; splits</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Climate runs</td>
+<td>Spin-up, canonical checkpoints, MCD/Ames exports</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>Calibration, baselines, residual model, seeds</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>Unified metrics, plots, uncertainty, leakage audit</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Paper</td>
+<td>LaTeX, bibliography, figures, daily integration</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
+<p>Daily cadence: 15-minute blocker meeting, immutable experiment registry, results
+ingested into the paper that day, and an evening go/no-go update. A run without a
+config, commit, seed, environment, and artifact path is not a paper result.</p>
+<h2 id="experiment-registry">Experiment registry<a class="headerlink" href="#experiment-registry" title="Permanent link">&para;</a></h2>
+<p>Add one row before launching any material run.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Commit</th>
+<th>Config/data version</th>
+<th style="text-align: right;">Seed</th>
+<th>Compute</th>
+<th>Status</th>
+<th>Result/artifact</th>
+<th>Paper use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIAG-MCD-LS0-P1</td>
+<td>existing</td>
+<td>3.5-sol transient, MCD v6.1</td>
+<td style="text-align: right;">—</td>
+<td>local</td>
+<td>complete, diagnostic only</td>
+<td><code>outputs/gcm3d_maps/current-p1-drag_mcd/benchmark.json</code></td>
+<td>motivation/error analysis only</td>
+</tr>
+<tr>
+<td>SMOKE-T21L12-DT600</td>
+<td>working tree</td>
+<td>full physics, TES, T21/12, 600 s</td>
+<td style="text-align: right;">—</td>
+<td>local CPU</td>
+<td>rejected: non-finite in first sol</td>
+<td>separate failed <code>outputs/iclr_smoke_t21_l12_dt600/</code> attempt</td>
+<td>stability boundary only</td>
+</tr>
+<tr>
+<td>SMOKE-T21L12-DT300</td>
+<td>working tree</td>
+<td>full physics, TES, T21/12, 300 s</td>
+<td style="text-align: right;">—</td>
+<td>local CPU</td>
+<td>complete: 10 sols/2,959 steps</td>
+<td><code>outputs/iclr_smoke_t21_l12_dt300/</code></td>
+<td>throughput and stability planning</td>
+</tr>
+<tr>
+<td>SMOKE-T42L12-DT450</td>
+<td>working tree</td>
+<td>full physics, TES, T42/12, 450 s</td>
+<td style="text-align: right;">—</td>
+<td>local CPU</td>
+<td>complete: 1 sol/197 steps</td>
+<td><code>outputs/iclr_smoke_t42_l12_dt450/</code></td>
+<td>resolution-cost planning only</td>
+</tr>
+<tr>
+<td>CANON-DET-Y1</td>
+<td>TBD</td>
+<td>frozen Sep 10</td>
+<td style="text-align: right;">0</td>
+<td>TBD</td>
+<td>not started</td>
+<td>TBD</td>
+<td>deterministic baseline</td>
+</tr>
+<tr>
+<td>CAL-GRAD</td>
+<td>TBD</td>
+<td>frozen Sep 10</td>
+<td style="text-align: right;">0–2</td>
+<td>TBD</td>
+<td>not started</td>
+<td>TBD</td>
+<td>primary differentiability result</td>
+</tr>
+<tr>
+<td>CAL-DFO</td>
+<td>TBD</td>
+<td>frozen Sep 10</td>
+<td style="text-align: right;">0–2</td>
+<td>TBD</td>
+<td>not started</td>
+<td>TBD</td>
+<td>tuning baseline</td>
+</tr>
+<tr>
+<td>RESIDUAL</td>
+<td>TBD</td>
+<td>frozen Sep 10</td>
+<td style="text-align: right;">0–2</td>
+<td>TBD</td>
+<td>gated Sep 17</td>
+<td>TBD</td>
+<td>neural result if successful</td>
+</tr>
+<tr>
+<td>AMES-MATCH</td>
+<td>TBD</td>
+<td>standard present Mars</td>
+<td style="text-align: right;">—</td>
+<td>TBD</td>
+<td>not started</td>
+<td>TBD</td>
+<td>second-model comparison</td>
+</tr>
+</tbody>
+</table>
+<h2 id="paper-outline-and-figure-contract">Paper outline and figure contract<a class="headerlink" href="#paper-outline-and-figure-contract" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Introduction:</strong> why differentiable planetary climate models; precise claims.</li>
+<li><strong>Related work:</strong> Mars PCM/MGCMs, Mars reanalyses/data fusion, NeuralGCM/JCM,
+   differentiable simulators and hybrid physics-ML.</li>
+<li><strong>Model:</strong> Dinosaur dycore, Mars physics, structured tendency interface,
+   constraints, differentiation and training/calibration.</li>
+<li><strong>Data and protocol:</strong> provenance, splits, observations versus model references,
+   matched comparisons, metrics.</li>
+<li><strong>Verification:</strong> dycore, column physics, gradients, budgets, runtime.</li>
+<li><strong>Results:</strong> deterministic climatology, calibration/residual, held-out/OOD,
+   MCD and Ames comparisons, ablations.</li>
+<li><strong>Limitations and broader impact:</strong> model incompleteness, model-reference bias,
+   reanalysis dependence, compute, and invalidity for terraforming regimes.</li>
+</ol>
+<p>Minimum main-paper figures/tables:</p>
+<ul>
+<li>architecture diagram showing dycore, explicit physics, learned residual, and
+  conservation projection;</li>
+<li>verification/budget/gradient table;</li>
+<li>seasonal latitude-pressure or global map comparison against empirical target,
+  MCD, and Ames;</li>
+<li>learning curves plus long-horizon rollout stability;</li>
+<li>primary held-out metric table with nominal, derivative-free, gradient-calibrated,
+  and residual variants;</li>
+<li>ablation table for radiation, dust, surface/regolith, PBL, and learned term.</li>
+</ul>
+<h2 id="scope-cuts-and-fallback-ladder">Scope cuts and fallback ladder<a class="headerlink" href="#scope-cuts-and-fallback-ladder" title="Permanent link">&para;</a></h2>
+<p>Cut in this order: T85, water/clouds, interactive dust, CO2 clouds, multiple neural
+architectures, many resolutions, terraforming experiments, then the residual
+network. Never cut empirical evaluation, conservation reporting, matched sampling,
+the deterministic baseline, or reproducibility metadata.</p>
+<ul>
+<li><strong>Plan A:</strong> constrained residual + gradient calibration, empirical test, MCD,
+  and Ames.</li>
+<li><strong>Plan B:</strong> gradient calibration as the ML contribution, empirical test, MCD,
+  and Ames; residual becomes future work.</li>
+<li><strong>Plan C:</strong> simulator/benchmark paper with strong validation only. Submit only
+  after a frank venue-fit review; do not manufacture a neural claim.</li>
+<li><strong>No-submit condition:</strong> no equilibrated deterministic baseline, no empirical
+  evaluation, irreproducible results, material budget failure, or evidence of
+  train/test leakage by September 22.</li>
+</ul>
+<h2 id="immediate-checklist-next-24-hours">Immediate checklist (next 24 hours)<a class="headerlink" href="#immediate-checklist-next-24-hours" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Verify conference dates, requirements, page limit, anonymization, and compute
+  disclosure; register abstract/title if required.</li>
+<li>[ ] Name owners/backups and inventory available CPU/GPU hours and storage.</li>
+<li>[x] Run the full non-slow and focused GCM suites from the current commit. Both
+  pass locally; archive a machine-readable report in the experiment pipeline next.</li>
+<li>[ ] Resolve the ArcoMars citation/name and complete the candidate dataset cards.</li>
+<li>[ ] Freeze the canonical variables, coordinates, metrics, and split proposal.</li>
+<li>[ ] Estimate wall time/storage for T21 one-year and T42 sensitivity runs from a</li>
+<li>[x] Measure the T21/12 one-sol and restart-to-ten-sol runs. The steady estimate
+  is recorded below; T42 still needs its own measurement and compute reservation.</li>
+<li>[ ] Create the LaTeX paper skeleton and bibliography; draft model and limitations
+  directly from the verified repository documentation.</li>
+<li>[ ] Open issues for the four missing physics benchmarks and the matched Ames run.</li>
+</ul>
+<h2 id="session-progress-log">Session progress log<a class="headerlink" href="#session-progress-log" title="Permanent link">&para;</a></h2>
+<p>Append dated entries here after each work session. Record decisions, evidence,
+artifacts, failures, blockers, and the next action; avoid narrative status without
+a verifiable output.</p>
+<h3 id="2026-09-05-submission-planning-and-repository-audit">2026-09-05 — submission planning and repository audit<a class="headerlink" href="#2026-09-05-submission-planning-and-repository-audit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Reiterated the goal as a neural-GCM-inspired differentiable simulator for Mars,
+  with the paper centered on present-day model credibility and learning utility.</li>
+<li>Audited the repository documentation, recent history, test inventory, staged
+  datasets, benchmark tooling, and checked-in outputs.</li>
+<li>Confirmed that most intended deterministic operators exist, but their coupled
+  seasonal validation and several column acceptance tests remain open.</li>
+<li>Confirmed that existing MCD results are explicitly transient diagnostics; copied
+  representative metrics above without promoting them to validation results.</li>
+<li>Identified the missing learned component/data contract and matched Ames run as
+  paper-critical gaps.</li>
+<li>Established September 7 (data), September 10 (configuration), September 17
+  (results/model), September 20 (tables), and September 24 (PDF) as hard gates.</li>
+<li>Next action: complete official-deadline/ArcoMars/data-access verification, assign
+  owners and compute, then run the current test suite and measured 10-sol benchmark.</li>
+</ul>
+<h3 id="2026-09-05-executable-test-baseline">2026-09-05 — executable test baseline<a class="headerlink" href="#2026-09-05-executable-test-baseline" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Verified commit <code>8314609cac7fcd91c6a38dc8440392493c7eccc2</code> with Python
+  3.12.3 and pytest 9.0.3.</li>
+<li>Focused command: <code>uv run --project package python -m pytest
+  package/tests/gcm3d -m "not slow"</code>; result: <strong>125 passed, 3 skipped,
+  2 deselected in 74.43 s</strong>.</li>
+<li>Full package command: <code>uv run --project package python -m pytest package/tests
+  -m "not slow"</code>; result: <strong>290 passed, 3 skipped, 5 deselected in 102.39 s</strong>.</li>
+<li>The first wrapped test attempt misparsed the quoted marker and reported
+  <code>file or directory not found: slow</code>; rerunning through the pass-through wrapper
+  preserved the pytest expression. This was a command-wrapper issue, not a model
+  failure.</li>
+<li>Interpretation: the implementation baseline is green, including the focused
+  GCM suite, but this does not exercise the deselected long integrations or prove
+  the open scientific validation requirements.</li>
+<li>Exclusion audit: the five slow tests are Held–Suarez climate, dry conservation
+  across timestep/resolution, a 50-year intervention run, accurate-vs-fast cap
+  balance, and the observed-band seasonal pressure swing. The three skips are
+  stale JAX/Torch parity cases in <code>test_terraforming_ode.py</code> caused by the Torch
+  model's move from one aggregate ice reservoir to separate north/south caps.</li>
+<li>Running the two slow GCM tests alone initially exposed a precision-ordering bug:
+  Held–Suarez mass drift was <code>3.50e-5</code> versus the <code>2e-5</code> threshold, and resting
+  drift was around <code>9.48e-7</code> versus the float64 <code>1e-12</code> threshold. The module had
+  relied on another test importing first and globally enabling JAX float64.</li>
+<li>Added an explicit <code>jax_enable_x64</code> configuration to <code>test_benchmarks.py</code>. The
+  isolated two-test run then passed in 53.25 s, and the complete five-test
+  benchmark module passed in 33.48 s with a warm compilation cache.</li>
+<li>Next action: decide whether to re-port or remove the stale 0-D parity path and
+  measure a canonical end-to-end run before committing scarce compute to
+  Mars-year experiments.</li>
+</ul>
+<h3 id="2026-09-05-canonical-t2112-stability-and-throughput-screen">2026-09-05 — canonical T21/12 stability and throughput screen<a class="headerlink" href="#2026-09-05-canonical-t2112-stability-and-throughput-screen" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Preserved all previous outputs and wrote only to new <code>outputs/iclr_smoke_*</code>
+  directories. The established T21/8, 300 s result remains unchanged.</li>
+<li>Screened the complete <code>convection</code> ablation configuration with TES surface
+  properties, prescribed dust, CO2 radiation and surface cycle, regolith,
+  stability exchange, PBL diffusion, and dry convective adjustment.</li>
+<li><strong>Rejected:</strong> T21/12 at 600 s became non-finite inside its first sol. The driver
+  exited with <code>FloatingPointError</code> after 18.13 s and exported no valid result.</li>
+<li><strong>Accepted for continued screening:</strong> T21/12 at 300 s completed one sol/296
+  steps in 30.44 s including compilation and export, then resumed from its saved
+  restart to ten sols/2,959 total steps. The nine-sol extension took 236.04 s,
+  or <strong>26.23 s per simulated sol</strong> on the local CPU.</li>
+<li>Linear planning estimate at the measured steady rate: <strong>4.87 hours per 668-sol
+  Mars year</strong> and <strong>9.73 hours for one spin-up plus one evaluation year</strong>, before
+  contingency and downstream benchmarking. Reserve at least 15 hours per T21/12
+  canonical configuration; multiple calibrations cannot each use full-year
+  backpropagation on this machine.</li>
+<li>The ten-sol manifest, restart, NetCDF, and five diagnostic maps are present at
+  <code>outputs/iclr_smoke_t21_l12_dt300/</code>. The manifest correctly labels the result
+  as a transient rather than climatology.</li>
+<li>Decision: use short differentiable training windows and a longer forward-only
+  validation rollout. Do not launch the two-year canonical run until the data
+  target, fixed physics configuration, checkpoint cadence, and output sampling
+  are frozen, because every rerun costs roughly half a day locally.</li>
+<li>Next action: inspect ten-sol physical/budget diagnostics, measure T42 throughput,
+  and add elapsed-time/throughput metadata to future manifests so estimates no
+  longer depend on shell timing logs.</li>
+</ul>
+<h3 id="2026-09-05-ten-sol-artifact-and-provenance-audit">2026-09-05 — ten-sol artifact and provenance audit<a class="headerlink" href="#2026-09-05-ten-sol-artifact-and-provenance-audit" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inspected the canonical smoke NetCDF rather than inferring success from process
+  exit alone. All exported fields are finite. Ranges are: surface pressure
+  <strong>263.91–1104.62 Pa</strong>, surface temperature <strong>148.84–265.85 K</strong>, horizontal wind
+  speed <strong>0.16–63.59 m/s</strong>, and CO2 frost <strong>0–55.38 Pa-equivalent</strong>. These are
+  plausible transient bounds, not agreement metrics.</li>
+<li>The artifact contains final 2-D pressure, surface temperature, near-surface
+  winds, frost, and topography plus configuration metadata. It does <strong>not</strong> contain
+  time-resolved TOA/surface energy, atmospheric-plus-cap CO2 mass, dry mass, AAM,
+  soil drift, or equilibration diagnostics. Therefore the existing driver is not
+  yet sufficient for the canonical two-year paper run even though its state is
+  finite.</li>
+<li>Confirmed from the forcing path that <code>co2_radiation_enabled=True</code> and
+  <code>ames_correlated_k_enabled=True</code>; the previous generic “two-stream CO2-band”
+  label under-described the active path. Updated map provenance to distinguish
+  <strong>Ames correlated-k CO2 radiation</strong>, compact-band two-stream radiation, and the
+  grey fallback.</li>
+<li>Added invocation start step, executed steps, elapsed wall time, and simulated
+  sols per wall hour to future ablation manifests. A three-step driver smoke test
+  produced all four new fields and the corrected radiation label.</li>
+<li>Regression check after these changes: all <strong>13</strong> <code>test_maps.py</code> tests pass in
+  6.98 s. <code>git diff --check</code> remains required at handoff.</li>
+<li>Decision: do not interpret the ten-sol ranges as a physics benchmark. Add a
+  sampled budget/equilibration time series before launching the production
+  spin-up, then use the final maps only as one view of the climate state.</li>
+</ul>
+<h3 id="2026-09-05-t42-resolution-cost-screen">2026-09-05 — T42 resolution-cost screen<a class="headerlink" href="#2026-09-05-t42-resolution-cost-screen" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Ran the full T42/12 configuration at the driver-verified 450 s timestep in a
+  separate output directory. A 0.1-sol/20-step cold-start screen completed in
+  16.39 s inside the driver; all final fields were finite.</li>
+<li>Resumed the same state to one sol/197 total steps. The 177-step extension took
+  117.86 s inside the driver and achieved <strong>27.40 simulated sols per wall hour</strong>.</li>
+<li>Linear estimate: <strong>24.38 hours per T42 Mars year</strong> and <strong>48.75 hours for a
+  spin-up/evaluation pair</strong>, before contingency. Reserve at least 72 hours for
+  one T42 pair on this CPU. This is about five times the measured T21/12 cost.</li>
+<li>Decision: T42 cannot be the training or ablation grid on the current local
+  compute schedule. Use it for one forward-only resolution-sensitivity evaluation
+  after the T21 model/data protocol is frozen, or move it to reserved accelerator/
+  higher-throughput compute and remeasure there.</li>
+<li>The T42 result is only a one-sol transient and is evidence for execution cost
+  and short stability, not climate accuracy or one-year stability.</li>
+</ul>
+<h2 id="source-of-truth-links-inside-this-repository">Source-of-truth links inside this repository<a class="headerlink" href="#source-of-truth-links-inside-this-repository" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Physics ledger: <code>docs/ideas/gcm3d-physics-limitations.md</code></li>
+<li>Ames mapping: <code>docs/ideas/amesgcm-comparison.md</code></li>
+<li>Architecture: <code>docs/package/gcm3d/architecture.md</code></li>
+<li>Implementation: <code>docs/package/gcm3d/implementation.md</code></li>
+<li>Data staging: <code>docs/scripts/gcm3d-data.md</code></li>
+<li>MCD benchmark: <code>scripts/benchmark_mcd.py</code></li>
+<li>Restartable Mars-year driver: <code>scripts/run_gcm3d_ablation.py</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
