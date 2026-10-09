@@ -1,0 +1,2721 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Differentiable three-dimensional Mars climate model — dynamics, physics, calibration and neural experiments">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Progress report - Terraforming · Mars GCM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#progress-report" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Terraforming · Mars GCM" class="md-header__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming · Mars GCM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Progress report
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  3-D GCM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../package/gcm3d/api/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI & Comparisons
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deprecated-global-mean/" class="md-tabs__link">
+          
+  
+  
+  Deprecated global-mean model
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Terraforming · Mars GCM" class="md-nav__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Terraforming · Mars GCM
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3-D GCM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3-D GCM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calibration & ablations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/neural-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/temperature-only/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only postprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../differentiable-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differentiable experiment runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../neural-temp-only-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation & limitations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcm3d-physics-limitations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics ledger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Browser visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI & Comparisons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI & Comparisons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/reference-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference comparisons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deprecated global-mean model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deprecated global-mean model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deprecated-global-mean/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deprecation and migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/global-mean-planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torch planet architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/global-mean-mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torch Mars derivation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/global-mean-climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived climate notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Global-mean presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Global-mean engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG intervention theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/BioMedAI-UCSC/terraforming/edit/main/docs/ideas/progress-report.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="progress-report">Progress report<a class="headerlink" href="#progress-report" title="Permanent link">&para;</a></h1>
+<p><strong>Recorded:</strong> 2026-09-15 16:35:38 PDT<br />
+<strong>Status:</strong> ARCO-Mars data-source assessment and recommended neural experiment</p>
+<h2 id="current-decision">Current decision<a class="headerlink" href="#current-decision" title="Permanent link">&para;</a></h2>
+<p>Use ARCO-MACDA as the primary training source for the hybrid Mars GCM. Stream
+only the required variables and Mars years from its Zarr v3 archive, begin with
+daily means to match the model's current daily-mean solar forcing, and restrict
+the first learned residual to bounded temperature and horizontal-wind
+tendencies. Keep surface pressure, atmospheric mass, and CO2 mass outside the
+learned correction until the physical model's CO2 conservation issue is fixed.</p>
+<h2 id="what-arco-mars-contains">What ARCO-Mars contains<a class="headerlink" href="#what-arco-mars-contains" title="Permanent link">&para;</a></h2>
+<p>ARCO-Mars combines three Mars reanalyses:</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th style="text-align: right;">Mars years</th>
+<th style="text-align: right;">Grid</th>
+<th>Main advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ARCO-EMARS</td>
+<td style="text-align: right;">MY 24-33</td>
+<td style="text-align: right;">36 x 60 x 28</td>
+<td>Ensemble mean and uncertainty</td>
+</tr>
+<tr>
+<td>ARCO-MACDA</td>
+<td style="text-align: right;">MY 24-35</td>
+<td style="text-align: right;">36 x 72 x 35</td>
+<td>Most variables, including 3-D dust and radiation</td>
+</tr>
+<tr>
+<td>ARCO-OpenMARS</td>
+<td style="text-align: right;">MY 24-35</td>
+<td style="text-align: right;">36 x 72 x 35</td>
+<td>Useful second reanalysis comparison</td>
+</tr>
+</tbody>
+</table>
+<p>The datasets assimilate spacecraft measurements from TES, THEMIS, MCS, and
+related instruments. They are reanalyses: observations combined with Mars GCM
+simulations.</p>
+<p>They are stored as Zarr v3 and can be read directly from Hugging Face without
+downloading the complete archives.</p>
+<h2 id="best-choice-arco-macda">Best choice: ARCO-MACDA<a class="headerlink" href="#best-choice-arco-macda" title="Permanent link">&para;</a></h2>
+<p>ARCO-MACDA is the best training source for our model. It contains:</p>
+<ul>
+<li>3-D atmospheric temperature</li>
+<li>3-D east-west wind</li>
+<li>3-D north-south wind</li>
+<li>Vertical pressure velocity</li>
+<li>Surface pressure</li>
+<li>Surface temperature</li>
+<li>Column dust opacity</li>
+<li>3-D dust mixing ratio</li>
+<li>Surface CO2 ice</li>
+<li>Surface shortwave radiation</li>
+<li>Surface longwave radiation</li>
+<li>Geopotential</li>
+<li>Solar longitude and Mars-year information</li>
+</ul>
+<p>Its complete shape is:</p>
+<ul>
+<li>96,480 time steps</li>
+<li>35 vertical levels</li>
+<li>36 latitudes</li>
+<li>72 longitudes</li>
+<li>Mars Years 24-35</li>
+</ul>
+<p>The complete ARCO-MACDA archive is about 160 GB, but Zarr allows us to read only
+selected years, variables, and time ranges. We should not download the whole
+archive.</p>
+<p>The number of states strongly indicates approximately 12 samples per sol,
+although we should verify the exact time-coordinate spacing before building
+training pairs.</p>
+<ul>
+<li>Dataset: <a href="https://huggingface.co/datasets/ananyo01/ARCO-MACDA">ARCO-MACDA</a></li>
+<li>DOI: <a href="https://doi.org/10.57967/hf/8771">10.57967/hf/8771</a></li>
+</ul>
+<h2 id="licensing">Licensing<a class="headerlink" href="#licensing" title="Permanent link">&para;</a></h2>
+<p>The Hugging Face ARCO-MACDA dataset is marked CC BY 4.0. Its underlying MACDA
+data also records the UK Open Government Licence 3.0 and requires attribution to
+the original dataset.</p>
+<p>The arXiv manuscript itself is CC BY-SA 4.0. That manuscript license is separate
+from the dataset license.</p>
+<p>This is usable for an academic paper as long as we cite both ARCO-MACDA and the
+original MACDA v2.0 dataset.</p>
+<h2 id="why-it-fits-our-model">Why it fits our model<a class="headerlink" href="#why-it-fits-our-model" title="Permanent link">&para;</a></h2>
+<p>The horizontal resolution is already close:</p>
+<ul>
+<li>ARCO-MACDA: 36 x 72</li>
+<li>Dinosaur T21: approximately 32 x 64</li>
+</ul>
+<p>The main conversion is vertical:</p>
+<ul>
+<li>ARCO-MACDA: 35 sigma levels</li>
+<li>Our model: 12 levels</li>
+</ul>
+<p>We can interpolate MACDA onto the Dinosaur grid and retain enough vertical
+information for a small neural model.</p>
+<p>ARCO-MACDA also includes consecutive atmospheric states. That makes it much
+better than the Ames five-sol averages for training a neural tendency
+correction.</p>
+<h2 id="recommended-experiment">Recommended experiment<a class="headerlink" href="#recommended-experiment" title="Permanent link">&para;</a></h2>
+<p>Use a small neural residual inside the GCM:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Physical Dinosaur forecast
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        +
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Small neural correction
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        =
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Corrected forecast
+</code></pre></div>
+<p>The network should predict only:</p>
+<ul>
+<li>Temperature tendency</li>
+<li>East-west wind tendency</li>
+<li>North-south wind tendency</li>
+</ul>
+<p>It should initially produce:</p>
+<ul>
+<li>No surface-pressure tendency</li>
+<li>No atmospheric-mass tendency</li>
+<li>No CO2 mass change</li>
+<li>Bounded temperature and wind corrections</li>
+</ul>
+<p>This prevents the neural network from hiding the current CO2 conservation
+problem.</p>
+<h2 id="training-setup">Training setup<a class="headerlink" href="#training-setup" title="Permanent link">&para;</a></h2>
+<p>A clean split would be:</p>
+<ul>
+<li>Training: MY 24-31</li>
+<li>Validation: MY 32-33</li>
+<li>Testing: MY 34-35</li>
+<li>Special out-of-distribution test: withhold MY 28, which contained a major
+  global dust storm</li>
+</ul>
+<p>We should also evaluate independently against Ames. MACDA and MCD are related to
+the LMD Mars modelling family, so Ames provides a more independent model
+comparison.</p>
+<p>The simplest training pipeline is:</p>
+<ol>
+<li>Read selected ARCO-MACDA variables from the cloud.</li>
+<li>Convert them to daily means initially.</li>
+<li>Interpolate from 35 levels to our 12 levels.</li>
+<li>Regrid to the Dinosaur T21 grid.</li>
+<li>Initialize the physical GCM from a MACDA state.</li>
+<li>Run the GCM forward.</li>
+<li>Measure its temperature and wind error.</li>
+<li>Train the network to correct that error.</li>
+<li>Test on Mars years and dust storms excluded from training.</li>
+<li>Run longer rollouts to measure stability.</li>
+</ol>
+<p>Using daily means matches our current daily-mean solar forcing. Later, we can
+use the full subdaily data after validating the model's diurnal forcing.</p>
+<h2 id="revised-effort">Revised effort<a class="headerlink" href="#revised-effort" title="Permanent link">&para;</a></h2>
+<p>Because ARCO-Mars is already cloud-ready and well organized, the neural
+experiment is easier than initially estimated:</p>
+<table>
+<thead>
+<tr>
+<th>Work</th>
+<th style="text-align: right;">Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verify time coordinate and stream a sample</td>
+<td style="text-align: right;">2-4 hours</td>
+</tr>
+<tr>
+<td>Build ARCO preprocessing</td>
+<td style="text-align: right;">0.5-1 day</td>
+</tr>
+<tr>
+<td>Vertical and horizontal regridding</td>
+<td style="text-align: right;">0.5 day</td>
+</tr>
+<tr>
+<td>Add bounded neural residual</td>
+<td style="text-align: right;">0.5-1 day</td>
+</tr>
+<tr>
+<td>Build one-step training</td>
+<td style="text-align: right;">1 day</td>
+</tr>
+<tr>
+<td>Short-rollout training and stability</td>
+<td style="text-align: right;">1-2 days</td>
+</tr>
+<tr>
+<td>Baselines, three seeds, figures</td>
+<td style="text-align: right;">1-2 days</td>
+</tr>
+</tbody>
+</table>
+<p>A credible first result should take approximately 4-6 intensive days, assuming
+the physical model is stable.</p>
+<h2 id="final-assessment">Final assessment<a class="headerlink" href="#final-assessment" title="Permanent link">&para;</a></h2>
+<p>ARCO-Mars solves the largest data problem for the neural component. It provides
+enough years, time steps, vertical levels, and physical variables to train and
+test a small hybrid Mars GCM.</p>
+<p>The strongest paper design is now:</p>
+<ol>
+<li>Dinosaur/JAX differentiable Mars GCM.</li>
+<li>Fix CO2 mass conservation.</li>
+<li>Train a small temperature-and-wind residual using ARCO-MACDA.</li>
+<li>Test on withheld Mars years and the MY 28 dust storm.</li>
+<li>Compare with:</li>
+<li>Physical GCM</li>
+<li>Gradient-calibrated GCM</li>
+<li>Neural residual GCM</li>
+<li>Ames MGCM</li>
+<li>MCD</li>
+<li>Report mass conservation and long-rollout stability.</li>
+</ol>
+<p>This gives the project a real neural component, a data-assimilated training
+source, held-out evaluation, and two separate model references.</p>
+<h2 id="immediate-next-actions">Immediate next actions<a class="headerlink" href="#immediate-next-actions" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Verify the exact ARCO-MACDA time-coordinate spacing by streaming a small
+   sample.</li>
+<li>Record the native coordinates, variable names, units, missing-value handling,
+   and citations in a versioned dataset contract.</li>
+<li>Fix and test CO2 mass conservation before enabling learned rollouts.</li>
+<li>Implement daily aggregation, 35-to-12-level interpolation, and T21 horizontal
+   regridding.</li>
+<li>Add a bounded residual interface for temperature and horizontal winds.</li>
+<li>Build one-step baselines before short-rollout training.</li>
+<li>Preserve MY 34-35 and MY 28 from model selection and training.</li>
+</ol>
+<h2 id="2026-09-16-branch-baseline-and-arco-macda-preparation">2026-09-16 — branch baseline and ARCO-MACDA preparation<a class="headerlink" href="#2026-09-16-branch-baseline-and-arco-macda-preparation" title="Permanent link">&para;</a></h2>
+<h3 id="co2-conservation-fix">CO2 conservation fix<a class="headerlink" href="#co2-conservation-fix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Identified the production failure: the phase-change tendency conserves
+  <code>p_s + p_ice</code> instantaneously, but the dynamical integrator advances
+  <code>log(p_s)</code>, so finite Runge-Kutta steps accumulated a false global mass
+  source. The previous positivity projection did not remove that error.</li>
+<li>Added a Gaussian-quadrature global inventory projection after each complete
+  timestep. It rescales atmospheric pressure while preserving its spatial
+  pattern, retains non-negative frost, and subtracts configured atmospheric
+  escape exactly.</li>
+<li>The production 10-sol gate changed combined atmospheric plus surface CO2 from
+  <code>2.5984358235794388e16 kg</code> to <code>2.5984358234819876e16 kg</code>: a drift of
+  <code>-974,512 kg</code>, or <code>-3.7503793288e-11</code> relative
+  (<code>-3.7503793288e-9 percent</code>).</li>
+<li>The CO2 regression suite passes all 10 selected tests, including a test that
+  verifies an explicit <code>10,000 kg s-1</code> escape sink is retained exactly.</li>
+</ul>
+<h3 id="arco-macda-verification-and-staging">ARCO-MACDA verification and staging<a class="headerlink" href="#arco-macda-verification-and-staging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Verified the live Zarr v3 store rather than relying on its summary card.</li>
+<li>Confirmed 96,480 states, 35 sigma levels, 36 latitudes, 72 longitudes, and an
+  exact cadence of 12 states per sol.</li>
+<li>The logical xarray size is <code>216,067,346,492 bytes</code> (about 216 GB), higher than
+  the earlier 160 GB estimate.</li>
+<li>Found a partial 202-state MY36 tail even though complete documented years are
+  MY24-35. Also confirmed that explicit Mars-year state counts vary, so the
+  pipeline binary-searches <code>MY_Ls</code> instead of assuming a fixed year length.</li>
+<li>Added <code>scripts/stage_arco_macda.py</code> and staged finite 10-sol MY24 samples on
+  the Dinosaur T21/L12 grid. The atmospheric artifact SHA-256 is
+  <code>0a973c94bbb49a60b00e1fef305f19053e60a42db5fbf3b5a53f726414873c1d</code>;
+  the surface-radiation artifact SHA-256 is
+  <code>4d3620b514cd4c6e17487c73750f864a4a55cbb500c9d8d57ef3abb2e8e379b9</code>.</li>
+<li>Recorded schema, licenses, citations, year boundaries, processing, and the
+  leakage-safe split in <code>docs/ideas/arco-macda-dataset-contract.md</code>.</li>
+</ul>
+<h3 id="physical-baseline">Physical baseline<a class="headerlink" href="#physical-baseline" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Configuration: T21, 12 sigma levels, 300 s timestep, daily-mean solar
+  forcing, MOLA orography, TES albedo and thermal inertia, Ames seasonal dust,
+  Ames correlated-k CO2 radiation, multilayer regolith, Richardson exchange,
+  PBL diffusion, dry convective adjustment, and the corrected energy-limited
+  CO2 cycle.</li>
+<li>The 10-sol production gate completed with finite exported fields. Surface
+  temperature was <code>145.62-237.53 K</code>; surface pressure was
+  <code>251.42-1246.24 Pa</code>; wind speed was <code>0.063-34.73 m s-1</code>.</li>
+<li>A fresh 668-sol baseline is checkpointing under
+  <code>outputs/branch_physical_baseline_t21_l12_dt300/</code>. Treat it as a numerical
+  stability and first-year spin-up result, not proof of climatological
+  equilibrium.</li>
+<li>Added <code>scripts/evaluate_physical_baseline.py</code> to produce MOLA maps,
+  pressure-topography statistics, ARCO-MACDA difference maps, Gaussian-weighted
+  error metrics, exact mass drift, artifact hashes, and explicit limitations.</li>
+</ul>
+<h2 id="2026-09-16-211955-pdt-long-run-stability-diagnosis">2026-09-16 21:19:55 PDT — long-run stability diagnosis<a class="headerlink" href="#2026-09-16-211955-pdt-long-run-stability-diagnosis" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The original unfiltered 300 s baseline did <strong>not</strong> complete. It remained
+  finite through step 151,559 (<code>512.1664323438 sols</code>, <code>Ls=268.423 deg</code>) and
+  became non-finite during the next 30-step block. The earlier coarse guard had
+  first located the failure before step 152,439; replaying from the valid
+  checkpoint at 0.1-sol resolution narrowed the onset to before step 151,589.</li>
+<li>Combined atmosphere-plus-frost CO2 at the last valid unfiltered checkpoint
+  was <code>2.598435822393495e16 kg</code>. Relative to the initial
+  <code>2.5984358235794388e16 kg</code>, the drift was <code>-4.5633063103e-10</code>
+  (<code>-4.5633063103e-8 percent</code>). This confirms the CO2 inventory projection
+  remained effective through the failure.</li>
+<li>The failure was a dynamical blow-up. At the last valid checkpoint, decoded
+  air temperature spanned <code>118.861-379.859 K</code>, and maximum horizontal wind
+  speed was <code>2953.397 m s-1</code>. These values are physically unusable even though
+  all state arrays were still finite.</li>
+<li>Root cause: the spectral primitive-equation integration had no horizontal
+  scale-selective dissipation, allowing kinetic energy/enstrophy to accumulate
+  at the truncation scale. Added standard fourth-order spectral horizontal
+  diffusion with a highest-wavenumber e-folding time of <code>0.1 sol</code>. The filter
+  applies only to modal atmospheric fields; it leaves nodal surface
+  temperature, frost, and soil reservoirs unchanged. The CO2 inventory
+  projection remains the outermost post-step operation.</li>
+<li>A recovery experiment starting from the already degraded 512.166-sol state
+  crossed the exact prior failure point and completed at 515.498 sols. In
+  3.332 sols, maximum wind speed fell from <code>2953.397</code> to <code>46.010 m s-1</code>, air and
+  surface fields remained finite, final surface pressure was
+  <code>248.097-1045.534 Pa</code>, and final surface temperature was
+  <code>149.043-271.746 K</code>.</li>
+<li>The recovery experiment demonstrates that the missing dissipation caused the
+  immediate crash, but it is not accepted as the production baseline because
+  its first 512 sols contain an unphysical high-wind episode. A fresh 668-sol
+  run with diffusion active from initialization is required before claiming a
+  stable physical baseline or reporting final MOLA/ARCO error statistics.</li>
+</ul>
+<h2 id="2026-09-16-214539-pdt-clean-filtered-production-run-active">2026-09-16 21:45:39 PDT — clean filtered production run active<a class="headerlink" href="#2026-09-16-214539-pdt-clean-filtered-production-run-active" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Started a fresh production run from the resting MOLA-balanced initial state
+  in <code>outputs/branch_physical_baseline_t21_l12_dt300_hyperdiff01/</code>. Its physical
+  configuration matches the failed run, with fourth-order horizontal diffusion
+  (highest resolved wavenumber e-folding time <code>0.1 sol</code>) added from step zero.</li>
+<li>Extended checkpoint diagnostics to record minimum/maximum atmospheric
+  temperature and maximum three-dimensional wind speed. These fields exposed
+  the unfiltered blow-up before NaNs and are now part of the stability evidence.</li>
+<li>At the latest recorded checkpoint, step 11,840 (<code>40.0111544610 sols</code>), all
+  fields were finite. Surface temperature was <code>144.590-235.337 K</code>, atmospheric
+  temperature was <code>108.411-227.846 K</code>, and maximum wind speed was
+  <code>115.799 m s-1</code>.</li>
+<li>Combined atmosphere-plus-frost CO2 at that checkpoint was
+  <code>2.5984358232419816e16 kg</code>, a relative drift of <code>-1.2986935804e-10</code> from the
+  exact initial inventory. This remains many orders of magnitude smaller than
+  the original mass-conservation failure.</li>
+<li>This run is still in progress. No final stability, MOLA comparison, or ARCO
+  error claim is valid until it reaches all 668 requested sols and the exported
+  artifacts pass the final evaluator.</li>
+</ul>
+<h2 id="2026-09-17-101636-pdt-completed-baseline-and-final-evaluation">2026-09-17 10:16:36 PDT — completed baseline and final evaluation<a class="headerlink" href="#2026-09-17-101636-pdt-completed-baseline-and-final-evaluation" title="Permanent link">&para;</a></h2>
+<h3 id="completion-and-numerical-stability">Completion and numerical stability<a class="headerlink" href="#completion-and-numerical-stability" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The clean filtered baseline completed all 197,673 requested steps:
+  <code>668.0004168718 sols</code>, ending at <code>Ls=359.682671 deg</code>. Every exported field and
+  every value in all 135 checkpoints is finite.</li>
+<li>Final surface ranges were pressure <code>221.822-1078.764 Pa</code>, surface temperature
+  <code>144.327-241.221 K</code>, near-surface wind speed <code>0.203-30.017 m s-1</code>, and CO2
+  frost <code>0-2845.423 Pa-equivalent</code>. The final checkpoint's maximum wind over
+  all 12 atmospheric levels was <code>129.729 m s-1</code>.</li>
+<li>Combined atmospheric plus surface CO2 changed from
+  <code>2.5984358235794388e16 kg</code> to <code>2.598435820403596e16 kg</code>: exactly
+  <code>-31,758,428 kg</code>, or <code>-1.2222132912e-9</code> relative
+  (<code>-1.2222132912e-7 percent</code>). This is the maximum absolute checkpoint drift.</li>
+</ul>
+<h3 id="mola-topology-result">MOLA topology result<a class="headerlink" href="#mola-topology-result" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MOLA elevation on the T21 grid spans <code>-7260.527</code> to <code>14478.380 m</code>, with an
+  area-weighted mean of <code>-560.377 m</code> and standard deviation <code>2892.316 m</code>.</li>
+<li>Final surface pressure has correlation <code>-0.960459</code> with elevation, a fitted
+  linear slope of <code>-52.582 Pa km-1</code>, and a fitted log-pressure scale height of
+  <code>10,951.313 m</code>. The map clearly resolves high pressure in Hellas and low
+  pressure over Tharsis/Olympus, within T21 smoothing.</li>
+</ul>
+<h3 id="arco-macda-differences">ARCO-MACDA differences<a class="headerlink" href="#arco-macda-differences" title="Permanent link">&para;</a></h3>
+<p>The final instantaneous model state at <code>Ls=359.683 deg</code> was compared with the
+MY24 ARCO daily mean at <code>Ls=0.278 deg</code>; the circular seasonal mismatch is
+<code>0.595 deg</code>. Metrics use Gaussian spherical-area weights.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th style="text-align: right;">Bias</th>
+<th style="text-align: right;">MAE</th>
+<th style="text-align: right;">RMSE</th>
+<th style="text-align: right;">Relative MAE</th>
+<th style="text-align: right;">Spatial correlation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Surface pressure</td>
+<td style="text-align: right;"><code>-14.121 Pa</code></td>
+<td style="text-align: right;"><code>23.575 Pa</code></td>
+<td style="text-align: right;"><code>29.714 Pa</code></td>
+<td style="text-align: right;"><code>3.905%</code></td>
+<td style="text-align: right;"><code>0.987174</code></td>
+</tr>
+<tr>
+<td>Surface temperature</td>
+<td style="text-align: right;"><code>+13.397 K</code></td>
+<td style="text-align: right;"><code>13.403 K</code></td>
+<td style="text-align: right;"><code>15.051 K</code></td>
+<td style="text-align: right;"><code>6.596%</code></td>
+<td style="text-align: right;"><code>0.953123</code></td>
+</tr>
+<tr>
+<td>Eastward wind</td>
+<td style="text-align: right;"><code>-1.163 m s-1</code></td>
+<td style="text-align: right;"><code>5.482 m s-1</code></td>
+<td style="text-align: right;"><code>7.583 m s-1</code></td>
+<td style="text-align: right;"><code>112.808%</code></td>
+<td style="text-align: right;"><code>0.469017</code></td>
+</tr>
+<tr>
+<td>Northward wind</td>
+<td style="text-align: right;"><code>-1.382 m s-1</code></td>
+<td style="text-align: right;"><code>5.456 m s-1</code></td>
+<td style="text-align: right;"><code>7.161 m s-1</code></td>
+<td style="text-align: right;"><code>177.752%</code></td>
+<td style="text-align: right;"><code>0.361018</code></td>
+</tr>
+<tr>
+<td>Wind speed</td>
+<td style="text-align: right;"><code>+3.447 m s-1</code></td>
+<td style="text-align: right;"><code>4.706 m s-1</code></td>
+<td style="text-align: right;"><code>5.964 m s-1</code></td>
+<td style="text-align: right;"><code>74.112%</code></td>
+<td style="text-align: right;"><code>0.454818</code></td>
+</tr>
+<tr>
+<td>CO2 frost</td>
+<td style="text-align: right;"><code>-47.328 Pa-eq</code></td>
+<td style="text-align: right;"><code>54.740 Pa-eq</code></td>
+<td style="text-align: right;"><code>231.449 Pa-eq</code></td>
+<td style="text-align: right;"><code>42.937%</code></td>
+<td style="text-align: right;"><code>0.888336</code></td>
+</tr>
+</tbody>
+</table>
+<p>Pressure and the broad temperature structure are strong first-baseline results.
+The model is too warm by about <code>13.4 K</code>, winds have weak spatial agreement and
+too much mean speed, and the seasonal CO2 frost reservoir is too small. These
+are physical-model errors, not numerical instability.</p>
+<h3 id="artifacts-and-scope">Artifacts and scope<a class="headerlink" href="#artifacts-and-scope" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Machine-readable report:
+  <code>outputs/branch_physical_baseline_t21_l12_dt300_hyperdiff01/evaluation/baseline_report.json</code></li>
+<li>MOLA/pressure figure:
+  <code>outputs/branch_physical_baseline_t21_l12_dt300_hyperdiff01/evaluation/mola_topography_pressure.png</code></li>
+<li>ARCO comparison and difference figure:
+  <code>outputs/branch_physical_baseline_t21_l12_dt300_hyperdiff01/evaluation/arco_macda_comparison.png</code></li>
+<li>Model NetCDF SHA-256:
+  <code>614103d9cbfe94f48f8b4bcab7c68dd649e51c9b95be6fa7dd0de9a5fec3d3bd</code></li>
+<li>Diagnostics SHA-256:
+  <code>0244018c726574e63d76e66449ead50c2f9e6f00cb74a155a656cb2fd7214e00</code></li>
+<li>Verification: all 42 relevant GCM physics/submission tests pass and
+  <code>git diff --check</code> reports no whitespace errors.</li>
+</ul>
+<p>This first Mars year establishes numerical stability, not climatological
+equilibrium. ARCO-MACDA is a reanalysis rather than direct truth, its sample is
+a daily mean while the model output is instantaneous under daily-mean forcing,
+and this MY24 sample is a pipeline comparison rather than a held-out test score.</p>
+<h2 id="2026-09-17-154128-pdt-energy-bias-correction-and-equilibrium-run">2026-09-17 15:41:28 PDT — energy-bias correction and equilibrium run<a class="headerlink" href="#2026-09-17-154128-pdt-energy-bias-correction-and-equilibrium-run" title="Permanent link">&para;</a></h2>
+<h3 id="diagnosed-causes">Diagnosed causes<a class="headerlink" href="#diagnosed-causes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The original <code>+13.397 K</code> ARCO and <code>+10.020 K</code> Ames year-end temperature
+  biases combined a real radiative error with an unfair temporal comparison.
+  Daily-mean sunlight suppresses the strong Martian day/night cycle; because
+  emission scales as <code>T^4</code>, this raises the model's mean surface temperature.</li>
+<li>The Ames correlated-k solar path also omitted the documented zenith-angle
+  air-mass factor. Added instantaneous path scaling for diurnal forcing and the
+  analytic flux-weighted daily path cosine <code>&lt;mu^2&gt;/&lt;mu&gt;</code> for daily forcing.</li>
+<li>The correlated-k thermal path ignored the prescribed Ames longwave dust field
+  and inferred IR dust entirely from visible opacity. It now uses the separate
+  longwave opacity normalized to the Ames IR reference band.</li>
+<li>At <code>Ls=4.775 deg</code>, the corrected model's surface shortwave-down flux was
+  <code>132.479 W m-2</code>; ARCO MY24 gave <code>137.072 W m-2</code>. Excess surface sunlight was
+  therefore not the remaining warm-bias source. Model downwelling longwave was
+  <code>22.583 W m-2</code>, versus <code>11.160 W m-2</code> in low-dust ARCO (<code>tau_vis=0.031</code>).
+  Separate CO2 and dust longwave scale controls were added so this calibration
+  is explicit and reproducible.</li>
+</ul>
+<h3 id="calibration-probes">Calibration probes<a class="headerlink" href="#calibration-probes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A 10-sol diurnal/full-opacity probe from the exact year-one restart reduced
+  the matched Ames temperature bias to <code>+6.931 K</code>, with <code>7.045 K</code> MAE and
+  <code>0.971589</code> spatial correlation after averaging five local-time phases.</li>
+<li>A 10-sol diurnal probe with both longwave opacity scales set to <code>0.25</code> reduced
+  the matched Ames bias to <code>+4.279 K</code>, MAE to <code>4.705 K</code>, and retained
+  <code>0.972040</code> spatial correlation. Its fixed-state TOA imbalance was
+  <code>+0.433 W m-2</code>, small enough to proceed to a full seasonal test.</li>
+<li>These are calibration probes, not equilibrium claims. The Ames dust scenario
+  has mean visible opacity near <code>0.35</code> at this season, while MY24 ARCO has only
+  <code>0.031</code>; dust opacity was therefore not tuned directly to the ARCO longwave
+  flux.</li>
+</ul>
+<h3 id="corrected-production-experiment">Corrected production experiment<a class="headerlink" href="#corrected-production-experiment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Started two complete corrected Mars years from the already spun-up 668-sol
+  restart under <code>outputs/branch_physical_diurnal_lw025_t21_l12_dt300/</code>.
+  The exact orbital period is <code>668.618832520472 sols</code>, so the run target is
+  total sol <code>2005.238081912778</code>: the first corrected year is adjustment, and
+  the two corresponding year-end states provide the seasonal convergence test.</li>
+<li>Release configuration: T21/L12, <code>dt=300 s</code>, resolved diurnal forcing,
+  zenith-correct solar paths, separately prescribed visible/IR dust,
+  <code>0.25</code> CO2 and dust longwave opacity scales, and fourth-order spectral
+  diffusion with a <code>0.1-sol</code> highest-mode e-folding time.</li>
+<li>At the first production checkpoint (<code>673.001811 sols</code>), all fields were
+  finite, mean surface temperature was <code>209.577 K</code>, maximum three-dimensional
+  wind was <code>129.812 m s-1</code>, and combined CO2 was
+  <code>2.598435820375651e16 kg</code>.</li>
+<li>Verification currently passes all 45 focused physics/submission tests,
+  compilation checks, and <code>git diff --check</code>. Merge remains gated on completion
+  of the multi-year convergence and seasonal benchmark.</li>
+</ul>
+<h2 id="2026-09-18-corrected-convection-run-completed">2026-09-18 — corrected convection run completed<a class="headerlink" href="#2026-09-18-corrected-convection-run-completed" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The diurnal, longwave-corrected convection run reached its exact target at
+  step <code>593385</code>, sol <code>2005.2380819402</code>; the runner exited and wrote the final
+  restart, NetCDF, maps, plots, and checkpoint.</li>
+<li>Final mean surface pressure was <code>576.597 Pa</code>, mean surface CO2 frost was
+  <code>93.075 Pa-equivalent</code>, and mean surface temperature was <code>209.839 K</code> with a
+  <code>144.315-268.195 K</code> surface range. Maximum three-dimensional wind was
+  <code>118.679 m s-1</code>; all recorded fields were finite.</li>
+<li>Combined atmosphere-plus-frost CO2 changed by <code>-46,959,948 kg</code> over the two
+  corrected years. Maximum absolute relative drift was <code>1.8072391e-9</code>.</li>
+<li>The declared global seasonal convergence evaluator passed pressure, surface
+  CO2 frost, and surface temperature at Ls <code>45</code>, <code>135</code>, <code>225</code>, and <code>315</code>
+  degrees. Maximum year-over-year changes were <code>2.497 Pa</code>, <code>2.497 Pa</code>, and
+  <code>0.620 K</code>, within thresholds of <code>5 Pa</code>, <code>5 Pa</code>, and <code>1 K</code>.</li>
+<li>The overall gate failed only on mean deep-soil temperature. Its seasonal
+  year-over-year changes were <code>0.442-0.634 K</code>, above the <code>0.25 K</code> threshold.
+  The atmosphere/surface seasonal cycle is repeatable by these global metrics,
+  but the regolith is not yet equilibrated.</li>
+<li>Machine-readable report:
+  <code>outputs/branch_physical_diurnal_lw025_t21_l12_dt300/evaluation/seasonal_convergence.json</code>.</li>
+</ul>
+<h2 id="2026-09-19-deterministic-paper-pipeline-and-tform-serve">2026-09-19 — deterministic paper pipeline and <code>tform serve</code><a class="headerlink" href="#2026-09-19-deterministic-paper-pipeline-and-tform-serve" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Removed the neural-residual experiment from the paper scope. The implemented
+  contribution is a deterministic differentiable Mars GCM with three bounded,
+  interpretable calibration controls: CO2 longwave opacity, dust longwave
+  opacity, and bulk surface exchange.</li>
+<li><code>tform serve</code> now launches the corrected physical configuration by default:
+  CO2 and dust longwave scales <code>0.25</code>, surface-exchange multiplier <code>1.0</code>,
+  correlated-k CO2 radiation, seasonal Ames visible/IR dust, TES albedo and
+  thermal inertia, regolith, stability-dependent exchange, PBL diffusion, dry
+  convection, MOLA orography, and the conservative CO2 cycle. The three
+  controls are available in an optional UI panel and validated against the same
+  fixed calibration bounds used by the command-line optimizer.</li>
+<li>Existing UI outputs remain intact: surface temperature, pressure, zonal and
+  meridional wind, wind speed, CO2 frost, and MOLA elevation. Physical
+  parameters and forcing provenance are saved in map metadata and exported
+  NetCDF attributes.</li>
+<li>Added a full-state comparison schema, gap-aware ARCO staging, a coupled JAX
+  calibration driver with an equal 20-call L-BFGS/Powell protocol, and seasonal
+  ARCO, Ames, and MCD evaluators. Reverse-mode timestep rematerialization bounds
+  calibration memory for the two-sol rollout.</li>
+<li>Held-out ARCO-MACDA MY34--35 diagnostics cover four seasons and all 12 model
+  levels. Air-temperature MAE is <code>6.22-10.28 K</code> with correlation
+  <code>0.871-0.964</code>; eastward-wind correlation is <code>0.871-0.939</code>; northward wind and
+  seasonal frost remain deficient.</li>
+<li>NASA Ames four-season diagnostics give surface-temperature bias
+  <code>+2.36</code> to <code>+4.74 K</code> and pressure correlation <code>0.985-0.987</code>. Near-surface
+  winds remain too fast, with speed bias <code>7.53-12.39 m/s</code>.</li>
+<li>Four MCD v6.1 seasonal comparisons were cached at local times 0, 6, 12, and
+  18 h. Temperature MAE is <code>15.07-19.53 K</code>, pressure correlation is
+  <code>0.971-0.980</code>, and wind-speed correlation is <code>0.215-0.458</code>. These are
+  quantitative model-reference diagnostics, not reproduction or observational
+  validation claims.</li>
+<li>Fixed boolean NetCDF attribute serialization in both server exports and the
+  MCD native cache. The UI production build passes; 12 focused server tests and
+  61 physics/maps/submission tests pass. The revised 13-page manuscript builds
+  successfully.</li>
+<li>One additional orbital period is running from the corrected restart to test
+  the declared <code>0.25 K</code> deep-soil convergence threshold. The full two-sol,
+  20-evaluation calibration is also running; neither result is claimed before
+  its machine-readable report completes.</li>
+</ul>
+<h2 id="2026-09-19-short-horizon-gpu-workload-prepared">2026-09-19 — short-horizon GPU workload prepared<a class="headerlink" href="#2026-09-19-short-horizon-gpu-workload-prepared" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Supersedes the two-sol calibration configuration above: the physical tangent
+  rollout is too expensive on the laptop. The frozen experiment now requests
+  0.25 sol, rounded to 74 physical steps at 300 s, with T21/L12 and all operators
+  retained. This is <strong>short-horizon coupled calibration</strong>, not equilibrium tuning.</li>
+<li>Added <code>apps/mars-calibration</code>, an installable application depending on
+  <code>terraforming[gcm3d]</code>, with a CUDA 12 JAX container, Nautilus Kubernetes Job,
+  persistent-volume transfer workflow, and a fixed <code>experiment.json</code>.
+  The original script remains a compatibility entry point.</li>
+<li>Uses the existing MY32 Ls45 target index 5 and checkpoint 477393, frozen with
+  TES, Ames dust, and MOLA in <code>outputs/nautilus-calibration-inputs/</code>. Every input
+  has a SHA-256 manifest; no data downloads happen in the GPU job.</li>
+<li>Enforces exactly 20 L-BFGS-B and 20 Powell oracle calls; an early optimizer
+  termination restarts from the best evaluated point, with restart counts
+  disclosed. Twelve centered finite-difference forward calls are separate.
+  The initial autodiff gradient is reused from optimization. Forward mode now
+  obtains the primal loss as auxiliary output of the same differentiated call.</li>
+<li>CUDA fallback to CPU is rejected. Per-call JSONL logs, package versions,
+  device identity, input hashes, and final acceptance report persist on the PVC.</li>
+<li>The target is a daily mean and the model endpoint is instantaneous. This
+  single-window demonstration does not establish MY33 validation, four-season
+  calibrated performance, or equilibrium sensitivity. Existing MY34–35
+  diagnostics remain physical-baseline diagnostics.</li>
+<li>Local application tests pass for exact budget enforcement, early termination,
+  finite-difference accounting, input-integrity checks, and canonical settings.
+  The input bundle passes preflight. Container build and the 74-step CUDA
+  experiment remain to be run on Nautilus; no GPU calibration result is claimed.</li>
+<li>A real one-step coupled CPU smoke run completed with exact 1/1 oracle
+  counts and all six finite-difference checks passing (maximum relative error
+  <code>6.1471e-6</code>). Its overall gate correctly failed because a single initial
+  evaluation cannot demonstrate loss reduction. This is integration verification,
+  not the requested 74-step calibration result. Report:
+  <code>outputs/nautilus-calibration-smoke/report.json</code>.</li>
+</ul>
+<h2 id="2026-09-19-common-reference-grids-and-amescap-export">2026-09-19 — common reference grids and AmesCAP export<a class="headerlink" href="#2026-09-19-common-reference-grids-and-amescap-export" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Added <code>tform mars compare</code> with an explicit cached-input JSON configuration.
+  Generated an offline HTML report for Ls45/135/225/315 with physical-model,
+  Ames, MCD and ARCO-MACDA surface maps, common row color ranges, centered
+  difference maps, MOLA terrain, parameter/sampling tables, and CSV/JSON metrics.</li>
+<li>Uses Gaussian area weights on T21, periodic longitude interpolation, explicit
+  time/level selection, and unit-checked frost conversion. Missing fields are
+  unavailable; unresolved dimensions and non-finite fields fail explicitly.</li>
+<li>The default compares the physical baseline only. Sparse model snapshots,
+  Ames five-sol means, ARCO daily means, and four-time MCD averages are not
+  perfectly matched. Wind-height/dust differences and monthly MCD frost are
+  limitations; no equilibrium or calibrated-climate improvement is claimed.</li>
+<li>Added AmesCAP 2-D NetCDF exports and a multi-source MarsPlot template.
+  Actual MarsPlot 3.3 rendering succeeded for all 28 Ls45 panels (eight pages).
+  Current MarsPlot 3.5 additionally requires the user's missing
+  <code>~/.amescap_profile</code>; its complete rendering is not claimed.</li>
+<li>Application comparison tests and existing CLI command tests pass (8 tests).
+  Artifacts: <code>outputs/reference-comparison/index.html</code>, <code>metrics.csv</code>,
+  <code>parameters.csv</code>, <code>mola.png</code>, and <code>amescap-rendered/plots/</code>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

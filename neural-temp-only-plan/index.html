@@ -1,0 +1,2462 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Differentiable three-dimensional Mars climate model — dynamics, physics, calibration and neural experiments">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Temperature-only neural postprocessing: implementation plan - Terraforming · Mars GCM</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../stylesheets/mars.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#temperature-only-neural-postprocessing-implementation-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Terraforming · Mars GCM" class="md-header__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Terraforming · Mars GCM
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Temperature-only neural postprocessing: implementation plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  3-D GCM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/what-is-tform/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../package/gcm3d/api/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cli/commands/" class="md-tabs__link">
+          
+  
+  
+  CLI & Comparisons
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../deprecated-global-mean/" class="md-tabs__link">
+          
+  
+  
+  Deprecated global-mean model
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Terraforming · Mars GCM" class="md-nav__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Terraforming · Mars GCM
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BioMedAI-UCSC/terraforming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BioMedAI-UCSC/terraforming
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3-D GCM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3-D GCM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calibration & ablations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/neural-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/temperature-only/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only postprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../differentiable-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differentiable experiment runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../neural-temp-only-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation & limitations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ideas/gcm3d-physics-limitations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics ledger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/what-is-tform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is tform?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Browser visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI & Comparisons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI & Comparisons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/reference-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference comparisons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/orbital-mechanics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orbital Mechanics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/solar-radiation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Radiation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/greenhouse-effect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Greenhouse Effect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mars
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/mars/solar-flux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar Flux Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/mars/climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Climate Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deprecated global-mean model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deprecated global-mean model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deprecated-global-mean/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deprecation and migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/global-mean-planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torch planet architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/global-mean-mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Torch Mars derivation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/mars/global-mean-climate-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived climate notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Global-mean presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Global-mean engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG intervention theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/BioMedAI-UCSC/terraforming/edit/main/docs/neural-temp-only-plan.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="temperature-only-neural-postprocessing-implementation-plan">Temperature-only neural postprocessing: implementation plan<a class="headerlink" href="#temperature-only-neural-postprocessing-implementation-plan" title="Permanent link">&para;</a></h1>
+<p>Status: implemented; see <a href="../neural-temp-only-runbook/">launch and acceptance runbook</a>.
+Local verification is separate from the still-required bounded remote experiment
+and its held-out scientific criteria.
+Branch: <code>neural-temp-only</code>, created directly from <code>final-phase-2</code>.</p>
+<h2 id="objective-and-scope">Objective and scope<a class="headerlink" href="#objective-and-scope" title="Permanent link">&para;</a></h2>
+<p>Improve a frozen physical Mars GCM's lowest-model-layer temperature forecast
+against MACDA using a small neural residual corrector. Target one fixed lead:
+one native MACDA interval, exactly one twelfth of a Martian sol (approximately
+two Mars hours). The target is air temperature at the model's lowest sigma
+midpoint, approximately sigma = 0.9583 for 12 uniform layers. It is not surface
+temperature, measured 2-m temperature, or a fixed geometric altitude.</p>
+<p>The forecast is <code>T_corrected = T_physical + neural_residual(features)</code>.
+Only the delivered temperature field changes. Physical PBL, radiation, winds,
+pressure, surface exchange and CO2 processes continue to determine the physical
+forecast. The correction is not fed back into the simulated state. The physical
+solver is frozen and forecast generation is amortized through a disk cache.</p>
+<p>The intended claim is improved reanalysis-referenced temperature prediction
+from a physical forecast and a small neural corrector. This experiment does not
+establish improved mixing, climate stability, or the benefit of differentiating
+through the GCM. Coupled correction, online adaptation after new observations,
+multiple forecast leads and learned initial conditions are outside this scope.</p>
+<h2 id="evidence-and-success-criteria">Evidence and success criteria<a class="headerlink" href="#evidence-and-success-criteria" title="Permanent link">&para;</a></h2>
+<p>The earlier four-case screen on <code>neural/four-method-screen</code> found a mass-weighted
+lowest-layer physical RMSE of about 3.94 K and mean bias about -0.50 K. An oracle
+constant bias correction would improve RMSE by only about 0.8%; the existing
+decoder-only checkpoint improves lowest-layer RMSE by about 0.44%. Those four
+cases are development evidence, not a new independent test. Their absolute
+scores must not be reused as this branch's baseline: the physical configuration
+and initialization must be regenerated and recorded on this branch.</p>
+<p>Research supports conditional correction, but does not guarantee a Mars gain.
+Rasp and Lerch report roughly 29–33% CRPS improvement over raw Earth forecasts,
+and only approximately 2.5–3.5% over their strongest boosted statistical control.
+CRPS improvements are not deterministic RMSE improvements. Representative data,
+location information and auxiliary physical predictors matter more than adding
+network depth. Previous training used the first four adjacent source chunks;
+this implementation must not repeat that coverage limitation.</p>
+<p>Declare these criteria before training:</p>
+<ul>
+<li>Primary metric: area-weighted RMSE in kelvin, with equal forecast-start weight.
+  Compute each start's area-weighted MSE, average across starts, then take the
+  square root. Do not average start RMSEs or flatten grid cells as independent
+  weather examples. The earlier 3.94 K diagnostic used a different, mass-weighted
+  aggregation; report mass-weighted RMSE secondarily for context.</li>
+<li>Substantial gain: at least 10% relative primary RMSE reduction versus the
+  paired physical baseline on the fixed test manifest. This is a target, not a
+  prediction; it requires eliminating at least 19% of baseline MSE.</li>
+<li>Neural value: lower test RMSE than the fitted linear control, with a paired
+  temporal-block bootstrap interval for MSE improvement excluding zero.</li>
+<li>Physical forecast value: improvement over the matched neural model without
+  physical forecast inputs. Otherwise do not claim the GCM adds predictive value.</li>
+<li>Report season, latitude band, and day/night metrics even when they regress.
+  Uncertainty resampling uses temporal blocks, never individual grid cells.
+  One small dataset and one seed give limited evidence; label conclusions so.</li>
+</ul>
+<p>Failure to meet a criterion must be reported. Do not change the target layer,
+lead, geographic mask, metric or test cases after observing results.</p>
+<h2 id="1-define-data-and-forecast-contracts">1. Define data and forecast contracts<a class="headerlink" href="#1-define-data-and-forecast-contracts" title="Permanent link">&para;</a></h2>
+<p>Reuse the base branch's coordinate system, physical equations, positivity
+wrapper, MOLA terrain handling and spatial regridding utilities. Its
+<code>scripts/stage_arco_macda.py</code> stages daily means; add a separate native-cadence
+loader rather than changing the meaning of existing daily products. The old
+neural trainers are absent from this branch. Their observed-atmosphere and
+past-only soil initialization may be adapted selectively after review; do not
+merge their full branch or unrelated physics edits.</p>
+<p>Pin the source revision to
+<code>65a0bebd804b9c240752277e83f5737d58c6ee9c</code>, and record the MACDA and ARCO citations.
+Read actual year/time coordinates when selecting windows: the archive contains
+out-of-order blocks, so do not binary-search a presumed globally monotonic time
+axis. Validate each proposed history/start/target interval for finite values,
+units, native cadence and split membership. Exclude and log invalid intervals;
+never interpolate across gaps or silently substitute a different target.</p>
+<p>Preserve the existing chronological split definition:</p>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th>Mars years</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td>24, 25, 26, 27, 29, 30, 31</td>
+<td>Features, normalization, all fitted parameters</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>32, 33</td>
+<td>Early stopping and frozen model selection</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>34, 35</td>
+<td>One final evaluation of frozen models</td>
+</tr>
+<tr>
+<td>Excluded stress set</td>
+<td>28</td>
+<td>No tuning or headline score in this deadline study</td>
+</tr>
+</tbody>
+</table>
+<p>Initial manifest size: 112 training starts, 32 validation starts and 32 test
+starts. For each training year select four starts in each of four seasonal
+quadrants; for each validation/test year select four starts in each quadrant.
+Choose dates using metadata and a fixed seed, not errors. Require disjoint
+history-to-target intervals and at least two sols between starts. Balance dates
+within a quadrant rather than selecting its first four valid records. Every
+global snapshot already spans local times across longitudes; verify geographic
+day/night coverage rather than treating a UTC timestamp as one global local time.</p>
+<p>Freeze manifests before fitting. Log requested and achieved coverage, exclusion
+reasons and the actual source indices/times. If valid data cannot meet coverage,
+stop and report the deficit; do not silently shrink the experiment. Use source
+file provenance where available to characterize observing-system changes. A
+global attribute carried through concatenated ARCO data is not sufficient proof
+of the assimilation regime for every window. Mark unknown provenance explicitly.</p>
+<p>The forecast contract includes code revision, dataset revision, manifest hash,
+T21/L12 grid, sigma centers, physical forcing/options, timestep, precision,
+terrain hash, source variables, initialization, feature schema and lead time.</p>
+<h2 id="2-generate-reusable-physical-forecast-pairs">2. Generate reusable physical forecast pairs<a class="headerlink" href="#2-generate-reusable-physical-forecast-pairs" title="Permanent link">&para;</a></h2>
+<p>For each start:</p>
+<ol>
+<li>Initialize atmospheric T/u/v and pressure from MACDA using the existing
+   spectral projection conventions. Initialize surface temperature and frost
+   from the start only.</li>
+<li>Initialize the regolith from the preceding one-sol surface-temperature
+   history using physical conduction with prescribed historical boundary
+   temperatures. Specify and test the initial deep-soil assumption; use exactly
+   the same procedure for every model. No future surface observations enter it.</li>
+<li>Advance the physical GCM one native interval. Use the base physical processes
+   with PBL, regolith, stability exchange and convective adjustment enabled;
+   freeze the exact configuration before producing any training labels. Use
+   MOLA terrain, float64 and an interval-dividing timestep no larger than 300 s.</li>
+<li>Keep start dust forcing fixed over the forecast, unless an explicitly
+   available-at-initialization forcing forecast is introduced in the contract.
+   Solar/orbital evolution is deterministic. Do not substitute observed future
+   dust or future surface temperature as predictors.</li>
+<li>Cache start features, physical forecast features, target temperature, area
+   weights, metadata and the physical error. Targets live separately from
+   inference features. Record pressure separately for secondary mass metrics.</li>
+</ol>
+<p>Physical forecasts are independent jobs: shard start IDs across four GPUs with
+one masked worker per GPU. Check actual device placement. Cache files are
+written atomically with checksums; completed matching entries are reusable.
+Contract mismatch must refuse cache reuse. A crash resumes missing start IDs,
+not a repeated full simulation campaign.</p>
+<p>Do not consume the old neural screen's forecast arrays as new training or test
+data. They remain development diagnostics with a different contract.</p>
+<h2 id="3-feature-schema-and-neural-model">3. Feature schema and neural model<a class="headerlink" href="#3-feature-schema-and-neural-model" title="Permanent link">&para;</a></h2>
+<p>Use one shared MLP: <code>features -&gt; Dense(32) -&gt; GELU -&gt; Dense(32) -&gt; GELU -&gt; Dense(1)</code>.
+The output is a correction in kelvin after multiplying by a frozen training-only
+residual RMS. Initialize the last layer to zero, so the initial forecast exactly
+reproduces the physical baseline. This blocks hidden-layer gradients only on the
+first update; it is not a justification for a random initial temperature change.</p>
+<p>Initial feature schema, all continuous and finite:</p>
+<ul>
+<li>Start lowest-layer T, start surface T, start next-layer T, start u/v, pressure,
+  and column dust opacity.</li>
+<li>Forecast lowest-layer T and its change from start; forecast surface T and
+  surface-minus-lowest-air T; next-layer-minus-lowest-layer forecast T; forecast
+  lowest-layer u/v and surface pressure.</li>
+<li>Forecast-time insolation, sine/cosine of local solar time, sine/cosine of solar
+  longitude, sine of latitude, sine/cosine of longitude, and terrain height.</li>
+</ul>
+<p>Local time and orbital-angle conventions must use the physical solver's
+conventions. Do not approximate Mars' seasonal progression by a uniform angle
+if the solver uses eccentric orbital evolution. No target-derived quantities,
+future reanalysis predictors, case IDs or dataset-year IDs enter the network.
+No learned per-cell embeddings are needed for the initial implementation.</p>
+<p>Freeze feature means/scales and residual RMS using training starts only, with
+positive scale floors. Preserve feature order and units in the checkpoint.
+Missing required predictors fail explicitly rather than being replaced with
+validation-derived values.</p>
+<h2 id="4-fit-cheap-meaningful-controls-on-the-same-cache">4. Fit cheap, meaningful controls on the same cache<a class="headerlink" href="#4-fit-cheap-meaningful-controls-on-the-same-cache" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Definition</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical</td>
+<td>Uncorrected cached GCM forecast</td>
+<td>Main reference</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>Start lowest-layer temperature</td>
+<td>Basic forecasting control</td>
+</tr>
+<tr>
+<td>Constant residual</td>
+<td>Training-weighted mean physical error</td>
+<td>Global bias control</td>
+</tr>
+<tr>
+<td>Linear residual</td>
+<td>Ridge regression on the same standardized predictors</td>
+<td>Tests value beyond conditional linear correction</td>
+</tr>
+<tr>
+<td>Neural residual</td>
+<td>Shared 32/32 MLP plus physical forecast</td>
+<td>Main candidate</td>
+</tr>
+<tr>
+<td>Neural without GCM forecast</td>
+<td>Same hidden widths; predicts change from start T using start/static/deterministic features only</td>
+<td>Tests added value of the GCM forecast</td>
+</tr>
+</tbody>
+</table>
+<p>The last control removes both forecast feature channels and the physical
+forecast additive term. It predicts <code>T_start + NN(start, static, solar features)</code>;
+retaining <code>T_physical</code> would invalidate the ablation. Normalize its residual from
+its own training targets. All controls use identical starts, target field,
+metric, weights and available-at-initialization information.</p>
+<p>For neural models use area-weighted squared temperature error, Adam at 0.001,
+gradient-norm clipping at 1 and weight decay 0.0001. Use a fixed seed of zero,
+at most 100 epochs, validation once per epoch, and patience of 10 epochs.
+Retain the best validation checkpoint including the zero-correction checkpoint.
+These are fixed initial settings, not a promised optimum or a search grid.
+For the standardized ridge objective use mean weighted squared error plus
+0.001 times coefficient squared norm; leave its intercept unpenalized.</p>
+<p>Shuffle forecast starts each epoch. A batch contains columns from several
+different starts: sample eight starts uniformly and 128 columns per start by
+area probability. This estimates equal-start, area-weighted loss; do not apply
+area weights a second time to already area-proportional samples. Full-grid
+validation always uses explicit quadrature weights. Preserve sampler RNG state
+for deterministic resume.</p>
+<p>Training the two small neural models can use one GPU or CPU; do not reserve four
+GPUs for these regressions. No GCM rollout occurs inside a training update.</p>
+<h2 id="5-evaluation-artifacts-and-table-logs">5. Evaluation, artifacts and table logs<a class="headerlink" href="#5-evaluation-artifacts-and-table-logs" title="Permanent link">&para;</a></h2>
+<p>Select each model using validation only, then freeze all models before test.
+Evaluate all controls once on the same test starts. Do not adapt parameters
+during test or choose a different model based on test performance.</p>
+<p>Write per-start predictions and paired squared-error differences, aggregate
+RMSE/MAE/bias, secondary mass-weighted metrics, and prespecified breakdowns:
+four seasonal quadrants, latitude bands [-90,-60), [-60,-30), [-30,30),
+[30,60), [60,90], and day/night using solar zenith cosine. Record sample weights
+and counts for each group. Bootstrap temporal blocks defined in the manifest;
+publish their definitions, seed and 95% paired intervals. Do not report millions
+of grid cells as independent samples.</p>
+<p>Add error maps, predicted-versus-reference temperature, residual-versus-local-time
+plots and paired per-block skill plots. Any oracle correction calculated from
+validation labels is labeled diagnostic and excluded from score comparisons.</p>
+<p>Output layout: <code>outputs/neural_temp/&lt;run_id&gt;/</code> containing <code>contract.json</code>,
+<code>manifest.json</code>, <code>normalization.json</code>, cache index/checksums, fitted baseline
+parameters, <code>checkpoint.pkl</code>/<code>best_validation.pkl</code> for each neural model,
+<code>training.jsonl</code>, validation/test reports, prediction arrays, plots and a concise
+Markdown report. Checkpoints include architecture, parameters, optimizer state,
+epoch/update count, sampler state, feature schema and contract hashes. Refuse
+resume when any scientific contract changes.</p>
+<p>Print readable tables during caching and training: stage, GPU, completed/total
+starts, epoch, train RMSE, validation RMSE, physical RMSE, relative gain, elapsed
+time and aggregate GPU-hours. Preserve structured JSONL events and raw worker
+logs. A successful command exit requires all requested artifacts and complete
+coverage; worker errors and timeouts return failure while preserving progress.</p>
+<h2 id="6-compute-cap-and-decision-gates">6. Compute cap and decision gates<a class="headerlink" href="#6-compute-cap-and-decision-gates" title="Permanent link">&para;</a></h2>
+<p>The conservative budget is four <strong>aggregate GPU-hours</strong>, including compilation
+and time GPUs are reserved during data preparation. Four GPUs for one hour
+consume the entire budget. CPU-only metadata work does not consume this budget.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th style="text-align: right;">Aggregate GPU-hour cap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Training/validation forecast caching</td>
+<td style="text-align: right;">2.25</td>
+</tr>
+<tr>
+<td>Small-model training</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>Test forecast caching and evaluation</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>Contingency</td>
+<td style="text-align: right;">0.50</td>
+</tr>
+</tbody>
+</table>
+<p>Time compilation and the first few requested forecast jobs, retaining their
+cache entries. Project the full manifest cost before continuing. If the workload
+cannot fit, report the estimate and propose a revised scope before spending the
+evaluation reserve. Do not silently reduce coverage or skip controls.</p>
+<p>After validation, proceed to final test only if the neural candidate meets the
+10% RMSE target versus physical and beats the linear control on validation.
+Otherwise report that substantial improvement has not been demonstrated and
+stop; do not start an architecture sweep. Passing this gate does not guarantee
+test success. Do not retrospectively claim a test result if the gate stops it.</p>
+<h2 id="7-implementation-sequence-and-verification">7. Implementation sequence and verification<a class="headerlink" href="#7-implementation-sequence-and-verification" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Deliverable</th>
+<th>Proposed files</th>
+<th>Required verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Native manifests and contracts</td>
+<td><code>scripts/neural_temp_data.py</code></td>
+<td>Gaps/out-of-order blocks, year boundaries, nonoverlapping splits, deterministic selection</td>
+</tr>
+<tr>
+<td>Frozen forecast cache</td>
+<td><code>scripts/cache_neural_temp.py</code></td>
+<td>Observed initialization, no future predictors, physical identity, crash/resume and contract rejection</td>
+</tr>
+<tr>
+<td>Feature builder and residual MLP</td>
+<td><code>scripts/neural_temp_model.py</code></td>
+<td>Units/order, training-only statistics, zero output identity, finite gradients</td>
+</tr>
+<tr>
+<td>Regressions and controls</td>
+<td><code>scripts/train_neural_temp.py</code></td>
+<td>Weighted analytic baseline checks, meaningful synthetic learning, resume equivalence, removal of all GCM inputs in ablation</td>
+</tr>
+<tr>
+<td>Evaluation/reporting</td>
+<td><code>scripts/evaluate_neural_temp.py</code></td>
+<td>Hand-computed weighted metrics, paired cases, temporal bootstrap units, no test fitting</td>
+</tr>
+<tr>
+<td>Bounded GPU runner</td>
+<td><code>scripts/run_neural_temp.py</code></td>
+<td>Unique device routing, atomic progress, timeout/worker-failure propagation, table/JSONL logs</td>
+</tr>
+</tbody>
+</table>
+<p>Place focused tests under <code>package/tests/gcm3d/</code>. Reuse physical unit checks from
+the base branch; add only tests needed for data leakage, scientific metrics,
+model behavior and restart reliability. A synthetic fit demonstrates optimizer
+correctness, not Mars generalization. First verify locally on synthetic arrays
+and cached metadata; run the bounded remote workflow only after implementation
+and its concrete launch command are reviewable.</p>
+<p>Implementation is complete when the contract, manifest, cache, all controls,
+resume path, bounded launcher and reporting work together and pass their checks.
+Scientific success additionally requires the declared held-out criteria; working
+software or reduced training loss alone does not satisfy them.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Rasp and Lerch, <em>Neural Networks for Postprocessing Ensemble Weather Forecasts</em>,
+   Monthly Weather Review (2018), DOI 10.1175/MWR-D-18-0187.1.
+   <a href="https://arxiv.org/html/1805.09091">Paper, especially Table 2 and data/evaluation sections</a>.</li>
+<li>Gronquist et al., <em>Deep learning for post-processing ensemble weather forecasts</em>,
+   <a href="https://doi.org/10.1098/rsta.2020.0092">DOI 10.1098/rsta.2020.0092</a>.
+   Its reported skill gains concern probabilistic ensembles, not Mars RMSE.</li>
+<li>Valeanu et al., MACDA v2.0 (2026),
+   <a href="https://catalogue.ceda.ac.uk/uuid/cd037a9ea387438fabf4d674dbe53088/">CEDA dataset and observing-system description</a>,
+   DOI 10.5285/cd037a9ea387438fabf4d674dbe53088.</li>
+<li>Bhattacharya, ARCO-MACDA (2026),
+   <a href="https://huggingface.co/datasets/ananyo01/ARCO-MACDA">dataset card</a>,
+   DOI 10.57967/hf/8771. The implementation pins a revision rather than <code>main</code>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.integrate", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

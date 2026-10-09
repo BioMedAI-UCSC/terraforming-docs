@@ -6,15 +6,15 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+        <meta name="description" content="Differentiable three-dimensional Mars climate model — dynamics, physics, calibration and neural experiments">
       
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../architecture/">
       
       
-        <link rel="next" href="../architecture/">
+        <link rel="next" href="../../../architecture/visualizer/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Philosophy - Terraforming</title>
+        <title>Design philosophy - Terraforming · Mars GCM</title>
       
     
     
@@ -96,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../../.." title="Terraforming · Mars GCM" class="md-header__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../../assets/logo.png" alt="logo">
 
@@ -109,13 +109,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Terraforming
+            Terraforming · Mars GCM
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Philosophy
+              Design philosophy
             
           </span>
         </div>
@@ -227,17 +227,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
   
-  Home
+  
+  3-D GCM
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -265,6 +266,48 @@
   
   
   
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
   
     
     
@@ -273,7 +316,7 @@
           
   
   
-  CLI Reference
+  CLI & Comparisons
 
         </a>
       </li>
@@ -309,53 +352,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../architecture/planet/" class="md-tabs__link">
+        <a href="../../../deprecated-global-mean/" class="md-tabs__link">
           
   
   
-  Architecture
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../api/framework/" class="md-tabs__link">
-          
-  
-  
-  API Reference
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
-          
-  
-  
-  Package · gcm3d (3-D GCM)
+  Deprecated global-mean model
 
         </a>
       </li>
@@ -387,12 +388,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../../.." title="Terraforming · Mars GCM" class="md-nav__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../../assets/logo.png" alt="logo">
 
     </a>
-    Terraforming
+    Terraforming · Mars GCM
   </label>
   
     <div class="md-nav__source">
@@ -415,6 +416,58 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3-D GCM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3-D GCM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../.." class="md-nav__link">
         
@@ -423,7 +476,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Start here
   
 
     
@@ -432,6 +485,322 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calibration & ablations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../neural-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../temperature-only/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only postprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../differentiable-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differentiable experiment runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../neural-temp-only-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation & limitations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ideas/gcm3d-physics-limitations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics ledger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -583,33 +952,38 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    CLI Reference
+    Architecture
   
 
     
@@ -620,12 +994,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    CLI Reference
+    Architecture
   
 
           </label>
@@ -638,14 +1012,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cli/commands/" class="md-nav__link">
+      <a href="../../../architecture/planet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Commands
+    GCM system
   
 
     
@@ -666,14 +1040,189 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cli/presets/" class="md-nav__link">
+      <a href="../../../architecture/mars/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Presets
+    Mars configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem Statement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Intent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-is-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Is Not
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trade-offs-accepted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trade-offs Accepted
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Browser visualizer
   
 
     
@@ -724,7 +1273,7 @@
   <span class="md-ellipsis">
     
   
-    Wiki
+    API Reference
   
 
     
@@ -737,6 +1286,264 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI & Comparisons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI & Comparisons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/reference-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference comparisons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -850,10 +1657,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
   
   
@@ -871,8 +1678,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -966,34 +1773,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../wiki/mars/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GHG Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1029,17 +1808,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Architecture
+    Deprecated global-mean model
   
 
     
@@ -1050,12 +1829,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Architecture
+    Deprecated global-mean model
   
 
           </label>
@@ -1068,14 +1847,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/planet/" class="md-nav__link">
+      <a href="../../../deprecated-global-mean/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Planet Framework
+    Deprecation and migration
   
 
     
@@ -1096,14 +1875,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/mars/" class="md-nav__link">
+      <a href="../../../architecture/global-mean-planet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Mars Model
+    Torch planet architecture
   
 
     
@@ -1124,101 +1903,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/interventions/" class="md-nav__link">
+      <a href="../../../architecture/global-mean-mars/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Reference
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    API Reference
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../api/framework/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Framework
+    Torch Mars derivation
   
 
     
@@ -1239,14 +1931,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../api/celestials/" class="md-nav__link">
+      <a href="../../../wiki/mars/global-mean-climate-model/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Mars
+    Archived climate notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Global-mean presets
   
 
     
@@ -1274,7 +1994,35 @@
   <span class="md-ellipsis">
     
   
-    Engine
+    Global-mean engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention architecture
   
 
     
@@ -1302,246 +2050,7 @@
   <span class="md-ellipsis">
     
   
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Package · gcm3d (3-D GCM)
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Package · gcm3d (3-D GCM)
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Philosophy
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Philosophy
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#problem-statement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problem Statement
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design-intent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Design Intent
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What This Is Not
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#trade-offs-accepted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Trade-offs Accepted
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
+    Intervention API
   
 
     
@@ -1562,70 +2071,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/" class="md-nav__link">
+      <a href="../../../wiki/mars/interventions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API Reference
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../implementation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementation & Physics
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../scripts/gcm3d-data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data & validation scripts
+    GHG intervention theory
   
 
     
@@ -1673,24 +2126,24 @@
 
 <h1 id="philosophy-gcm3d">Philosophy — gcm3d<a class="headerlink" href="#philosophy-gcm3d" title="Permanent link">&para;</a></h1>
 <h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
-<p>The torch 0-D model integrates a global-mean energy/mass budget. It cannot answer
+<p>The deprecated torch 0-D model integrates a global-mean energy/mass budget. It cannot answer
 anything spatial: <em>where</em> does the winter CO₂ cap form, <em>how</em> does Tharsis shape
 the surface-pressure field, <em>what</em> circulation do the equator–pole and
 day–night temperature gradients drive. Answering those requires a real 3-D
 general-circulation model (GCM) — a spectral dynamical core plus column physics.</p>
 <p>Rather than write a dycore from scratch, <code>gcm3d</code> builds on <strong>dinosaur</strong>, the
 differentiable JAX spectral primitive-equation core underneath NeuralGCM. This
-buys a validated, mass/energy/angular-momentum-conserving dynamical core <em>and</em>
-end-to-end differentiability — the property the inverse-design / world-model work
-needs at 10⁵–10⁶ trajectories, which is exactly JAX's strength.</p>
+provides a tested spectral core and JAX differentiation. Conservation and gradient
+agreement still need measurement for each coupled configuration; using Dinosaur
+does not certify the Mars physics or guarantee a particular trajectory throughput.</p>
 <h2 id="design-intent">Design Intent<a class="headerlink" href="#design-intent" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p><strong>Planet-agnostic core, planet-specific instance.</strong> The core consumes a
    <code>BodyConstants</code>; it hard-codes nothing about Mars. Mars supplies its instance
    (<code>MARS_BODY_3D</code>) next to the existing <code>MARS_*</code> constants, so there is a single
-   source of truth. Other bodies (Titan, Earth, exoplanets) come for free by
-   defining a new <code>BodyConstants</code>.</p>
+   source of truth. A new <code>BodyConstants</code> configures the dry core for another
+   body; radiation, condensable reservoirs and boundary data need separate work.</p>
 </li>
 <li>
 <p><strong>The dynamics⊕physics seam is stable.</strong> Dinosaur's equations are an
@@ -1711,13 +2164,15 @@ needs at 10⁵–10⁶ trajectories, which is exactly JAX's strength.</p>
    <code>jax.grad</code> flows from a diagnostic of the final state back to the initial state
    or forcing, and <code>jax.vmap</code> batches. Smooth (tanh) gates replace hard branches
    wherever a physical threshold (cap exhaustion, frost point) would otherwise
-   zero the gradient.</p>
+   zero the gradient. Some helpers retain piecewise projections; check gradient
+   agreement with finite differences at the actual fitting horizon.</p>
 </li>
 <li>
 <p><strong>Honesty about fidelity is a first-class requirement.</strong> Output objects
    self-label their physics (<code>MarsMapFields.physics</code>) and flag when a run is a
    spin-up <em>transient</em> rather than a seasonally-equilibrated climatology
-   (<code>is_transient</code>, &lt; 668 sols). See <code>docs/ideas/gcm3d-physics-limitations.md</code>.</p>
+   (<code>is_transient</code>, &lt; 668 sols). Longer duration still needs explicit seasonal
+   convergence checks. See <a href="../validation/">validation and limitations</a>.</p>
 </li>
 </ol>
 <h2 id="what-this-is-not">What This Is Not<a class="headerlink" href="#what-this-is-not" title="Permanent link">&para;</a></h2>
@@ -1727,9 +2182,10 @@ needs at 10⁵–10⁶ trajectories, which is exactly JAX's strength.</p>
   topography), not quantitative Ames/LMD magnitudes. The radiative path is a
   compact two-stream + optional Ames 12-band correlated-k scheme — good, but
   explicitly <em>not</em> full LMD/JCM line-by-line fidelity.</li>
-<li><strong>Not a torch replacement.</strong> It does not touch <code>engine/</code>. The 0-D
-  <code>terraforming_ode</code> is a <em>proof of concept</em> that the physics can live on the
-  dinosaur substrate — an input to the go/no-go on porting the engine, not the port.</li>
+<li><strong>Separate from the deprecated torch engine.</strong> The GCM is the recommended
+  workflow for new work. Existing torch APIs remain for compatibility; deprecation
+  does not imply all global-mean intervention capabilities have a continuous
+  3-D replacement. The JAX seasonal 0-D prototype is not the spatial GCM.</li>
 <li><strong>Not a moist model.</strong> No water cycle, clouds, or moist convection. Convection
   is dry adjustment only.</li>
 </ul>
@@ -1747,16 +2203,16 @@ needs at 10⁵–10⁶ trajectories, which is exactly JAX's strength.</p>
 <td>Keeps the torch core lightweight; gated behind one import guard.</td>
 </tr>
 <tr>
-<td>Grey / compact-band radiation as the default fallback</td>
-<td>Differentiable and fast for ablations; the bundled Ames 12-band correlated-k table is the accurate default when staged.</td>
+<td>Explicit grey, compact-band and correlated-k configurations</td>
+<td>Keep ablations reproducible; resolved CO₂ radiation must be enabled before the bundled table is used.</td>
 </tr>
 <tr>
 <td>Surface reservoirs live <em>outside</em> the dinosaur <code>State</code> (in <code>ColumnPhysicsState</code>)</td>
 <td>Surface temperature/frost are not advected by wind, so they must not be dinosaur tracers (which get transported).</td>
 </tr>
 <tr>
-<td>Explicit CO₂ mass exchange needs a post-step positivity projection</td>
-<td>Multistage IMEX schemes do not preserve frost positivity; the projection restores exact per-cell CO₂ mass conservation.</td>
+<td>CO₂ exchange needs post-step corrections</td>
+<td>Repair frost positivity and restore the global Gaussian-quadrature inventory after logarithmic-pressure integration, retaining configured escape.</td>
 </tr>
 <tr>
 <td>Diurnal runs impose a strict CFL on the timestep</td>

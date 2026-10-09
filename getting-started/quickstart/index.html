@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+        <meta name="description" content="Differentiable three-dimensional Mars climate model — dynamics, physics, calibration and neural experiments">
       
       
       
@@ -14,7 +14,7 @@
         <link rel="prev" href="../installation/">
       
       
-        <link rel="next" href="../../cli/commands/">
+        <link rel="next" href="../../architecture/planet/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Quickstart - Terraforming</title>
+        <title>Quickstart - Terraforming · Mars GCM</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quickstart" class="md-skip">
+        <a href="#run-your-first-mars-gcm" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../.." title="Terraforming · Mars GCM" class="md-header__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../assets/logo.png" alt="logo">
 
@@ -109,7 +109,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Terraforming
+            Terraforming · Mars GCM
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -227,17 +227,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
   
-  Home
+  
+  3-D GCM
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -256,46 +257,6 @@
   
   
   Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../cli/commands/" class="md-tabs__link">
-          
-  
-  
-  CLI Reference
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
-          
-  
-  
-  Wiki
 
         </a>
       </li>
@@ -331,7 +292,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../api/framework/" class="md-tabs__link">
+        <a href="../../package/gcm3d/api/" class="md-tabs__link">
           
   
   
@@ -351,11 +312,51 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../package/gcm3d/" class="md-tabs__link">
+        <a href="../../cli/commands/" class="md-tabs__link">
           
   
   
-  Package · gcm3d (3-D GCM)
+  CLI & Comparisons
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../wiki/orbital-mechanics/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deprecated-global-mean/" class="md-tabs__link">
+          
+  
+  
+  Deprecated global-mean model
 
         </a>
       </li>
@@ -387,12 +388,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../.." title="Terraforming · Mars GCM" class="md-nav__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../assets/logo.png" alt="logo">
 
     </a>
-    Terraforming
+    Terraforming · Mars GCM
   </label>
   
     <div class="md-nav__source">
@@ -415,6 +416,58 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3-D GCM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3-D GCM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
         
@@ -423,7 +476,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Start here
   
 
     
@@ -432,6 +485,322 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calibration & ablations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/neural-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/temperature-only/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only postprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../differentiable-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differentiable experiment runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../neural-temp-only-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation & limitations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ideas/gcm3d-physics-limitations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics ledger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -616,10 +985,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cli-run-a-preset-simulation" class="md-nav__link">
+  <a href="#1-export-a-first-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI: Run a preset simulation
+        1. Export a first map
       
     </span>
   </a>
@@ -627,10 +996,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cli-custom-yaml-config" class="md-nav__link">
+  <a href="#2-understand-the-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI: Custom YAML config
+        2. Understand the fields
       
     </span>
   </a>
@@ -638,10 +1007,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#python-api-basic-simulation" class="md-nav__link">
+  <a href="#3-explore-in-the-browser" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Python API: Basic simulation
+        3. Explore in the browser
       
     </span>
   </a>
@@ -649,10 +1018,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#python-api-ghg-intervention" class="md-nav__link">
+  <a href="#4-configure-python-and-restart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Python API: GHG intervention
+        4. Configure Python and restart
       
     </span>
   </a>
@@ -660,10 +1029,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#explore-available-presets" class="md-nav__link">
+  <a href="#5-choose-the-next-experiment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Explore available presets
+        5. Choose the next experiment
       
     </span>
   </a>
@@ -716,7 +1085,7 @@
   <span class="md-ellipsis">
     
   
-    CLI Reference
+    Architecture
   
 
     
@@ -732,7 +1101,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    CLI Reference
+    Architecture
   
 
           </label>
@@ -745,14 +1114,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/commands/" class="md-nav__link">
+      <a href="../../architecture/planet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Commands
+    GCM system
   
 
     
@@ -773,14 +1142,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/presets/" class="md-nav__link">
+      <a href="../../architecture/mars/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Presets
+    Mars configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Browser visualizer
   
 
     
@@ -831,7 +1284,7 @@
   <span class="md-ellipsis">
     
   
-    Wiki
+    API Reference
   
 
     
@@ -844,6 +1297,264 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI & Comparisons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI & Comparisons
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/reference-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference comparisons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -957,10 +1668,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
   
   
@@ -978,8 +1689,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1073,351 +1784,9 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../wiki/mars/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GHG Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Architecture
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/planet/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Planet Framework
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/mars/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mars Model
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../architecture/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Reference
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    API Reference
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/framework/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Framework
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/celestials/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mars
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/engine/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Engine
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1460,7 +1829,7 @@
   <span class="md-ellipsis">
     
   
-    Package · gcm3d (3-D GCM)
+    Deprecated global-mean model
   
 
     
@@ -1476,7 +1845,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Package · gcm3d (3-D GCM)
+    Deprecated global-mean model
   
 
           </label>
@@ -1489,14 +1858,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package/gcm3d/" class="md-nav__link">
+      <a href="../../deprecated-global-mean/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Deprecation and migration
   
 
     
@@ -1517,14 +1886,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package/gcm3d/philosophy/" class="md-nav__link">
+      <a href="../../architecture/global-mean-planet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Philosophy
+    Torch planet architecture
   
 
     
@@ -1545,14 +1914,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package/gcm3d/architecture/" class="md-nav__link">
+      <a href="../../architecture/global-mean-mars/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Architecture
+    Torch Mars derivation
   
 
     
@@ -1573,14 +1942,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package/gcm3d/api/" class="md-nav__link">
+      <a href="../../wiki/mars/global-mean-climate-model/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API Reference
+    Archived climate notes
   
 
     
@@ -1601,14 +1970,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package/gcm3d/implementation/" class="md-nav__link">
+      <a href="../../cli/presets/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementation & Physics
+    Global-mean presets
   
 
     
@@ -1629,14 +1998,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../../scripts/gcm3d-data/" class="md-nav__link">
+      <a href="../../api/engine/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Data & validation scripts
+    Global-mean engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wiki/mars/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG intervention theory
   
 
     
@@ -1682,84 +2135,86 @@
   
 
 
-<h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">&para;</a></h1>
-<h2 id="cli-run-a-preset-simulation">CLI: Run a preset simulation<a class="headerlink" href="#cli-run-a-preset-simulation" title="Permanent link">&para;</a></h2>
-<p>The fastest way to run a simulation is with a built-in preset:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Single sol (diurnal cycle) at Gale Crater</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--preset<span class="w"> </span>gale-crater<span class="w"> </span>--type<span class="w"> </span>sol
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># One Martian year at current Mars baseline</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--preset<span class="w"> </span>current-mars<span class="w"> </span>--type<span class="w"> </span>year
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Multi-latitude run (45°N, equator, 40°S)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--preset<span class="w"> </span>equatorial<span class="w"> </span>--type<span class="w"> </span>multi
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># 4 landmark sites in one run</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--preset<span class="w"> </span>landmark-spots<span class="w"> </span>--type<span class="w"> </span>spots
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Terraforming intervention: GHG injection over many years</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--preset<span class="w"> </span>terraforming-phase1<span class="w"> </span>--type<span class="w"> </span>intervention
+<h1 id="run-your-first-mars-gcm">Run your first Mars GCM<a class="headerlink" href="#run-your-first-mars-gcm" title="Permanent link">&para;</a></h1>
+<p>Complete <a href="../installation/">installation</a>, including the GCM extra and MOLA
+staging. Run commands from the repository root using the installed environment.</p>
+<h2 id="1-export-a-first-map">1. Export a first map<a class="headerlink" href="#1-export-a-first-map" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rtk<span class="w"> </span>proxy<span class="w"> </span>.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>cli.main<span class="w"> </span>mars<span class="w"> </span>maps<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--scale<span class="w"> </span>fast<span class="w"> </span>--truncation<span class="w"> </span>T21<span class="w"> </span>--layers<span class="w"> </span><span class="m">12</span><span class="w"> </span>--dt<span class="w"> </span><span class="m">300</span><span class="w"> </span>--steps<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--name<span class="w"> </span>first-gcm-map
 </code></pre></div>
-<p>Results are saved as CSV in <code>outputs/</code> and plots are shown automatically. Pass <code>--no-plot</code> to suppress plots.</p>
-<h2 id="cli-custom-yaml-config">CLI: Custom YAML config<a class="headerlink" href="#cli-custom-yaml-config" title="Permanent link">&para;</a></h2>
-<p>Create a config file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># my-sim.yaml</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">planet</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">surface_temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">210.0</span><span class="w">   </span><span class="c1"># K</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">surface_pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">636.0</span><span class="w">      </span><span class="c1"># Pa</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">albedo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">greenhouse_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">ice_mass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0e15</span><span class="w">             </span><span class="c1"># kg</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">latitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">longitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">137.0</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nt">experiment</span><span class="p">:</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="nt">sols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">687</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">accuracy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accurate</span>
+<p>This short T21/L12 run uses daily-mean grey radiation and energy-limited CO₂
+exchange. Outputs appear under <code>outputs/gcm3d_maps/first-gcm-map/</code> as PNGs and
+NetCDF. It verifies the workflow; it is not a climatology or the full browser
+physical baseline. <code>fast</code> is a resolution preset, distinct from the deprecated
+global-mean model's <code>Accuracy.FAST</code> integrator.</p>
+<h2 id="2-understand-the-fields">2. Understand the fields<a class="headerlink" href="#2-understand-the-fields" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Units</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Temperature</td>
+<td>K</td>
+<td>Surface skin in forced runs; lowest-layer air in dry runs</td>
+</tr>
+<tr>
+<td>Pressure</td>
+<td>Pa</td>
+<td>Terrain-dependent surface pressure</td>
+</tr>
+<tr>
+<td><code>u</code>, <code>v</code>, wind speed</td>
+<td>m/s</td>
+<td>Lowest sigma-layer winds, not fixed 10 m height</td>
+</tr>
+<tr>
+<td>CO₂ frost</td>
+<td>Pa-equivalent</td>
+<td>Surface reservoir; mass per area is this value divided by gravity</td>
+</tr>
+<tr>
+<td>Elevation</td>
+<td>m</td>
+<td>Regridded MOLA lower boundary</td>
+</tr>
+</tbody>
+</table>
+<p>Read <code>temperature_kind</code>, <code>insolation_sampling</code>, wind-height and climate-status
+metadata before comparing references. The final map is an instantaneous sample.</p>
+<h2 id="3-explore-in-the-browser">3. Explore in the browser<a class="headerlink" href="#3-explore-in-the-browser" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rtk<span class="w"> </span>proxy<span class="w"> </span>.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>cli.main<span class="w"> </span>serve<span class="w"> </span>--no-browser
 </code></pre></div>
-<p>Run it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tform<span class="w"> </span>mars<span class="w"> </span>run<span class="w"> </span>--config<span class="w"> </span>my-sim.yaml
-</code></pre></div>
-<p>Validate without running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tform<span class="w"> </span>mars<span class="w"> </span>config<span class="w"> </span>validate<span class="w"> </span>my-sim.yaml
-</code></pre></div>
-<h2 id="python-api-basic-simulation">Python API: Basic simulation<a class="headerlink" href="#python-api-basic-simulation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.celestials</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mars</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeController</span><span class="p">,</span> <span class="n">Accuracy</span><span class="p">,</span> <span class="n">Snapshot</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Create Mars with default (current) state</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">planet</span> <span class="o">=</span> <span class="n">Mars</span><span class="p">()</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Integrate for 1 Martian year (~687 Earth days)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">tc</span> <span class="o">=</span> <span class="n">TimeController</span><span class="p">(</span><span class="n">planet</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="n">Accuracy</span><span class="o">.</span><span class="n">ACCURATE</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">snapshots</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Snapshot</span><span class="p">]</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_sols</span><span class="o">=</span><span class="mi">687</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># Access results</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">for</span> <span class="n">snap</span> <span class="ow">in</span> <span class="n">snapshots</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]:</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Day </span><span class="si">{</span><span class="n">snap</span><span class="o">.</span><span class="n">time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">: T=</span><span class="si">{</span><span class="n">snap</span><span class="o">.</span><span class="n">surface_temperature</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> K, &quot;</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>          <span class="sa">f</span><span class="s2">&quot;P=</span><span class="si">{</span><span class="n">snap</span><span class="o">.</span><span class="n">surface_pressure</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> Pa&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="python-api-ghg-intervention">Python API: GHG intervention<a class="headerlink" href="#python-api-ghg-intervention" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.celestials</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mars</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">src.interventions</span><span class="w"> </span><span class="kn">import</span> <span class="n">InterventionController</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">planet</span> <span class="o">=</span> <span class="n">Mars</span><span class="p">()</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">ctrl</span> <span class="o">=</span> <span class="n">InterventionController</span><span class="p">(</span><span class="n">planet</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Inject 1e9 kg/year of SF6 for 50 years</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">results</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;SF6&quot;</span><span class="p">:</span> <span class="mf">1e9</span><span class="p">},</span>  <span class="c1"># kg/year</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">n_years</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final temperature: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">surface_temperature</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature gain:  </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">surface_temperature</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">210</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="explore-available-presets">Explore available presets<a class="headerlink" href="#explore-available-presets" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tform<span class="w"> </span>mars<span class="w"> </span>config<span class="w"> </span>list
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>tform<span class="w"> </span>mars<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>terraforming-phase1
-</code></pre></div>
+<p>Open <code>http://127.0.0.1:8000</code> and select GCM. The server enables correlated-k CO₂
+radiation, regolith, stability exchange, PBL diffusion and dry convection,
+with spectral diffusion and available TES/seasonal Ames dust data. Its explicit
+CO₂/dust longwave multipliers are 0.25 and surface exchange multiplier is 1.0.
+This differs from the simple CLI map configuration.</p>
+<h2 id="4-configure-python-and-restart">4. Configure Python and restart<a class="headerlink" href="#4-configure-python-and-restart" title="Permanent link">&para;</a></h2>
+<p>The <a href="../../package/gcm3d/quickstart/">Python GCM quickstart</a> contains complete
+forcing, map/export and restart examples. Use <code>run_maps</code> for reporting/deployment,
+and parameterized step/rollout kernels for differentiated objectives.
+Start with float64 and an explicit stable timestep.</p>
+<h2 id="5-choose-the-next-experiment">5. Choose the next experiment<a class="headerlink" href="#5-choose-the-next-experiment" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../package/gcm3d/calibration/">Physical calibration and paired ablations</a>.</li>
+<li><a href="../../package/gcm3d/neural-experiments/">Neural radiation and bounded heating</a>.</li>
+<li><a href="../../package/gcm3d/temperature-only/">Frozen temperature-only postprocessing</a>.</li>
+<li><a href="../../cli/reference-comparison/">Reference comparisons</a>.</li>
+<li><a href="../../package/gcm3d/validation/">Validation and limitations</a>.</li>
+</ul>
+<p>A Mars year is about 668.62 sols. Equilibrium needs matched-phase convergence,
+including deep soil, rather than elapsed duration alone.</p>
+<div class="admonition warning">
+<p class="admonition-title">Deprecated global-mean model</p>
+<p>Use GCM workflows for new simulations. <code>tform mars run</code> and torch ODE
+examples are retained under <a href="../../deprecated-global-mean/">deprecated documentation</a>.</p>
+</div>
 
 
 

@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Mars terraforming physics framework — planets, atmospheres, orbital mechanics">
+        <meta name="description" content="Differentiable three-dimensional Mars climate model — dynamics, physics, calibration and neural experiments">
       
       
       
@@ -14,7 +14,7 @@
         <link rel="prev" href="../solar-flux/">
       
       
-        <link rel="next" href="../interventions/">
+        <link rel="next" href="../../../deprecated-global-mean/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Climate Model - Terraforming</title>
+        <title>Climate Model - Terraforming · Mars GCM</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mars-climate-model" class="md-skip">
+        <a href="#mars-gcm-climate-model" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Terraforming" class="md-header__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../../.." title="Terraforming · Mars GCM" class="md-header__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../../assets/logo.png" alt="logo">
 
@@ -109,7 +109,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Terraforming
+            Terraforming · Mars GCM
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -227,17 +227,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
   
-  Home
+  
+  3-D GCM
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -269,11 +270,51 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../../architecture/planet/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../package/gcm3d/api/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../../cli/commands/" class="md-tabs__link">
           
   
   
-  CLI Reference
+  CLI & Comparisons
 
         </a>
       </li>
@@ -311,51 +352,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../architecture/planet/" class="md-tabs__link">
+        <a href="../../../deprecated-global-mean/" class="md-tabs__link">
           
   
   
-  Architecture
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../api/framework/" class="md-tabs__link">
-          
-  
-  
-  API Reference
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../package/gcm3d/" class="md-tabs__link">
-          
-  
-  
-  Package · gcm3d (3-D GCM)
+  Deprecated global-mean model
 
         </a>
       </li>
@@ -387,12 +388,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Terraforming" class="md-nav__button md-logo" aria-label="Terraforming" data-md-component="logo">
+    <a href="../../.." title="Terraforming · Mars GCM" class="md-nav__button md-logo" aria-label="Terraforming · Mars GCM" data-md-component="logo">
       
   <img src="../../../assets/logo.png" alt="logo">
 
     </a>
-    Terraforming
+    Terraforming · Mars GCM
   </label>
   
     <div class="md-nav__source">
@@ -415,6 +416,58 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3-D GCM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3-D GCM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../.." class="md-nav__link">
         
@@ -423,7 +476,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Start here
   
 
     
@@ -432,6 +485,322 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation & physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/calibration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calibration & ablations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/neural-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/temperature-only/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only postprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../differentiable-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differentiable experiment runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../neural-temp-only-runbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temperature-only runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scripts/gcm3d-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data & validation scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation & limitations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ideas/gcm3d-physics-limitations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics ledger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -609,7 +978,7 @@
   <span class="md-ellipsis">
     
   
-    CLI Reference
+    Architecture
   
 
     
@@ -625,7 +994,349 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    CLI Reference
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/planet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM system
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/mars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Browser visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../package/gcm3d/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GCM interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/celestials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI & Comparisons
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI & Comparisons
   
 
           </label>
@@ -666,14 +1377,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cli/presets/" class="md-nav__link">
+      <a href="../../../cli/reference-comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Presets
+    Reference comparisons
   
 
     
@@ -719,10 +1430,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -740,8 +1451,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -860,10 +1571,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="">
             
   
   
@@ -881,8 +1592,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1015,10 +1726,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#state-vector" class="md-nav__link">
+  <a href="#dynamics-and-state" class="md-nav__link">
     <span class="md-ellipsis">
       
-        State vector
+        Dynamics and state
       
     </span>
   </a>
@@ -1026,10 +1737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#temperature-ode" class="md-nav__link">
+  <a href="#energy-exchange" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Temperature ODE
+        Energy exchange
       
     </span>
   </a>
@@ -1037,10 +1748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pressure-ode" class="md-nav__link">
+  <a href="#co2-reservoirs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pressure ODE
+        CO₂ reservoirs
       
     </span>
   </a>
@@ -1048,10 +1759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#co2-ice-mass-ode" class="md-nav__link">
+  <a href="#integration-and-learning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CO₂ ice mass ODE
+        Integration and learning
       
     </span>
   </a>
@@ -1059,10 +1770,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#greenhouse-factor" class="md-nav__link">
+  <a href="#what-results-mean" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Greenhouse factor
+        What results mean
       
     </span>
   </a>
@@ -1070,32 +1781,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#numerical-integration" class="md-nav__link">
+  <a href="#implementation-and-next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Numerical integration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#baseline-outputs-1-hour-step-at-l_s-0-theta_z-60" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Baseline outputs (1-hour step at \(L_s = 0°\), \(\theta_z = 60°\))
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementation
+        Implementation and next steps
       
     </span>
   </a>
@@ -1111,351 +1800,9 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GHG Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Architecture
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../architecture/planet/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Planet Framework
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../architecture/mars/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mars Model
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../architecture/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Reference
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    API Reference
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../api/framework/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Framework
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../api/celestials/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mars
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../api/engine/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Engine
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../api/interventions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Interventions
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1498,7 +1845,7 @@
   <span class="md-ellipsis">
     
   
-    Package · gcm3d (3-D GCM)
+    Deprecated global-mean model
   
 
     
@@ -1514,7 +1861,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Package · gcm3d (3-D GCM)
+    Deprecated global-mean model
   
 
           </label>
@@ -1527,14 +1874,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../package/gcm3d/" class="md-nav__link">
+      <a href="../../../deprecated-global-mean/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Deprecation and migration
   
 
     
@@ -1555,14 +1902,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../package/gcm3d/philosophy/" class="md-nav__link">
+      <a href="../../../architecture/global-mean-planet/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Philosophy
+    Torch planet architecture
   
 
     
@@ -1583,14 +1930,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../package/gcm3d/architecture/" class="md-nav__link">
+      <a href="../../../architecture/global-mean-mars/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Architecture
+    Torch Mars derivation
   
 
     
@@ -1611,14 +1958,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../package/gcm3d/api/" class="md-nav__link">
+      <a href="../global-mean-climate-model/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    API Reference
+    Archived climate notes
   
 
     
@@ -1639,14 +1986,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../package/gcm3d/implementation/" class="md-nav__link">
+      <a href="../../../cli/presets/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementation & Physics
+    Global-mean presets
   
 
     
@@ -1667,14 +2014,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../scripts/gcm3d-data/" class="md-nav__link">
+      <a href="../../../api/engine/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Data & validation scripts
+    Global-mean engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intervention API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GHG intervention theory
   
 
     
@@ -1720,103 +2151,61 @@
   
 
 
-<h1 id="mars-climate-model">Mars Climate Model<a class="headerlink" href="#mars-climate-model" title="Permanent link">&para;</a></h1>
-<p>The climate model integrates a coupled system of three ordinary differential equations (ODEs) describing the evolution of surface temperature <span class="arithmatex">\(T\)</span>, atmospheric pressure <span class="arithmatex">\(P\)</span>, and polar CO₂ ice mass <span class="arithmatex">\(M_\text{ice}\)</span> over time. This page derives each equation and explains the physical meaning of every term.</p>
-<hr />
-<h2 id="state-vector">State vector<a class="headerlink" href="#state-vector" title="Permanent link">&para;</a></h2>
-<p>At each timestep the simulation tracks:</p>
-<div class="arithmatex">\[
-\mathbf{y}(t) = \begin{pmatrix} T(t) \\ P(t) \\ M_\text{ice}(t) \end{pmatrix}
-\]</div>
-<p>where <span class="arithmatex">\(T\)</span> is in K, <span class="arithmatex">\(P\)</span> in Pa, and <span class="arithmatex">\(M_\text{ice}\)</span> in kg. All three are coupled — pressure affects the greenhouse factor, ice mass affects pressure through sublimation, and temperature drives sublimation.</p>
-<hr />
-<h2 id="temperature-ode">Temperature ODE<a class="headerlink" href="#temperature-ode" title="Permanent link">&para;</a></h2>
-<p>The surface energy balance governs <span class="arithmatex">\(dT/dt\)</span> (<a href="https://doi.org/10.1029/98JE01388">Haberle, 1998</a>; <a href="https://doi.org/10.1017/CBO9780511780783">Pierrehumbert, 2010</a>):</p>
-<div class="arithmatex">\[
-\frac{dT}{dt} = \frac{F_\text{net}}{C_\text{eff}}
-\]</div>
-<p>The net surface energy flux <span class="arithmatex">\(F_\text{net}\)</span> is:</p>
-<div class="arithmatex">\[
-F_\text{net} = F_\text{sfc} - F_\text{refl} + F_\text{IR,down} - F_\text{IR,up} + \Delta F_\text{GHG}
-\]</div>
-<p>Expanding each term:</p>
-<p><strong>Absorbed shortwave (solar):</strong></p>
-<div class="arithmatex">\[
-F_\text{sfc} - F_\text{refl} = \frac{S_{1\,\text{AU}}}{r(L_s)^2}\,\max\!\bigl(0,\cos\theta_z\bigr)\cdot\tau_\text{atm}\cdot(1 - \alpha)
-\]</div>
-<p><strong>Downwelling thermal IR (greenhouse back-radiation):</strong></p>
-<div class="arithmatex">\[
-F_\text{IR,down} = \varepsilon_\text{atm}\,\sigma\,T^4
-\]</div>
-<p><strong>Upwelling thermal IR (surface emission):</strong></p>
-<div class="arithmatex">\[
-F_\text{IR,up} = \varepsilon_\text{sfc}\,\sigma\,T^4
-\]</div>
-<p><strong>Radiative forcing from injected GHGs</strong> (zero at baseline, see <a href="../interventions/">GHG Interventions</a>):</p>
-<div class="arithmatex">\[
-\Delta F_\text{GHG} = \sum_i \eta_i \cdot C_i
-\]</div>
-<p><strong>Effective heat capacity</strong> <span class="arithmatex">\(C_\text{eff}\)</span> (J m⁻² K⁻¹) is the thermal inertia of the surface layer. The baseline value is <span class="arithmatex">\(C_\text{eff} = 2.0 \times 10^6\,\text{J\,m}^{-2}\,\text{K}^{-1}\)</span>, consistent with fine-grained Martian regolith (<a href="https://doi.org/10.1016/j.icarus.2007.01.022">Putzig &amp; Mellon, 2007</a>).</p>
-<hr />
-<h2 id="pressure-ode">Pressure ODE<a class="headerlink" href="#pressure-ode" title="Permanent link">&para;</a></h2>
-<p>Atmospheric pressure evolves through CO₂ cap sublimation/deposition and any injected gases:</p>
-<div class="arithmatex">\[
-\frac{dP}{dt} = \frac{dP}{dt}\bigg|_\text{sublimation} + \frac{dP}{dt}\bigg|_\text{injection}
-\]</div>
-<p>The sublimation term couples to <span class="arithmatex">\(M_\text{ice}\)</span>: when <span class="arithmatex">\(T\)</span> rises above the CO₂ frost point (<span class="arithmatex">\(\approx 148\,\text{K}\)</span> at Martian pressures, <a href="https://en.wikipedia.org/wiki/Carbon_dioxide_(data_page)">Wikipedia: Carbon dioxide (data page)</a>), CO₂ ice sublimes and raises <span class="arithmatex">\(P\)</span>.</p>
-<hr />
-<h2 id="co2-ice-mass-ode">CO₂ ice mass ODE<a class="headerlink" href="#co2-ice-mass-ode" title="Permanent link">&para;</a></h2>
-<p>The polar CO₂ cap mass evolves through sublimation and condensation:</p>
-<div class="arithmatex">\[
-\frac{dM_\text{ice}}{dt} = -k_\text{sub}(T, P) + k_\text{dep}(T, P)
-\]</div>
-<p>where the sublimation rate <span class="arithmatex">\(k_\text{sub}\)</span> increases with temperature and decreases with surface pressure (Le Chatelier's principle), and the deposition rate <span class="arithmatex">\(k_\text{dep}\)</span> applies when the surface reaches the CO₂ frost point. The current CO₂ ice reservoir is approximately <span class="arithmatex">\(M_\text{ice} \approx 3 \times 10^{15}\,\text{kg}\)</span> (<a href="https://doi.org/10.1126/science.1080895">Byrne &amp; Ingersoll, 2003</a>).</p>
-<hr />
-<h2 id="greenhouse-factor">Greenhouse factor<a class="headerlink" href="#greenhouse-factor" title="Permanent link">&para;</a></h2>
-<p>Rather than tracking <span class="arithmatex">\(\varepsilon_\text{atm}\)</span> directly, the model uses a dimensionless greenhouse factor <span class="arithmatex">\(\gamma \geq 1\)</span> that amplifies the effective absorbed solar flux and modifies the net IR balance. It is updated each year based on the current atmospheric composition (see <a href="../interventions/">GHG Interventions</a>):</p>
-<div class="arithmatex">\[
-\gamma_\text{new} = \gamma_\text{base} \cdot \left(1 + \frac{\Delta F_\text{total}}{F_\text{ref}}\right)
-\]</div>
-<p>where <span class="arithmatex">\(F_\text{ref}\)</span> is a normalisation flux and <span class="arithmatex">\(\Delta F_\text{total}\)</span> is the cumulative radiative forcing from all injected species.</p>
-<hr />
-<h2 id="numerical-integration">Numerical integration<a class="headerlink" href="#numerical-integration" title="Permanent link">&para;</a></h2>
-<p>The ODE system is integrated using <strong>4th-order Runge-Kutta</strong> (RK4) (<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Wikipedia: Runge-Kutta methods</a>) at hourly timesteps (<span class="arithmatex">\(\Delta t = 3600\,\text{s}\)</span>) in <code>Accuracy.ACCURATE</code> mode. RK4 achieves <span class="arithmatex">\(O(\Delta t^4)\)</span> local truncation error, making it accurate enough for century-scale simulations without adaptive step-size control.</p>
-<p>The fast mode uses <strong>reduced-order analytic updates</strong> — a relaxation scheme that gives physically consistent trajectories at much lower computational cost, useful for ensemble runs.</p>
-<hr />
-<h2 id="baseline-outputs-1-hour-step-at-l_s-0-theta_z-60">Baseline outputs (1-hour step at <span class="arithmatex">\(L_s = 0°\)</span>, <span class="arithmatex">\(\theta_z = 60°\)</span>)<a class="headerlink" href="#baseline-outputs-1-hour-step-at-l_s-0-theta_z-60" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Diagnostic</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(F_\text{TOA}\)</span></td>
-<td><span class="arithmatex">\(356.6\,\text{W\,m}^{-2}\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(F_\text{sfc}\)</span></td>
-<td><span class="arithmatex">\(196.1\,\text{W\,m}^{-2}\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(F_\text{IR,up}\)</span></td>
-<td><span class="arithmatex">\(22.1\,\text{W\,m}^{-2}\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\Delta T\)</span> per hour</td>
-<td><span class="arithmatex">\(+0.116\,\text{K}\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(P\)</span></td>
-<td><span class="arithmatex">\(610\,\text{Pa}\)</span> (unchanged, no sublimation)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<p>The ODE right-hand side is implemented in <a href="../../../api/celestials/"><code>src.celestials.planets.mars — Mars.compute_derivatives</code></a>. The integrator is in <a href="../../../api/engine/"><code>src.engine — TimeController</code></a>.</p>
+<h1 id="mars-gcm-climate-model">Mars GCM climate model<a class="headerlink" href="#mars-gcm-climate-model" title="Permanent link">&para;</a></h1>
+<p>The primary Mars model resolves atmospheric dynamics and column physics on a
+sphere with terrain-following sigma layers. It evolves circulation and spatial
+temperature/pressure fields alongside surface temperature, CO₂ frost and optional
+multilayer soil. The torch global-mean ODE model is deprecated.</p>
+<h2 id="dynamics-and-state">Dynamics and state<a class="headerlink" href="#dynamics-and-state" title="Permanent link">&para;</a></h2>
+<p>Dinosaur advances hydrostatic primitive equations with spectral vorticity,
+divergence, temperature variation and logarithmic surface pressure. Mars supplies
+its body constants and MOLA lower boundary. The grid is spherical harmonics
+horizontally and sigma coordinates vertically; surface reservoirs are not
+advected as atmospheric tracers.</p>
+<h2 id="energy-exchange">Energy exchange<a class="headerlink" href="#energy-exchange" title="Permanent link">&para;</a></h2>
+<p>Solar geometry follows a Keplerian eccentric orbit and either moving diurnal
+illumination or a daily mean. The radiation scheme returns directional interface
+fluxes whose convergence drives atmospheric heating and surface energy input.
+Resolved CO₂ radiation uses bundled Ames correlated-k tables or an explicitly
+selected compact-band alternative; simple CLI configurations use a grey balance.
+Dust optical depth is prescribed and can vary seasonally.</p>
+<p>Surface sensible heat is transferred to the lowest layer with its physical
+pressure-dependent heat capacity. Surface loss and atmospheric gain cancel in
+the exchange budget. Optional conduction transfers heat through the regolith;
+PBL diffusion and smooth dry convective exchange redistribute column energy.</p>
+<h2 id="co2-reservoirs">CO₂ reservoirs<a class="headerlink" href="#co2-reservoirs" title="Permanent link">&para;</a></h2>
+<p>Condensation removes atmospheric mass and releases surface latent heat;
+sublimation reverses the transfer. Frost is stored in pressure-equivalent units,
+and its local saturation temperature depends on pressure. Energy-limited phase
+exchange is tied to the surface-energy residual.</p>
+<p>Advancing logarithmic pressure introduces finite-step inventory error. The
+complete-step wrapper repairs negative frost and rescales atmospheric pressure
+so global Gaussian-quadrature atmosphere-plus-frost matches the pre-step inventory
+minus prescribed escape. This is a global budget correction, not proof of exact
+local transport or full-system energy conservation.</p>
+<h2 id="integration-and-learning">Integration and learning<a class="headerlink" href="#integration-and-learning" title="Permanent link">&para;</a></h2>
+<p>The GCM uses IMEX-RK-SIL3: implicit gravity-wave dynamics and explicit physics.
+It is separate from the deprecated model's RK4/fast modes. JAX scan rollouts
+support gradients, batching and optional rematerialization; tests compare selected
+gradients with finite differences. Physical calibration controls gas/dust thermal
+opacity and surface exchange. Learned radiation replaces fluxes, while bounded
+neural temperature heating adds a source. Temperature-only postprocessing instead
+fits frozen forecast outputs.</p>
+<h2 id="what-results-mean">What results mean<a class="headerlink" href="#what-results-mean" title="Permanent link">&para;</a></h2>
+<p>Short maps are transient diagnostics. A duration above 668 sols does not establish
+equilibrium; phase-matched atmospheric, surface and deep-soil repeatability must
+be checked. Existing reference comparisons differ in sampling and wind height
+and are not independent observational validation. Water/cloud physics,
+interactive dust and composition-dependent high-pressure validation remain absent.</p>
+<h2 id="implementation-and-next-steps">Implementation and next steps<a class="headerlink" href="#implementation-and-next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../../architecture/planet/">GCM architecture</a> and <a href="../../../architecture/mars/">Mars configuration</a>.</li>
+<li><a href="../../../package/gcm3d/implementation/">Physics algorithms</a> and <a href="../../../package/gcm3d/api/">API</a>.</li>
+<li><a href="../../../getting-started/quickstart/">First simulation</a>.</li>
+<li><a href="../../../package/gcm3d/calibration/">Calibration</a> and <a href="../../../package/gcm3d/neural-experiments/">neural experiments</a>.</li>
+<li><a href="../../../package/gcm3d/validation/">Validation and limitations</a>.</li>
+<li><a href="../global-mean-climate-model/">Deprecated global-mean derivation</a>.</li>
+</ul>
 
 
 
